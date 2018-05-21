@@ -1,0 +1,10 @@
+parm complex_wi.prmtop
+trajin 05_Prod.nc 1 999999999 1
+center :1-366 mass origin
+image origin center
+rms protein @CA,C,N  first out protein.rmsd
+rms ligand :1&!@H= first out LIG.rmsd
+strip :WAT
+strip :Na+
+strip :Cl-
+trajout 4XQP_G230_05_Prod_300ns_Run1.crd crd 

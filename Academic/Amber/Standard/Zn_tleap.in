@@ -1,0 +1,13 @@
+source leaprc.protein.ff14SB
+source leaprc.water.spce
+source leaprc.gaff
+loadamberparams frcmod.spce
+loadamberparams LIG.frcmod
+loadoff LIG.lib
+
+mol = loadpdb complex_amber.pdb
+solvatebox mol SPCBOX 10.0
+addions mol Na+ 0
+savepdb mol complex_wi_amber.pdb
+saveamberparm mol complex_wi.prmtop complex_wi.inpcrd
+quit

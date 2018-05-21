@@ -1,0 +1,18 @@
+source leaprc.protein.ff14SB
+source leaprc.water.tip3p
+loadamberparams frcmod.ionsjc_tip3p
+source leaprc.gaff
+
+loadamberparams LIG.frcmod
+loadoff LIG.lib
+
+complex = loadpdb complex.pdb
+saveamberparm complex complex.prmtop complex.inpcrd
+solvateoct complex TIP3PBOX 10.0
+check complex
+charge complex
+addions2 complex Na+ 0
+charge complex
+saveamberparm complex complex_wi.prmtop complex_wi.inpcrd
+savepdb complex complex_wi_amber.pdb
+quit

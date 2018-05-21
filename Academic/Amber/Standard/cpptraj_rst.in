@@ -1,0 +1,4 @@
+parm complex_wi_ZN.prmtop
+trajin 04_Density.rst
+autoimage
+trajout 5IF4_complex_wi_ZN_Density.pdb pdb

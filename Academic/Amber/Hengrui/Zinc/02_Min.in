@@ -1,0 +1,9 @@
+Minimzing the system with 25 kcal/mol restraints on protein, 2500 steps of
+steepest descent and 2500 of conjugated gradient
+ &cntrl
+    imin=1, irest=0, ntx=1,
+    maxcyc=5000, ncyc=2500, ntmin=1,
+    ntpr=500,
+    cut=9.0, 
+    ioutfm=1, ntxo=2,
+ &end

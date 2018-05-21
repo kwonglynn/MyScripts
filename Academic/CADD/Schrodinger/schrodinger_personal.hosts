@@ -1,0 +1,387 @@
+# Schrodinger hosts file
+#
+# The hosts file consists of a series of entries describing each
+# 'host' (machine) on which jobs can be run.
+# 
+# A 'name' line marks the beginning of each machine's entry.
+# (So, the first non-comment line in this file must be a 'name' line.)
+# 
+# A host entry is a list of the settings to use when submitting a job to
+# a particular host or batch queue.  Each setting consists of a keyword
+# (ending with a ':') and its value.
+#
+# The most important keywords are:
+#
+#   name:        the name of the host entry.  It will be used in Maestro
+#                and on the command line to select this entry when
+#                submitting a job.
+#
+#                For entries that are used to submit jobs to a batch queue,
+#                the name should describe the batch queue; for entries
+#                used to submit jobs directly to another machine (e.g.,
+#                'erwin.schrodinger.com'), the entry name should be the
+#                host name (e.g., 'erwin').  When the entry name is NOT a
+#                valid host name, a host: setting must be used to specify
+#                the actual host name.
+#
+#   host:        the actual hostname, e.g, 'erwin.schrodinger.com'. 
+#                This is only necessary if different from the entry name.
+#                It is required for batch queue entries.
+#
+#   schrodinger: the Schrodinger software installation directory to use
+#                to run the job.  You may list more than one schrodinger
+#                directory if you have multiple installations.
+#                By default, the most recent version of the software
+#                among all listed directories will be used.
+#
+#   tmpdir:      a directory under which individual users' scratch 
+#                directories are created, e.g., if tmpdir is '/scratch',
+#                then kim's temp directory will be '/scratch/kim'.
+#
+#   processors:  the number of processors available for parallel jobs
+#
+#
+# Hash marks (#) start comment lines.  Blank lines are ignored.
+#
+# If you need create a personalized version, copy this file to your 
+# ~/.schrodinger directory or to the job directory and modify that copy.
+#
+#######################################################################
+# Note: The 'localhost' entry is special.  It is used for jobs that
+#       are run without specifying a host.  Also, settings made in the
+#       'localhost' entry are implicitly included in every other host
+#       entry as well, so common settings (like 'schrodinger:') should
+#       be made there.  
+#######################################################################
+
+#
+name:        localhost
+tmpdir:      /scratch/local
+processors: 1
+
+# Batch submission
+Name: 30min-devel
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=30 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC% --reservation=devel
+processors: 16
+processors_per_node: 16
+
+Name: 2hour
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=02:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC%
+processors: 16
+processors_per_node: 16
+
+Name: 2hour-1gpu
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=02:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC% --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:
+
+Name: 5hour
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=05:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC%
+processors: 16
+processors_per_node: 16
+
+Name: 5hour-1gpu
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=05:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC% --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:
+
+Name: 10hour
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=10:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC%
+processors: 16
+processors_per_node: 16
+
+Name: 10hour-1gpu
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=10:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC% --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:
+
+Name: 24hour
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=24:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC%
+processors: 16
+processors_per_node: 16
+
+Name: 24hour-1gpu
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=24:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC% --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:
+
+Name: 48hour
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=48:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC%
+processors: 16
+processors_per_node: 16
+
+Name: 48hour-1gpu
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=48:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC% --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:
+
+Name: 72hour
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=72:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC%
+processors: 16
+processors_per_node: 16
+
+Name: 72hour-1gpu
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=72:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC% --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:
+
+Name: 96hour
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=96:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC%
+processors: 16
+processors_per_node: 16
+
+Name: 96hour-1gpu
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=96:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC% --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:
+
+Name: 120hour
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=120:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC%
+processors: 16
+processors_per_node: 16
+
+Name: 120hour-1gpu
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=120:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC% --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:
+
+Name: 144hour
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=144:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC%
+processors: 16
+processors_per_node: 16
+
+Name: 144hour-1gpu
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=144:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC% --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:
+
+Name: 168hour
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=168:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC%
+processors: 16
+processors_per_node: 16
+
+Name: 168hour-1gpu
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=168:00:00 --nodes=%(NPROC+PPN-1)/PPN% --ntasks=%NPROC% --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:
+
+Name: 5hour-1gpu-4c-mem
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=05:00:00 --nodes=1 -ntasks=4 --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:
+
+Name: 24hour-1gpu-2c-mem
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=24:00:00 --nodes=1 --ntasks=2 --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:
+
+
+Name: 24hour-1gpu-4c-mem
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=24:00:00 --nodes=1 -ntasks=4 --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:
+
+Name: 50hour-1gpu-4c-mem
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=50:00:00 --nodes=1 --ntasks=4 --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:
+
+Name: 168hour-1gpu-4c-mem
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=168:00:00 --nodes=1 --ntasks=4 --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+
+Name: 50hour-1gpu-1c-mem
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=50:00:00 --nodes=1 --ntasks=1 --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:
+
+
+Name: 8hour-1gpu-1c-mem
+Host: localhost
+env: SCHRODINGER_TMPDIR=/scratch/local
+env: TMPDIR=/scratch/local
+env: SCHRODINGER_MPIRUN_OPTIONS=-x TMPDIR
+env: LD_PRELOAD=""
+Queue: SLURM2.1
+Qargs: --account=${SBATCH_ACCOUNT} --time=8:00:00 --nodes=1 --ntasks=1 --reservation=gpu --gres=gpu:1
+processors: 16
+processors_per_node: 16
+gpgpu:

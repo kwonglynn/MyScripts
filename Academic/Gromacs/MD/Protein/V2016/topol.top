@@ -1,0 +1,79 @@
+;
+;	File 'topol.top' was generated
+;	By user: x_guaku (5464)
+;	On host: triolith1
+;	At date: Fri Apr 13 10:41:51 2018
+
+;
+;	This is a standalone topology file
+;
+;	Created by:
+;	                 :-) GROMACS - gmx pdb2gmx, VERSION 5.1.4 (-:
+;	
+;	Executable:   /software/apps/gromacs/5.1.4/g620-plumed/bin/gmx_mpi
+;	Data prefix:  /software/apps/gromacs/5.1.4/g620-plumed
+;	Command line:
+;	  gmx_mpi pdb2gmx -f protein.pdb -o 5KXI_processed.gro -ignh -ter
+;	Force field was read from the standard GROMACS share directory.
+;
+
+; Include forcefield parameters
+#include "amber99sb-ildn.ff/forcefield.itp"
+
+; Note the position for the [ atomtypes ] section. This section should be removed from the ligand topology.
+
+[ atomtypes ]
+;name   bond_type     mass     charge   ptype   sigma         epsilon       Amb
+ n4       n4          0.00000  0.00000   A     3.25000e-01   7.11280e-01 ; 1.82  0.1700
+ cy       cy          0.00000  0.00000   A     3.39967e-01   3.59824e-01 ; 1.91  0.0860
+ c3       c3          0.00000  0.00000   A     3.39967e-01   4.57730e-01 ; 1.91  0.1094
+ os       os          0.00000  0.00000   A     3.00001e-01   7.11280e-01 ; 1.68  0.1700
+ ca       ca          0.00000  0.00000   A     3.39967e-01   3.59824e-01 ; 1.91  0.0860
+ nb       nb          0.00000  0.00000   A     3.25000e-01   7.11280e-01 ; 1.82  0.1700
+ f        f           0.00000  0.00000   A     3.11815e-01   2.55224e-01 ; 1.75  0.0610
+ hn       hn          0.00000  0.00000   A     1.06908e-01   6.56888e-02 ; 0.60  0.0157
+ hx       hx          0.00000  0.00000   A     1.95998e-01   6.56888e-02 ; 1.10  0.0157
+ hc       hc          0.00000  0.00000   A     2.64953e-01   6.56888e-02 ; 1.49  0.0157
+ h1       h1          0.00000  0.00000   A     2.47135e-01   6.56888e-02 ; 1.39  0.0157
+ h4       h4          0.00000  0.00000   A     2.51055e-01   6.27600e-02 ; 1.41  0.0150
+ ha       ha          0.00000  0.00000   A     2.59964e-01   6.27600e-02 ; 1.46  0.0150
+
+; Include chain topologies
+; Note the sequence of the topology files should be consistent with that of the coordinate file.
+#include "LIG_MD.top"
+#include "topol_Protein_chain_A.itp"
+#include "topol_Protein_chain_B.itp"
+#include "topol_Protein_chain_C.itp"
+#include "topol_Protein_chain_D.itp"
+#include "topol_Protein_chain_E.itp"
+
+; Include water topology
+#include "amber99sb-ildn.ff/tip3p.itp"
+
+; Note the restraint file can be included directly in the topology file.
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "amber99sb-ildn.ff/ions.itp"
+
+[ system ]
+; Name
+a4b2 and 2FA in water
+
+[ molecules ]
+; Compound        #mols
+; Note the sequence of molecule names should be consistent with that of the topology and coordinate files.
+LIG		    1
+Protein_chain_A     1
+Protein_chain_B     1
+Protein_chain_C     1
+Protein_chain_D     1
+Protein_chain_E     1
+SOL         29162
+NA               135
+CL               96

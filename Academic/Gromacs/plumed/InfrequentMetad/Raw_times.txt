@@ -1,0 +1,12 @@
+Reweighted Unbinding time =    0.183 ms | Metadynamics time = 268.89 ns | alpha = 6.82e+02 |  
+Reweighted Unbinding time =    1.551 ms | Metadynamics time = 275.55 ns | alpha = 5.63e+03 |  
+Reweighted Unbinding time =    0.198 ms | Metadynamics time = 192.64 ns | alpha = 1.03e+03 |  
+Reweighted Unbinding time =    0.071 ms | Metadynamics time = 252.53 ns | alpha = 2.81e+02 |  
+Reweighted Unbinding time =    3.357 ms | Metadynamics time = 879.85 ns | alpha = 3.82e+03 |  
+Reweighted Unbinding time =    1.520 ms | Metadynamics time = 244.99 ns | alpha = 6.20e+03 |  
+Reweighted Unbinding time =   18.702 ms | Metadynamics time = 539.87 ns | alpha = 3.46e+04 |  
+Reweighted Unbinding time =   10.209 ms | Metadynamics time = 405.13 ns | alpha = 2.52e+04 |  
+Reweighted Unbinding time =    5.510 ms | Metadynamics time = 465.43 ns | alpha = 1.18e+04 |  
+Reweighted Unbinding time =    0.464 ms | Metadynamics time = 295.56 ns | alpha = 1.57e+03 |  
+Reweighted Unbinding time =    2.278 ms | Metadynamics time = 472.19 ns | alpha = 4.83e+03 |  
+Reweighted Unbinding time =    2.623 ms | Metadynamics time = 735.22 ns | alpha = 3.57e+03 |  

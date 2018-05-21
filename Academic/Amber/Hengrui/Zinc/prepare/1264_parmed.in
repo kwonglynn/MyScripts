@@ -1,0 +1,4 @@
+loadRestrt complex_wi.inpcrd
+setOverwrite True
+add12_6_4 @%Zn2+ watermodel SPCE
+outparm complex_wi_ZN.prmtop complex_wi_ZN.inpcrd

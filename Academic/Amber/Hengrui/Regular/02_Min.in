@@ -1,0 +1,8 @@
+Minimzation with no restraints.
+ &cntrl
+ imin=1, irest=0, ntx=1,
+ ntf=1, ntc=1,
+ cut=9.0,
+ ntmin=1, maxcyc=2000, ncyc=1000, ntpr=100,
+ ioutfm=1, ntxo=2,
+ &end

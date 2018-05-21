@@ -1,0 +1,4 @@
+parm complex_wi.prmtop
+trajin 05_Prod.rst
+autoimage
+trajout 4XQP_G230_complex_wi_MD1.pdb pdb
