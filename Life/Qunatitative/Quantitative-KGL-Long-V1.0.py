@@ -64,7 +64,7 @@ def ProperStock(stock_info, code, Tperiod):
             else:
                 stock=ts.get_k_data(code)
     
-        if len(stock) < 250:
+        if len(stock) < 1050:
             return None
         else:
             return True    
