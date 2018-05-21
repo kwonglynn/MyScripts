@@ -502,7 +502,7 @@ if __name__ == '__main__':
 
         if opts["cmap"]:
             map_obj = pylab.pcolormesh(mat,
-                    shading="flat", edgecolors="None", cmap=mpl.cm.Greys)
+                    shading="flat", edgecolors="None", cmap=mpl.cm.jet_r)
         elif opts["dmap"]:
             if opts["--greyscale"]:
                 cmap = mpl.cm.Greys
