@@ -47,12 +47,11 @@ def ProperStock(stock_info, code, Tperiod):
     if all([float(stock_info.loc[stock_info.index==code].pe) > 200, \
         float(stock_info.loc[stock_info.index==code].pb) > 15, \
         float(stock_info.loc[stock_info.index==code].esp) < 0, \
-        float(stock_info.loc[stock_info.index==code].perundp) < 0, \
-        float(stock_info.loc[stock_info.index==code].rev) < -20, \
-        float(stock_info.loc[stock_info.index==code].profit) < -20]):
+        float(stock_info.loc[stock_info.index==code].perundp) < 0]):
+#        float(stock_info.loc[stock_info.index==code].rev) < -20, \
+#        float(stock_info.loc[stock_info.index==code].profit) < -20]):
         # float(stock_info.loc[stock_info.index==code].gpr) < 15, \
         # float(stock_info.loc[stock_info.index==code].npr) < 0, ]       
-
         try:
             if TEST=='True':
                 stock=ts.get_k_data(code, ktype = Tperiod, start=Tstart, end=Tend)
@@ -69,6 +68,9 @@ def ProperStock(stock_info, code, Tperiod):
             return None
         else:
             return True    
+    
+    else:
+        return None
 
 #MACD is most important!
 def MACD(code, Tperiod): 
@@ -178,6 +180,7 @@ for code in codes:
     if not all([DIFF[-1] >= DEA[-1], DEA[-1] >= DEA[-2]]):
         continue    
     
+    print("%s, %s\n" %(code, today))
     fo.write("%s, %s\n" %(code, today))
 
 # Write out the signal date, for testing.
