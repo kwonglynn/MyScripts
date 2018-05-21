@@ -149,17 +149,15 @@ if __name__ == '__main__':
         codes.append(code_test)
      ######################TEST#########################
    
-    M = 0
-    codes.append('300059')
-    print (codes[-10:])      
-    for code in codes[-10:]:   
+    M = 0   
+    for code in codes:   
         M += 1
         print(M)
         
         #Pre-Filter
         if not ProperStock(stock_info, code, 'D'):
             continue
-        print ('Here')
+
         # Monthly KDJ and MACD
         Tperiod = 'M'
         KValue, DValue = KDJ(code, Tperiod)
