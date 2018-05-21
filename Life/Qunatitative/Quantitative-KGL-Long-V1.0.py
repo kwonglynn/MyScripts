@@ -21,7 +21,6 @@ import tushare as ts
 import pandas as pd
 import numpy as np
 import datetime
-import time
 import matplotlib.pyplot as plt
 plt.rcParams['font.sans-serif']=['SimHei']
 
@@ -43,6 +42,7 @@ def EWMACal(Close, period, expo):
     return EWMA   
 
 def ProperStock(stock_info, code, Tperiod):
+
     # Pre-filter with basic data.
     if all([float(stock_info.loc[stock_info.index==code].pe) > 200, \
         float(stock_info.loc[stock_info.index==code].pb) > 15, \
@@ -51,41 +51,40 @@ def ProperStock(stock_info, code, Tperiod):
 #        float(stock_info.loc[stock_info.index==code].rev) < -20, \
 #        float(stock_info.loc[stock_info.index==code].profit) < -20]):
         # float(stock_info.loc[stock_info.index==code].gpr) < 15, \
-        # float(stock_info.loc[stock_info.index==code].npr) < 0, ]       
-        try:
+        # float(stock_info.loc[stock_info.index==code].npr) < 0, ]  
+        
+        # Loop until the data is retrieved. 
+        while True:
             if TEST=='True':
                 stock=ts.get_k_data(code, ktype = Tperiod, start=Tstart, end=Tend)
             else:
                 stock=ts.get_k_data(code)
-        except:
-            time.sleep(1)
-            if TEST=='True':
-                stock=ts.get_k_data(code, ktype = Tperiod, start=Tstart, end=Tend)
-            else:
-                stock=ts.get_k_data(code)
-    
-        if len(stock) < 1050:
-            return None
-        else:
-            return True    
-    
+            
+            try:
+                if len(stock) < 1050:
+                    return None
+                elif len(stock) > 1050:
+                    return True
+            except NameError:
+                continue   
+    # Exit if the basic contiditons are not met.
     else:
         return None
 
 #MACD is most important!
 def MACD(code, Tperiod): 
     # Get the date depending the time period, namely weekly or monthly.
-    try:
+    while True:
         if TEST=='True':
             stock=ts.get_k_data(code, ktype = Tperiod, start=Tstart, end=Tend)
         else:
-            stock=ts.get_k_data(code, ktype = Tperiod)
-    except:
-        time.sleep(1)
-        if TEST=='True':
-            stock=ts.get_k_data(code, ktype = Tperiod, start=Tstart, end=Tend)
-        else:
-            stock=ts.get_k_data(code, ktype = Tperiod)
+            stock=ts.get_k_data(code)
+        
+        try:
+            if len(stock) > 0:
+                break
+        except NameError:
+            continue
 
     stock.index=stock.iloc[:,0]
     stock.index=pd.to_datetime(stock.index,format='%Y-%m-%d')
@@ -99,20 +98,20 @@ def MACD(code, Tperiod):
 
 def KDJ(code, Tperiod):
     #Weekly KDJ.
-    try:
+    while True:
         if TEST=='True':
             stock=ts.get_k_data(code, ktype = Tperiod, start=Tstart, end=Tend)
         else:
-            stock=ts.get_k_data(code, ktype = Tperiod)
-    except:
-        time.sleep(1)
-        if TEST=='True':
-            stock=ts.get_k_data(code, ktype = Tperiod, start=Tstart, end=Tend)
-        else:
-            stock=ts.get_k_data(code, ktype = Tperiod)
+            stock=ts.get_k_data(code)
+        
+        try:
+            if len(stock) > 0:
+                break
+        except NameError:
+            continue
 
     stock.index=stock.iloc[:,0]
-    stock.index=pd.to_datetime(stock.index,format='%Y-%m-%d')
+    stock.index=pd.to_datetime(stock.index,format = '%Y-%m-%d')
     stock=stock.iloc[:,1:-1]
     Close=stock.close
     High=stock.high
@@ -141,7 +140,14 @@ def KDJ(code, Tperiod):
         
 ##### Second Part:
 ##### Process all the stocks one by one
-stock_info=ts.get_stock_basics()
+while True:
+    stock_info = ts.get_stock_basics()   
+    try:
+        if len(stock_info) > 0:
+            break
+    except NameError:
+        continue
+
 codes=sorted(list(stock_info.index))
 
 today=datetime.date.today().strftime('%Y-%m-%d')
@@ -157,8 +163,8 @@ for code in codes:
     print(M)
     
     #Pre-Filter
-    # if not ProperStock(stock_info, code, 'D'):
-    #    continue
+    if not ProperStock(stock_info, code, 'D'):
+        continue
 
     # Monthly KDJ and MACD
     Tperiod = 'M'
@@ -182,9 +188,5 @@ for code in codes:
     
     print("%s, %s\n" %(code, today))
     fo.write("%s, %s\n" %(code, today))
-
-# Write out the signal date, for testing.
-    if TEST == 'True':
-        print("%s, %s\n" %(code, today))
    
 fo.close()         
