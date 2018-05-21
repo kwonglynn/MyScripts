@@ -121,7 +121,7 @@ if __name__ == '__main__':
     fo = open('Stocks-%s.txt' % today,'w')  
 
     ######################TEST#########################
-    TEST = 'False'
+    TEST = 'True'
         
     if TEST == 'True':
         code_test = '300059'
