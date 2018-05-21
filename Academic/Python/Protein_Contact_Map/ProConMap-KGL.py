@@ -419,10 +419,10 @@ def calc_dist_matrix(residues, measure="CA", dist_thresh=None,
         res_a = residues[i]
         res_b = residues[j]
         dist = calc_distance(res_a, res_b, measure)
-        mat[i,j] = dist
+        mat[j,i] = dist
 
         if not asymmetric:
-            mat[j,i] = dist
+            mat[i,j] = dist
 
     # transpose i with j so the distances are contained only in the
     # upper-triangle.
