@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 # Notice: Change time before usage!
 # Note with Tstart, cannot get the latest data!
-TEST='False'
+TEST='True'
     
 if TEST=='True':
-    code_test='601318'
+    code_test='300059'
 #    Tstart=''
 #    Tend=''
     Tstart='2000-11-16'
-    Tend='2017-05-31'
+    Tend='2018-05-21'
 
 """
 Created on Sun Aug 27 00:39:55 2017
@@ -41,32 +41,35 @@ def EWMACal(Close, period, expo):
         EWMA[i]=expo*Close[i]+(1-expo)*EWMA[i-1]
     return EWMA   
 
-def ProperStock(stock_info, code, Tperiod):
+def GetStock(code, Tperiod):
+    while True:
+        if TEST == 'True':
+            stock=ts.get_k_data(code, ktype = Tperiod, start=Tstart, end=Tend)
+        else:
+            stock=ts.get_k_data(code)
+        
+        try:
+            if len(stock) > 0:
+                return stock
+        except NameError:
+            continue  
 
+def ProperStock(stock_info, code, Tperiod):
     # Pre-filter with basic data.
-    if all([float(stock_info.loc[stock_info.index==code].pe) > 200, \
-        float(stock_info.loc[stock_info.index==code].pb) > 15, \
-        float(stock_info.loc[stock_info.index==code].esp) < 0, \
-        float(stock_info.loc[stock_info.index==code].perundp) < 0]):
+    if all([float(stock_info.loc[stock_info.index == code].pe) < 200, \
+        float(stock_info.loc[stock_info.index == code].pb) < 20, \
+        float(stock_info.loc[stock_info.index == code].perundp) > 0]):
 #        float(stock_info.loc[stock_info.index==code].rev) < -20, \
 #        float(stock_info.loc[stock_info.index==code].profit) < -20]):
         # float(stock_info.loc[stock_info.index==code].gpr) < 15, \
         # float(stock_info.loc[stock_info.index==code].npr) < 0, ]  
         
-        # Loop until the data is retrieved. 
-        while True:
-            if TEST=='True':
-                stock=ts.get_k_data(code, ktype = Tperiod, start=Tstart, end=Tend)
-            else:
-                stock=ts.get_k_data(code)
-            
-            try:
-                if len(stock) < 1050:
-                    return None
-                elif len(stock) > 1050:
-                    return True
-            except NameError:
-                continue   
+        # The stock should have enough data for the monthly analysis, > 50 months. 
+        stock = GetStock(code, Tperiod)
+        if len(stock) > 1050:
+            return True
+        else:
+            return None
     # Exit if the basic contiditons are not met.
     else:
         return None
@@ -74,17 +77,7 @@ def ProperStock(stock_info, code, Tperiod):
 #MACD is most important!
 def MACD(code, Tperiod): 
     # Get the date depending the time period, namely weekly or monthly.
-    while True:
-        if TEST=='True':
-            stock=ts.get_k_data(code, ktype = Tperiod, start=Tstart, end=Tend)
-        else:
-            stock=ts.get_k_data(code)
-        
-        try:
-            if len(stock) > 0:
-                break
-        except NameError:
-            continue
+    stock = GetStock(code, Tperiod)
 
     stock.index=stock.iloc[:,0]
     stock.index=pd.to_datetime(stock.index,format='%Y-%m-%d')
@@ -98,17 +91,7 @@ def MACD(code, Tperiod):
 
 def KDJ(code, Tperiod):
     #Weekly KDJ.
-    while True:
-        if TEST=='True':
-            stock=ts.get_k_data(code, ktype = Tperiod, start=Tstart, end=Tend)
-        else:
-            stock=ts.get_k_data(code)
-        
-        try:
-            if len(stock) > 0:
-                break
-        except NameError:
-            continue
+    stock = GetStock(code, Tperiod)
 
     stock.index=stock.iloc[:,0]
     stock.index=pd.to_datetime(stock.index,format = '%Y-%m-%d')
