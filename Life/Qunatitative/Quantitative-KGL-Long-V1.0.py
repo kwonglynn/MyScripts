@@ -39,7 +39,7 @@ def GetStock(code, Tperiod):
         if TEST == 'True':
             stock = ts.get_k_data(code, ktype = Tperiod, start=Tstart, end=Tend)
         else:
-            stock = ts.get_k_data(code)
+            stock = ts.get_k_data(code, ktype= Tperiod, start=Tstart)
         
         try:
             if len(stock) > 0:
@@ -118,16 +118,17 @@ def KDJ(code, Tperiod):
 ##### Process all the stocks one by one
 if __name__ == '__main__':
     today = datetime.date.today().strftime('%Y-%m-%d')
-    fo = open('Stocks-%s.txt' % today,'w')  
+    fo = open('Stocks-%s.txt' % today,'w')
+    #The start time has to be specified explicitly, otherwise the default data is not enough for monthly analysis.
+    Tstart = '2012-01-01'
 
     ######################TEST#########################
-    TEST = 'True'
-        
+    TEST = 'False'       
     if TEST == 'True':
         code_test = '300059'
     #    Tstart=''
     #    Tend=''
-        Tstart = '2000-11-16'
+        Tstart = '2012-01-01'
         Tend = '2018-05-21'
     ####################TEST##########################
     
@@ -141,20 +142,24 @@ if __name__ == '__main__':
             continue
     
     codes = sorted(list(stock_info.index))
-    
+ 
+    ######################TEST#########################
     if TEST == 'True':
         codes = []
         codes.append(code_test)
-    
-    M = 0       
-    for code in codes:   
+     ######################TEST#########################
+   
+    M = 0
+    codes.append('300059')
+    print (codes[-10:])      
+    for code in codes[-10:]:   
         M += 1
         print(M)
         
         #Pre-Filter
         if not ProperStock(stock_info, code, 'D'):
             continue
-    
+        print ('Here')
         # Monthly KDJ and MACD
         Tperiod = 'M'
         KValue, DValue = KDJ(code, Tperiod)
