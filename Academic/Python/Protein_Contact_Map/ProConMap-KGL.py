@@ -420,6 +420,9 @@ def calc_dist_matrix(residues, measure="CA", dist_thresh=None,
         res_b = residues[j]
         dist = calc_distance(res_a, res_b, measure)
         mat[j,i] = dist
+        
+        if abs(i-j) < 2:
+            mat[j,i] = None
 
         if not asymmetric:
             mat[i,j] = dist
