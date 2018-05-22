@@ -404,9 +404,6 @@ def calc_dist_matrix(residues, measure="CA", dist_thresh=None,
 
     # Compute the upper-triangle of the underlying distance matrix.
     #
-    # TODO:
-    # - parallelise this over multiple processes + show benchmark results.
-    # - use the lower-triangle to convey other information.
     pair_indices = combinations_with_replacement(range(len(residues)), 2)
 
     for i, j in pair_indices:
@@ -416,13 +413,13 @@ def calc_dist_matrix(residues, measure="CA", dist_thresh=None,
         mat[j,i] = dist
         
         if abs(i-j) < 2:
-            mat[j,i] = None
+            mat[j,i] = np.nan
 
         if not asymmetric:
             mat[i,j] = dist
 
     # transpose i with j so the distances are contained only in the
-    # upper-triangle.
+    # upper-triangle. This is only useful for asymmetric!
     mat = mat.T
     mat = np.ma.masked_array(mat, np.isnan(mat))
 
