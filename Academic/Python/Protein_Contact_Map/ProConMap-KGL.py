@@ -58,7 +58,7 @@ mpl.use('Agg') # Agg is a non-interactive backend,
 
 import os
 import sys
-import numpy
+import numpy as np
 import pylab
 
 from itertools import combinations_with_replacement
@@ -132,8 +132,9 @@ def get_residues(pdb_fn, chain_ids=None, model_num=0):
 
     """
 
+    #Get the name of PDB file.
     pdb_id = os.path.splitext(os.path.basename(pdb_fn))[0]
-
+    # First create an instance of the parser.
     parser = Bio.PDB.PDBParser(pdb_id, pdb_fn)
     struct = parser.get_structure(pdb_id, pdb_fn)
     model = struct[model_num]
@@ -193,7 +194,7 @@ def get_atom_coord(res, atom_name, verbose=False):
         # Infer the CB atom position described in http://goo.gl/OaNjxe
         #
         # NOTE:
-        # These are Bio.PDB.Vector objects and _not_ numpy arrays.
+        # These are Bio.PDB.Vector objects and _not_ np arrays.
         N = res["N"].get_vector()
         CA = res["CA"].get_vector()
         C = res["C"].get_vector()
@@ -201,18 +202,11 @@ def get_atom_coord(res, atom_name, verbose=False):
         CA_N = N - CA
         CA_C = C - CA
 
-        rot_mat = Bio.PDB.rotaxis(-numpy.pi * 120.0 / 180.0, CA_C)
+        rot_mat = Bio.PDB.rotaxis(-np.pi * 120.0 / 180.0, CA_C)
         coord = (CA + CA_N.left_multiply(rot_mat)).get_array()
 
     return coord
 
-def is_parallel(r1, r2):
-    """Determine if the N-to-C directions of two residues are parallel to each other.
-
-    """
-    v1 = get_atom_coord(r1, "C") - get_atom_coord(r1, "N")
-    v2 = get_atom_coord(r2, "C") - get_atom_coord(r2, "N")
-    return v1.dot(v2) > 0
 #
 # Plotting
 #
@@ -294,7 +288,7 @@ def calc_center_of_mass(atoms):
     coords = [a.get_coord() for a in atoms]
     weights = [a.mass for a in atoms]
 
-    return numpy.average(coords, weights=weights, axis=0)
+    return np.average(coords, weights=weights, axis=0)
 
 
 def calc_minvdw_distance(res_a, res_b):
@@ -320,7 +314,7 @@ def calc_minvdw_distance(res_a, res_b):
             A = a.get_coord()
             B = b.get_coord()
 
-            dist = numpy.linalg.norm(A - B) - radii_a - radii_b
+            dist = np.linalg.norm(A - B) - radii_a - radii_b
 
             if (min_dist is None) or dist < min_dist:
                 min_dist = dist
@@ -352,7 +346,7 @@ def calc_cmass_distance(res_a, res_b, sidechain_only=False):
     A = calc_center_of_mass(atoms_a)
     B = calc_center_of_mass(atoms_b)
 
-    return numpy.linalg.norm(A-B)
+    return np.linalg.norm(A-B)
 
 
 def calc_distance(res_a, res_b, measure="CA"):
@@ -372,7 +366,7 @@ def calc_distance(res_a, res_b, measure="CA"):
     if measure in ("CA", "CB"):
         A = get_atom_coord(res_a, measure)
         B = get_atom_coord(res_b, measure)
-        dist = numpy.linalg.norm(A-B)
+        dist = np.linalg.norm(A-B)
     elif measure == "cmass":
         dist = calc_cmass_distance(res_a, res_b)
     elif measure == "sccmass":
@@ -401,12 +395,12 @@ def calc_dist_matrix(residues, measure="CA", dist_thresh=None,
 
     """
 
-    mat = numpy.zeros((len(residues), len(residues)), dtype="float64")
+    mat = np.zeros((len(residues), len(residues)), dtype="float64")
 
     # after the distances are added to the upper-triangle, the nan values
     # indicate the lower matrix values, which are "empty", but can be used to
     # convey other information if needed.
-    mat[:] = numpy.nan
+    mat[:] = np.nan
 
     # Compute the upper-triangle of the underlying distance matrix.
     #
@@ -430,13 +424,13 @@ def calc_dist_matrix(residues, measure="CA", dist_thresh=None,
     # transpose i with j so the distances are contained only in the
     # upper-triangle.
     mat = mat.T
-    mat = numpy.ma.masked_array(mat, numpy.isnan(mat))
+    mat = np.ma.masked_array(mat, np.isnan(mat))
 
     if dist_thresh is not None:
         mat = mat < dist_thresh
 
     if mask_thresh:
-        mat = numpy.ma.masked_greater_equal(mat, mask_thresh)
+        mat = np.ma.masked_greater_equal(mat, mask_thresh)
 
     return mat
 
@@ -457,7 +451,7 @@ if __name__ == '__main__':
 
         # Check that pdb chain ids are alphanumeric (see:
         # http://deposit.rcsb.org/adit/).
-        if not numpy.all(list(map(str.isalnum, chain_ids))):
+        if not np.all(list(map(str.isalnum, chain_ids))):
             sys.stderr.write()
 
 
@@ -478,7 +472,7 @@ if __name__ == '__main__':
         else:
             fmt = "%.3f"
 
-        numpy.savetxt(opts["--output"], mat.filled(0), fmt=fmt)
+        np.savetxt(opts["--output"], mat.filled(0), fmt=fmt)
     else:
         font_kwargs = {
                 "family" : opts["--font-family"],
