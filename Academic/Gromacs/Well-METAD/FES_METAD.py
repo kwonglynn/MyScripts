@@ -1,58 +1,114 @@
-###############Input####################################
-#Command for plumed
-#plumed sum_hills --hills HILLS --bin 98,99
-fin='fes.dat'
-fout='fes1.png'
-auto=0      #0 for use input, 1 for automatic generation.
-upper=1     #Always be 1
-lower=-17   #1 smaller than the automatic one
-STEP=1
-bin=99
-##########Input Stop here###############################
+#!/usr/bin/env python
+# encoding: utf-8
 
-import sys
-import os
+"""
+Author:
+    Guanglin Kuang <guanglin@kth.se>
+
+Usage:
+    FES_METAD.py <fes> -o <file> [(-u <upper> -l <lower>)] [options]
+
+Options:
+    -o, --output <file>         Save the plot to a file [default: fes.png].
+    -u, --upper <upper>         The upper boundary of the map.
+    -l, --lower <lower>         The lower boundary of the map.
+    -s, --step <step>           The step for the boundary [default: 1].
+    -B, --BIN <BIN>             The bin number for the map [default: 99].
+    --cv1 <cv1>                 CV type, can be Distance, Dihedral or Contact [default: Distance].
+    --cv2 <cv2>                 CV type, can be Distance, Dihedral or Contact [default: Distance].
+    
+    -v, --verbose               Verbose mode.
+
+Note:
+    1, Use plumed to generate the free energy data:
+       plumed sum_hills --hills HILLS --bin 98,99
+       Distance BIN is 98, dihedral BIN is 99. Try and check fes.dat for the details.
+    2, Use the script to generate a FES map.
+    3, Adjust the upper and lower boundaries to make the map nicer.
+"""
+
 import matplotlib.pyplot as plt
-from pylab import *
-import matplotlib.tri as tri
 import numpy as np
-import math
+from docopt import docopt
 
-data = np.genfromtxt(fin)
-allX=data[:,0]*10
-allY=data[:,1]
-allZ=data[:,2]/4.184 		#kJ/mol->kcal/mol
+##########Input Stop here###############################
+if __name__ == '__main__':
+    
+    ####Treat the options####
+    opts = docopt(__doc__)
+    
+    fin = opts["<fes>"]
+    fout = opts["--output"]
+    
+    if opts["--upper"] and opts["--lower"]:
+        upper = int(opts["--upper"])
+        lower = int(opts["--lower"])
+    
+    step = int(opts["--step"])
+    BIN = int(opts["--BIN"])
+    #########Options#########
+    
+    data = np.genfromtxt(fin)
+    
+    # The first collective variable.
+    if opts["--cv1"] == 'Distance':
+        allX = data[:, 0] * 10       # nM to Angstrom
+        unit1 = r'$\AA$'
+    elif opts["--cv1"] == 'Dihedral':
+        allX = data[:, 0]
+        unit1 = 'radian'
+    elif opts["--cv1"] == 'Contact':
+        allX = data[:, 0]
+        unit1 = ''
+    
+    # The second collective variable.
+    if opts["--cv2"] == 'Distance':
+        allY = data[:, 1] * 10       # nM to Angstrom
+        unit2 = r'$\AA$'
+    elif opts["--cv1"] == 'Dihedral':
+        allY = data[:, 1]
+        unit2 = 'radian'
+    elif opts["--cv1"] == 'Contact':
+        allY = data[:, 1]
+        unit2 = ''        
+        
+    allZ = data[:, 2] / 4.184 	  # kJ/mol->kcal/mol
+    
+    zmax = allZ.max()
+    allZ0 = allZ - zmax			#Let the upper limit to be 0
 
-zmax=allZ.max()
-allZ0=allZ-zmax			#Let the upper limit to be 0
-
-if auto==1:
-    lower=int(allZ0.min())
-    upper=int(allZ0.max())
-
-X=allX[0:bin]
-Y=allY[range(1,len(allY),bin)]
-Z=allZ0.reshape(bin,bin)
-
-levels=range(lower,upper,STEP)
-print "levels are:\n",levels
-
-CS=plt.contourf(X,Y,Z,levels,cmap='jet',origin='lower')
-
-cbar=plt.colorbar(CS)
-
-xmin=X.min()
-xmax=X.max()
-ymin=Y.min()
-ymax=Y.max()
-
-plt.xlim(xmin,xmax)
-plt.ylim(ymin,ymax)
-
-plt.xlabel('Distance' +'('+r'$\AA$'+')',fontsize=20)
-plt.ylabel('Distance' +'('+r'$\AA$'+')',fontsize=20)
-cbar.ax.tick_params(labelsize=18)
-cbar.set_label(r'$\Delta$'+'G'+' (kcal/mol)',fontsize=18)
-plt.tick_params(labelsize=18)
-plt.savefig(fout, dpi=600)
-
+    # Either provide both upper and lower boundaries or leave it empty.
+    if not opts["--upper"]:
+        lower0 = int(allZ0.min())
+        upper0 = int(allZ0.max())
+    
+        lower = lower0 - 1
+        upper = upper0 + 1
+    
+    X = allX[0 : BIN]
+    Y = allY[range(1, len(allY), BIN)]
+    Z = allZ0.reshape(BIN, BIN)
+    
+    levels = range(lower, upper, step)
+    print ("Levels are:\n", levels)
+    
+    CS = plt.contourf(X, Y, Z, levels, cmap='jet', origin='lower')
+    
+    cbar = plt.colorbar(CS)
+    
+    xmin = X.min()
+    xmax = X.max()
+    ymin = Y.min()
+    ymax = Y.max()
+    
+    plt.xlim(xmin, xmax)
+    plt.ylim(ymin, ymax)
+    
+    # Customize the x, y label if necessary to make it clearer.
+    plt.xlabel(opts["--cv1"] + '(' + unit1 + ')', fontsize=12)
+    plt.ylabel(opts["--cv2"] + '(' + unit2 + ')', fontsize=12)
+    cbar.ax.tick_params(labelsize=10)
+    cbar.set_label(r'$\Delta$' + 'G' + ' (kcal/mol)', fontsize=10)
+    plt.tick_params(labelsize=10)
+    plt.savefig(fout, dpi=600)
+    
