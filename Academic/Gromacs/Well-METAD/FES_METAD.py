@@ -90,7 +90,7 @@ if __name__ == '__main__':
     Z = allZ0.reshape(BIN, BIN)
     
     levels = range(lower, upper, step)
-    print ("Levels are:" + '\n' + levels)
+    print ("Levels are:" + '\n' + str(levels))
     
     CS = plt.contourf(X, Y, Z, levels, cmap='jet', origin='lower')
     
