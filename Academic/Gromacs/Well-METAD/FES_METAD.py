@@ -6,7 +6,7 @@ Author:
     Guanglin Kuang <guanglin@kth.se>
 
 Usage:
-    FES_METAD.py <fes> -o <file> [(-u <upper> -l <lower>)] [options]
+    FES_METAD.py <fes> [(-u <upper> -l <lower>)] --cv1 <cv1> --cv2 <cv2> [options]
 
 Options:
     -o, --output <file>         Save the plot to a file [default: fes.png].
@@ -14,8 +14,8 @@ Options:
     -l, --lower <lower>         The lower boundary of the map.
     -s, --step <step>           The step for the boundary [default: 1].
     -B, --BIN <BIN>             The bin number for the map [default: 99].
-    --cv1 <cv1>                 CV type, can be Distance, Dihedral or Contact [default: Distance].
-    --cv2 <cv2>                 CV type, can be Distance, Dihedral or Contact [default: Distance].
+    --cv1 <cv1>                 CV type, can be distance, dihedral or contact [default: distance].
+    --cv2 <cv2>                 CV type, can be distance, dihedral or contact [default: dihedral].
     
     -v, --verbose               Verbose mode.
 
@@ -51,24 +51,24 @@ if __name__ == '__main__':
     data = np.genfromtxt(fin)
     
     # The first collective variable.
-    if opts["--cv1"] == 'Distance':
+    if opts["--cv1"] == 'distance':
         allX = data[:, 0] * 10       # nM to Angstrom
         unit1 = r'$\AA$'
-    elif opts["--cv1"] == 'Dihedral':
+    elif opts["--cv1"] == 'dihedral':
         allX = data[:, 0]
         unit1 = 'radian'
-    elif opts["--cv1"] == 'Contact':
+    elif opts["--cv1"] == 'contact':
         allX = data[:, 0]
         unit1 = ''
     
     # The second collective variable.
-    if opts["--cv2"] == 'Distance':
+    if opts["--cv2"] == 'distance':
         allY = data[:, 1] * 10       # nM to Angstrom
         unit2 = r'$\AA$'
-    elif opts["--cv1"] == 'Dihedral':
+    elif opts["--cv1"] == 'dihedral':
         allY = data[:, 1]
         unit2 = 'radian'
-    elif opts["--cv1"] == 'Contact':
+    elif opts["--cv1"] == 'contact':
         allY = data[:, 1]
         unit2 = ''        
         
@@ -105,8 +105,8 @@ if __name__ == '__main__':
     plt.ylim(ymin, ymax)
     
     # Customize the x, y label if necessary to make it clearer.
-    plt.xlabel(opts["--cv1"] + '(' + unit1 + ')', fontsize=12)
-    plt.ylabel(opts["--cv2"] + '(' + unit2 + ')', fontsize=12)
+    plt.xlabel(opts["--cv1"].capitalize() + '(' + unit1 + ')', fontsize=12)
+    plt.ylabel(opts["--cv2"].capitalize() + '(' + unit2 + ')', fontsize=12)
     cbar.ax.tick_params(labelsize=10)
     cbar.set_label(r'$\Delta$' + 'G' + ' (kcal/mol)', fontsize=10)
     plt.tick_params(labelsize=10)
