@@ -65,10 +65,10 @@ if __name__ == '__main__':
     if opts["--cv2"] == 'distance':
         allY = data[:, 1] * 10       # nM to Angstrom
         unit2 = r'$\AA$'
-    elif opts["--cv1"] == 'dihedral':
+    elif opts["--cv2"] == 'dihedral':
         allY = data[:, 1]
         unit2 = 'radian'
-    elif opts["--cv1"] == 'contact':
+    elif opts["--cv2"] == 'contact':
         allY = data[:, 1]
         unit2 = ''        
         
