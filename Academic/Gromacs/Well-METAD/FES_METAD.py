@@ -105,8 +105,8 @@ if __name__ == '__main__':
     plt.ylim(ymin, ymax)
     
     # Customize the x, y label if necessary to make it clearer.
-    plt.xlabel(opts["--cv1"].capitalize() + '(' + unit1 + ')', fontsize=12)
-    plt.ylabel(opts["--cv2"].capitalize() + '(' + unit2 + ')', fontsize=12)
+    plt.xlabel(opts["--cv1"].capitalize() + ' (' + unit1 + ')', fontsize=12)
+    plt.ylabel(opts["--cv2"].capitalize() + ' (' + unit2 + ')', fontsize=12)
     cbar.ax.tick_params(labelsize=10)
     cbar.set_label(r'$\Delta$' + 'G' + ' (kcal/mol)', fontsize=10)
     plt.tick_params(labelsize=10)
