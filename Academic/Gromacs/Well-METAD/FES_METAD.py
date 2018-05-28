@@ -6,7 +6,7 @@ Author:
     Guanglin Kuang <guanglin@kth.se>
 
 Usage:
-    FES_METAD.py <fes> [(-u <upper> -l <lower>)] --cv1 <cv1> --cv2 <cv2> [options]
+    FES_METAD.py <fes> [-u <upper> -l <lower>] [--cv1 <cv1> --cv2 <cv2>] [options]
 
 Options:
     -o, --output <file>         Save the plot to a file [default: fes.png].
