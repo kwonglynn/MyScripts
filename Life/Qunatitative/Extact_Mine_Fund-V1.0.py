@@ -45,7 +45,7 @@ for fund in AllFundsList:
     except:
         continue
     print ('Found:', code)
-    #Return in one and two years
+    #Return in one, two and three years
     year1 = (prices[0]-prices[250])/prices[250]*100
     year2 = (prices[250]-prices[500])/prices[500]*100
     year3 = (prices[500]-prices[750])/prices[750]*100
