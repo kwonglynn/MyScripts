@@ -47,7 +47,7 @@ for code in codes:
     std = np.std(returns)
     sharp = (ER-Rf)/std * 100
 
-    fo.write("%s\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\n" %  (code, year1, year2, slope, sharp, std))
+    fo.write("'%s'\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\n" %  (code, year1, year2, slope, sharp, std))
     
 fo.close()
         
