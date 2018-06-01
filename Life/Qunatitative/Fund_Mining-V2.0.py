@@ -5,10 +5,10 @@ import numpy as np
 from scipy import stats
 
 ##################################Main########################################
-StartDate = '2013-05-31'
+StartDate = '2015-05-31'
 EndDate = '2018-05-31'
  
-TEST = 'True'
+TEST = 'False'
 if TEST == 'True': 
     codes = ['110022','540006','590008','519606','090013','020026']
 
@@ -26,6 +26,8 @@ for code in codes:
     returns = np.array(fund.change.dropna())
     
     if len(prices) < 500:
+        continue
+    elif prices[0] < prices[-1] or (prices[0]-prices[250])/prices[250] < 0.2:
         continue
     
     print (code)
