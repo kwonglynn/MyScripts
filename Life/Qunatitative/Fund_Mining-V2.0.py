@@ -8,7 +8,7 @@ from scipy import stats
 StartDate = '2015-05-31'
 EndDate = '2018-05-31'
  
-TEST = 'True'
+TEST = 'False'
 if TEST == 'True': 
     codes = ['110022','540006','590008','519606','090013','020026']
 
@@ -24,17 +24,14 @@ for code in codes:
     print (code)
     try:
         fund = ts.fund.nav.get_nav_history(code, start=StartDate, end=EndDate)
-    except AttributeError:
-        continue
-    except ValueError:
-        continue
+        prices = np.array(fund.total.dropna())
+        returns = np.array(fund.change.dropna())
     
-    prices = np.array(fund.total.dropna())
-    returns = np.array(fund.change.dropna())
-    
-    if len(prices) < 500:
-        continue
-    elif prices[0] < prices[-1] or (prices[0]-prices[250])/prices[250] < 0.2:
+        if len(prices) < 500:
+            continue
+        elif prices[0] < prices[-1] or (prices[0]-prices[250])/prices[250] < 0.2:
+            continue
+    except:
         continue
 
     #Return in one and two years
