@@ -40,7 +40,7 @@ with open('EquityFunds-%s.dat' % today,'w') as fo:
         print (code)
         try:
             fund = ts.fund.nav.get_nav_history(code, start=StartDate, end=EndDate)
-            if float(fund.value) <= float(fund.total) or (int(fund.total)*10) > 11:
+            if float(fund.value) <= float(fund.total) and (int(fund.total)*10) > 11:
                 j += 1
                 print ('j: ', j)
                 fo.write(code + '\n')

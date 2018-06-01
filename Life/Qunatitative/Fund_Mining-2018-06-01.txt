@@ -1,0 +1,2 @@
+Code	Year1	Year2	Year3	Slope	Sharp	STD
+'110022'	 39.69	 41.03	-12.88	  0.14	  6.24	  1.61
