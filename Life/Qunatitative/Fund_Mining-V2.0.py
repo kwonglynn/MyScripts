@@ -8,7 +8,7 @@ import datetime
 ##################################Main########################################
 today = datetime.date.today().strftime('%Y-%m-%d')
 fo = open('Fund_Mining-%s.txt' % today, 'w')
-fo.write("Code\tyear1\tyear2\tSlope\tSharp\tSTD\n")
+fo.write("Code\tYear1\tYear2\tYear3\tSlope\tSharp\tSTD\n")
 
 StartDate = '2015-05-31'
 EndDate = '2018-05-31'
@@ -29,7 +29,7 @@ for code in codes:
         prices = np.array(fund.total.dropna())
         returns = np.array(fund.change.dropna())
     
-        if len(prices) < 500:
+        if len(prices) < 751:
             continue
         elif prices[0] < prices[-1] or (prices[0]-prices[250])/prices[250] < 0.2:
             continue
@@ -38,7 +38,8 @@ for code in codes:
 
     #Return in one and two years
     year1 = (prices[0]-prices[250])/prices[250]*100
-    year2 = (prices[0]-prices[500])/prices[500]*100
+    year2 = (prices[250]-prices[500])/prices[500]*100
+    year3 = (prices[500]-prices[750])/prices[750]*100
     
     x = np.arange(len(prices))
     slope = -1 * stats.linregress(x, prices)[0] * 100
@@ -49,7 +50,7 @@ for code in codes:
     std = np.std(returns)
     sharp = (ER-Rf)/std * 100
 
-    fo.write("'%s'\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\n" %  (code, year1, year2, slope, sharp, std))
+    fo.write("'%s'\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\n" %  (code, year1, year2, year3, slope, sharp, std))
     
 fo.close()
         
