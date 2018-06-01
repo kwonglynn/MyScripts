@@ -8,12 +8,12 @@ from scipy import stats
 StartDate = '2015-05-31'
 EndDate = '2018-05-31'
  
-TEST = 'False'
+TEST = 'True'
 if TEST == 'True': 
     codes = ['110022','540006','590008','519606','090013','020026']
 
 fo = open('Fund_Mining2.dat','w')
-fo.write("Code\tSlope\tSTD\n")
+fo.write("Code\tyear1\tyear2\tSlope\tSharp\tSTD\n")
 
 if TEST != 'True':
     with open('EquityFunds-old.dat','r') as fi:
@@ -21,7 +21,14 @@ if TEST != 'True':
     
 for code in codes:
     code = code.strip()
-    fund = ts.fund.nav.get_nav_history(code, start=StartDate, end=EndDate)
+    print (code)
+    try:
+        fund = ts.fund.nav.get_nav_history(code, start=StartDate, end=EndDate)
+    except AttributeError:
+        continue
+    except ValueError:
+        continue
+    
     prices = np.array(fund.total.dropna())
     returns = np.array(fund.change.dropna())
     
@@ -29,13 +36,21 @@ for code in codes:
         continue
     elif prices[0] < prices[-1] or (prices[0]-prices[250])/prices[250] < 0.2:
         continue
-    
-    print (code)
-    x = np.arange(len(prices))
-    slope = stats.linregress(x, prices)[0] * 100
-    std = np.std(returns)
 
-    fo.write("%s\t%4.2f\t%4.2f\n" %  (code, slope, std))
+    #Return in one and two years
+    year1 = (prices[0]-prices[250])/prices[250]*100
+    year2 = (prices[0]-prices[500])/prices[500]*100
+    
+    x = np.arange(len(prices))
+    slope = -1 * stats.linregress(x, prices)[0] * 100
+    
+    #SHARP
+    ER = np.mean(returns)
+    Rf = 5.0 / 250
+    std = np.std(returns)
+    sharp = (ER-Rf)/std * 100
+
+    fo.write("%s\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\n" %  (code, year1, year2, slope, sharp, std))
     
 fo.close()
         
