@@ -1,27 +1,27 @@
 ﻿# !/usr/bin/python
 # -*- coding: utf-8 -*-
 #import datetime
-import urllib2
-import json
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
-#import re
+from urllib.request import urlopen
 import tushare as ts
+#import json
+#import sys
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
+#import re
 
 def ExtractFund(i, codes):
-    ResponseAllFunds = urllib2.urlopen('http://fund.eastmoney.com/js/fundcode_search.js')
-    AllFundsTxt = ResponseAllFunds.read()
+    ResponseAllFunds = urlopen('http://fund.eastmoney.com/js/fundcode_search.js')
+    AllFundsTxt = str(ResponseAllFunds.read())
 
     #处理数据 将其转化为list
     AllFundsTxt = AllFundsTxt[AllFundsTxt.find('=')+2:AllFundsTxt.rfind(';')]
-    AllFundsList = json.loads(AllFundsTxt.decode('utf-8'))
+    AllFundsList = eval(AllFundsTxt)
 
     # 循环处理每个基金, 只保留需要的基金。
     with open('AllFunds.dat','w') as fo:
         for fund in AllFundsList:
             i += 1
-            print 'i: ', i
+            print ('i: ', i)
 #            if i > 10: break
             code = str(fund[0])
             fo.write(code+'\n')
@@ -30,19 +30,19 @@ def ExtractFund(i, codes):
 def FilterFund(j, StartDate, EndDate, codes):
     with open('EquityFunds.dat','w') as fo:
         for code in codes:
-            print code
+            print (code)
             try:
                 fund = ts.fund.nav.get_nav_history(code, start=StartDate, end=EndDate)
-                if float(fund.value) <= float(fund.total):
+                if float(fund.value) <= float(fund.total) or (int(fund.total)*10) > 11:
                     j += 1
-                    print 'j: ', j                
+                    print ('j: ', j)
                     fo.write(code+'\n')
-            except AttributeError:
+            except:
                 continue
                 
 ###############################User Input############################################
-StartDate = '2018-01-19'
-EndDate = '2018-01-19'
+StartDate = '2018-05-31'
+EndDate = '2018-05-31'
 i=0
 codes = []
 ExtractFund(i, codes)
