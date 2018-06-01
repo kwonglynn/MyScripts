@@ -3,8 +3,11 @@
 import tushare as ts
 import numpy as np
 from scipy import stats
+import datetime
 
 ##################################Main########################################
+today = datetime.date.today().strftime('%Y-%m-%d')
+
 StartDate = '2015-05-31'
 EndDate = '2018-05-31'
  
@@ -12,7 +15,7 @@ TEST = 'False'
 if TEST == 'True': 
     codes = ['110022','540006','590008','519606','090013','020026']
 
-fo = open('Fund_Mining2.dat','w')
+fo = open('Fund_Mining-%s.txt' % today, 'w')
 fo.write("Code\tyear1\tyear2\tSlope\tSharp\tSTD\n")
 
 if TEST != 'True':
