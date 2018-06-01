@@ -10,7 +10,7 @@ today = datetime.date.today().strftime('%Y-%m-%d')
 fo = open('Fund_Mining-%s.txt' % today, 'w')
 fo.write("Code\tYear1\tYear2\tYear3\tSlope\tSharp\tSTD\n")
 
-StartDate = '2015-05-31'
+StartDate = '2014-05-31'
 EndDate = '2018-05-31'
  
 TEST = 'False'
