@@ -19,7 +19,7 @@ fo = open('Fund_Mining-%s.txt' % today, 'w')
 fo.write("Code\tyear1\tyear2\tSlope\tSharp\tSTD\n")
 
 if TEST != 'True':
-    with open('EquityFunds-old.dat','r') as fi:
+    with open('EquityFunds.dat','r') as fi:
         codes=fi.readlines()
     
 for code in codes:
