@@ -95,9 +95,30 @@ for line in f_pdb:
         
         fo.write("%s%s %s%s%s %s%s%s   %s%s%s%s%s      %s%s%s\n"  % \
 			 (record,serial,name,altLoc,resName,chainID,resSeq,iCode,x,y,z,occu,temp,segID,element,charge))
-    elif 'TER' in line or 'END' in line:
-        fo.write(line)    
+    elif line.startswith('TER') or line.startswith('END'):
+        if not 'NMA' in line:
+            fo.write(line)
+        else:
+            record = line[0:6]
+            serial = line[6:11]
+            name = line[12:16]
+            altLoc = line[16]
+            resName = line[17:20]
+            chainID = line[21]
+            resSeq = line[22:26]
+            iCode = line[26]            
+            if len(iCode.strip()) > 0:
+                iCode = ' '
+                if len(resSeq.strip()) == 2:
+                    resSeq = '  ' + str(int(resSeq)+1)
+                elif len(resSeq.strip()) == 3:
+                    resSeq = ' ' + str(int(resSeq)+1)
+                elif len(resSeq.strip()) == 4:
+                    resSeq = str(int(resSeq)+1)
 
+        fo.write("%s%s %s%s%s %s%s%s"  % \
+			 (record,serial,name,altLoc,resName,chainID,resSeq,iCode))
+                
 f_pdb.close()            
 f_pqr.close()
 f_His.close()
