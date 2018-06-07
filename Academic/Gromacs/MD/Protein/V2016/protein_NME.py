@@ -7,14 +7,14 @@ parser.add_argument("-o", "--output", default="protein_prep_NME.pdb", help="The 
 try:
     args = parser.parse_args()
 except:
-    print ("\nExample: clean_LIG.py protein_prep.pdb -o protein_prep_NME.pdb\n")
+    print ("\nExample: python protein_NME.py protein_prep.pdb -o protein_prep_NME.pdb\n")
     quit()
 
 fi = open(args.input,'r')
 fo = open(args.output,'w')
 
 for line in fi:
-    if 'HETATM' in line or 'ATOM' in line:
+    if line.startswith('HETATM') or line.startswith('ATOM'):
 ###Common for all PDBs        
         record = line[0:6].strip()
         serial = line[6:11].strip()
