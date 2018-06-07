@@ -12,8 +12,6 @@ Options:
     --pqr <pqr>                 The PQR file prepared by ProPKA [default: protein_prep.pqr]
     -o, --output <file>         Save the plot to a file [default: protein_prep_HIS_NME.pdb].
 
-    -v, --verbose               Verbose mode.
-
 """
 from docopt import docopt
 opts = docopt(__doc__)
@@ -50,7 +48,7 @@ for line in f_pqr:
                 histidines.append(histidine)
 
 for term in histidines:
-    line = term[0]+'\t'+term[1]+'\t'+term[2]+'\n'       
+    line = term[0] + '\t' + term[1] + '\t' + term[2] + '\n'       
     f_His.write(line)
 
 ###Change the histidine lines according to the pqr file.
