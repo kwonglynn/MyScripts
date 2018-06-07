@@ -116,7 +116,7 @@ for line in f_pdb:
                 elif len(resSeq.strip()) == 4:
                     resSeq = str(int(resSeq)+1)
 
-        fo.write("%s%s %s%s%s %s%s%s"  % \
+        fo.write("%s%s %s%s%s %s%s%s\n"  % \
 			 (record,serial,name,altLoc,resName,chainID,resSeq,iCode))
                 
 f_pdb.close()            
