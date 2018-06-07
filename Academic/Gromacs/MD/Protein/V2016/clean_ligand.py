@@ -1,10 +1,21 @@
 # -*- coding: utf-8 -*-
+import argparse
 
-fi = open('2FA_Dock.pdb','r')
-fo = open('LIG.pdb','w')
+parser = argparse.ArgumentParser()
+parser.add_argument("input", help="The pdb file of the ligand.")
+parser.add_argument("-o", "--output", default="LIG.pdb", help="The name of the output pdb file.")
+
+try:
+    args = parser.parse_args()
+except:
+    print ("\nExample: clean_LIG.py ligand.pdb -o LIG.pdb\n")
+    quit()
+
+fi = open(args.input,'r')
+fo = open(args.output,'w')
 
 resName =  'LIG' 		# The residue name of the ligand.
-rename_atom = 'True'		# Whether to rename the atoms
+rename_atom = 'False'		# Whether to rename the atoms
 
 element2 = ['Cl','CL','Br','BR','PB']
 
