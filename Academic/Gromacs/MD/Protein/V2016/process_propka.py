@@ -24,7 +24,7 @@ fo = open(opts["--output"], 'w')
 ###Process the pqr file produced by PROPKA.
 histidines = []
 for line in f_pqr:
-    if 'ATOM' in line:
+    if line.startswith('ATOM'):
         record = line[0:6]
         serial = line[6:11]
         name = line[12:16]
@@ -53,7 +53,7 @@ for term in histidines:
 
 ###Change the histidine lines according to the pqr file.
 for line in f_pdb:
-    if 'ATOM' in line:
+    if line.startswith('ATOM'):
         record = line[0:6]
         serial = line[6:11]
         name = line[12:16]
