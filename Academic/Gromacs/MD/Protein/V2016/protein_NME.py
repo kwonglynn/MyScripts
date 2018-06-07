@@ -16,22 +16,22 @@ fo = open(args.output,'w')
 for line in fi:
     if line.startswith('HETATM') or line.startswith('ATOM'):
 ###Common for all PDBs        
-        record = line[0:6].strip()
-        serial = line[6:11].strip()
-        name = line[12:16].strip()
-        altLoc = line[16].strip()
-        resName = line[17:20].strip()
-        chainID = line[21].strip()
-        resSeq = line[22:26].strip()
-        iCode = line[26].strip()
-        x = float(line[30:38].strip())
-        y = float(line[38:46].strip())
-        z = float(line[46:54].strip())
-        occu = float(line[54:60].strip())
-        temp = float(line[60:66].strip())
-        segID = line[72:76].strip()
-        element = line[76:78].strip()
-        charge = line[78:80].strip()
+        record = line[0:6]
+        serial = line[6:11]
+        name = line[12:16]
+        altLoc = line[16]
+        resName = line[17:20]
+        chainID = line[21]
+        resSeq = line[22:26]
+        iCode = line[26]
+        x = line[30:38]
+        y = line[38:46]
+        z = line[46:54]
+        occu = line[54:60]
+        temp = line[60:66]
+        segID = line[72:76]
+        element = line[76:78]
+        charge = line[78:80]
         
 #Protein specific
         #Process the NME cap residue
@@ -45,7 +45,7 @@ for line in fi:
             if name.strip() == 'CA':
                 name = ' CH3'
         
-        fo.write("%-6s%5d %4s%1s%3s %1s%4s%1s   %8.3f%8.3f%8.3f%6.2f%6.2f      %4s%2s%2s\n"  % \
-                 (record,serial,name,altLoc,resName,chainID,resSeq,iCode,x,y,z,occu,temp,segID,element,charge))
+        fo.write("%s%s %s%s%s %s%s%s   %s%s%s%s%s      %s%s%s\n"  % \
+			 (record,serial,name,altLoc,resName,chainID,resSeq,iCode,x,y,z,occu,temp,segID,element,charge))
     elif 'TER' in line or 'END' in line:
         fo.write(line)
