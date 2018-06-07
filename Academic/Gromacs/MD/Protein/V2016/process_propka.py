@@ -95,6 +95,7 @@ for line in f_pdb:
         
         fo.write("%s%s %s%s%s %s%s%s   %s%s%s%s%s      %s%s%s\n"  % \
 			 (record,serial,name,altLoc,resName,chainID,resSeq,iCode,x,y,z,occu,temp,segID,element,charge))
+
     elif line.startswith('TER') or line.startswith('END'):
         if line.startswith('ENDMDL'):
             continue
@@ -122,8 +123,8 @@ for line in f_pdb:
                 elif len(resSeq.strip()) == 4:
                     resSeq = str(int(resSeq)+1)
 
-        fo.write("%s%s %s%s%s %s%s%s\n"  % \
-			 (record,serial,name,altLoc,resName,chainID,resSeq,iCode))
+            fo.write("%s%s %s%s%s %s%s%s\n"  % \
+    			 (record,serial,name,altLoc,resName,chainID,resSeq,iCode))
                 
 f_pdb.close()            
 f_pqr.close()
