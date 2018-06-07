@@ -40,12 +40,16 @@ for line in fi:
             
             if len(iCode.strip()) > 0:
                 iCode = ' '
-                resSeq = ' ' + str(int(resSeq)+1)
+                if len(resSeq.strip()) == 2:
+                    resSeq = '  ' + str(int(resSeq)+1)
+                if len(resSeq.strip()) == 3:
+                    resSeq = ' ' + str(int(resSeq)+1)
                 
             if name.strip() == 'CA':
                 name = ' CH3'
         
         fo.write("%s%s %s%s%s %s%s%s   %s%s%s%s%s      %s%s%s\n"  % \
 			 (record,serial,name,altLoc,resName,chainID,resSeq,iCode,x,y,z,occu,temp,segID,element,charge))
+    
     elif 'TER' in line or 'END' in line:
         fo.write(line)
