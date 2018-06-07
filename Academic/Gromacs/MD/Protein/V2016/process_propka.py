@@ -1,13 +1,31 @@
 # -*- coding: utf-8 -*-
 
-fi1=open('a4b2_5KXI_truncated_prep_noH_clean.pqr','r')
-fi2=open('a4b2_5KXI_truncated_prep_noH_clean.pdb','r')
-fo1=open('Histidines_propka.dat','w')
-fo2=open('a4b2_5KXI_truncated_prep_noH_clean_propka.pdb','w')
+"""
+Author:
+    Guanglin Kuang <guanglin@kth.se>
+
+Usage:
+    protein_propka.py [options]
+
+Options:
+    --pdb <pdb>                 The PDB file of the protein [default: protein_prep.pdb]
+    --pqr <pqr>                 The PQR file prepared by ProPKA [default: protein_prep.pqr]
+    -o, --output <file>         Save the plot to a file [default: protein_prep_HIS_NME.pdb].
+
+    -v, --verbose               Verbose mode.
+
+"""
+from docopt import docopt
+opts = docopt(__doc__)
+
+f_pdb = open(opts["--pdb"], 'r')
+f_pqr = open(opts["--pqr"], 'r')
+f_His = open('Histidines_propka.dat', 'w')
+fo = open(opts["--output"], 'w')
 
 ###Process the pqr file produced by PROPKA.
 histidines = []
-for line in fi1:
+for line in f_pqr:
     if 'ATOM' in line:
         record = line[0:6]
         serial = line[6:11]
@@ -33,10 +51,10 @@ for line in fi1:
 
 for term in histidines:
     line = term[0]+'\t'+term[1]+'\t'+term[2]+'\n'       
-    fo1.write(line)
+    f_His.write(line)
 
 ###Change the histidine lines according to the pqr file.
-for line in fi2:
+for line in f_pdb:
     if 'ATOM' in line:
         record = line[0:6]
         serial = line[6:11]
@@ -67,17 +85,22 @@ for line in fi2:
             
             if len(iCode.strip()) > 0:
                 iCode = ' '
-                resSeq = ' ' + str(int(resSeq)+1)
+                if len(resSeq.strip()) == 2:
+                    resSeq = '  ' + str(int(resSeq)+1)
+                elif len(resSeq.strip()) == 3:
+                    resSeq = ' ' + str(int(resSeq)+1)
+                elif len(resSeq.strip()) == 4:
+                    resSeq = str(int(resSeq)+1)
                 
             if name.strip() == 'CA':
                 name = ' CH3'
         
-        fo2.write("%s%s %s%s%s %s%s%s   %s%s%s%s%s      %s%s%s\n"  % \
+        fo.write("%s%s %s%s%s %s%s%s   %s%s%s%s%s      %s%s%s\n"  % \
 			 (record,serial,name,altLoc,resName,chainID,resSeq,iCode,x,y,z,occu,temp,segID,element,charge))
     elif 'TER' in line or 'END' in line:
-        fo2.write(line)    
+        fo.write(line)    
 
-fi1.close()            
-fi2.close()
-fo1.close()
-fo2.close()
+f_pdb.close()            
+f_pqr.close()
+f_His.close()
+fo.close()
