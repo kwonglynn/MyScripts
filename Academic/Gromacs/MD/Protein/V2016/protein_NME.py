@@ -42,8 +42,10 @@ for line in fi:
                 iCode = ' '
                 if len(resSeq.strip()) == 2:
                     resSeq = '  ' + str(int(resSeq)+1)
-                if len(resSeq.strip()) == 3:
+                elif len(resSeq.strip()) == 3:
                     resSeq = ' ' + str(int(resSeq)+1)
+                elif len(resSeq.strip()) == 4:
+                    resSeq = str(int(resSeq)+1)
                 
             if name.strip() == 'CA':
                 name = ' CH3'
