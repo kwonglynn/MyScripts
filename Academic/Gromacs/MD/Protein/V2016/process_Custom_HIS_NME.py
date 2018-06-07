@@ -9,8 +9,8 @@ Usage:
 
 Options:
     --pdb <pdb>                 The PDB file of the protein [default: protein_prep.pdb]
-    --his <his>                 The PQR file prepared by ProPKA [default: histidines.dat]
-    -o, --output <file>         Save the plot to a file [default: protein_prep_HIS_NME.pdb].
+    --his <his>                 The text file containing histidine information [default: histidines.dat]
+    -o, --output <file>         The output file. [default: protein_prep_HIS_NME.pdb].
 
 """
 from docopt import docopt
@@ -48,7 +48,7 @@ for line in f_pdb:
         
         if 'HI' in resName:
             for histidine in histidines:
-                if [resName.strip(), chainID.strip(), resSeq.strip()] == histidine:
+                if [chainID.strip(), resSeq.strip()] == histidine[1:]:
                     resName = histidine[0]
                     break
                 

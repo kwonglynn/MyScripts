@@ -10,7 +10,7 @@ Usage:
 Options:
     --pdb <pdb>                 The PDB file of the protein [default: protein_prep.pdb]
     --pqr <pqr>                 The PQR file prepared by ProPKA [default: protein_prep.pqr]
-    -o, --output <file>         Save the plot to a file [default: protein_prep_HIS_NME.pdb].
+    -o, --output <file>         The output file. [default: protein_prep_HIS_NME.pdb].
 
 """
 from docopt import docopt
