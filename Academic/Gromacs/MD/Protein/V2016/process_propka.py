@@ -96,9 +96,11 @@ for line in f_pdb:
         fo.write("%s%s %s%s%s %s%s%s   %s%s%s%s%s      %s%s%s\n"  % \
 			 (record,serial,name,altLoc,resName,chainID,resSeq,iCode,x,y,z,occu,temp,segID,element,charge))
     elif line.startswith('TER') or line.startswith('END'):
-        if not 'NMA' in line:
+        if line.startswith('ENDMDL'):
+            continue
+        elif not 'NMA' in line:
             fo.write(line)
-        else:
+        elif 'NMA' in line:
             #Common part as before.
             record = line[0:6]
             serial = line[6:11]
