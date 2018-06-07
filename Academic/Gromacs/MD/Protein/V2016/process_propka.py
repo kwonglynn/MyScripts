@@ -99,6 +99,7 @@ for line in f_pdb:
         if not 'NMA' in line:
             fo.write(line)
         else:
+            #Common part as before.
             record = line[0:6]
             serial = line[6:11]
             name = line[12:16]
@@ -106,7 +107,10 @@ for line in f_pdb:
             resName = line[17:20]
             chainID = line[21]
             resSeq = line[22:26]
-            iCode = line[26]            
+            iCode = line[26]
+            
+            #Specific for NME
+            resName = 'NME'            
             if len(iCode.strip()) > 0:
                 iCode = ' '
                 if len(resSeq.strip()) == 2:
