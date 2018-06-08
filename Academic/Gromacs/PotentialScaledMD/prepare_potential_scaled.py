@@ -47,9 +47,13 @@ for line in fi:
             #Don't forget other directives that don't need to be scaled.
             flag = 'ELSE'
 
-    # Comment lines or empty lines.    
-    elif line.startswith(';') or line.startswith('*') or len(line.strip()) == 0:
+    # Write comment lines.    
+    elif line.startswith(';') or line.startswith('*'):
         fo.write(line + '\n')
+    
+    # Write empty lines without adding an additional return as other lines.
+    elif len(line.strip()) == 0:
+        fo.write(line)
 
     # Other directies that don't need to be scaled.
     elif flag == 'ELSE':
