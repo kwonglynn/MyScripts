@@ -59,7 +59,7 @@ for line in fi:
     elif flag == 'atomtypes':
         items = line.split()
         epsilon = float(items[6]) * scale
-        newitems = items[:6] + str(epsilon) 
+        newitems = items[:6] + [str(epsilon)] 
         newline = '\t'.join(newitems) + '\n'
         fo.write(newline)
 
@@ -67,7 +67,7 @@ for line in fi:
     elif flag == 'bondtypes':
         items = line.split()
         kb = float(items[4]) * scale
-        newitems = items[:4] + str(kb) + items[5:]
+        newitems = items[:4] + [str(kb)] + items[5:]
         newline = '\t'.join(newitems) + '\n'
         fo.write(newline)
 
@@ -75,7 +75,7 @@ for line in fi:
     elif flag == 'angletypes':
         items = line.split()
         cth = float(items[5]) * scale
-        newitems = items[:5] + str(cth) + items[6:]
+        newitems = items[:5] + [str(cth)] + items[6:]
         newline = '\t'.join(newitems) + '\n'
         fo.write(newline)
 
@@ -85,7 +85,7 @@ for line in fi:
     elif flag == 'dihedraltypes':
         items = line.split()
         kd = float(items[6]) * scale
-        newitems = items[:6] + str(kd) + items[7:]
+        newitems = items[:6] + [str(kd)] + items[7:]
         newline = '\t'.join(newitems) + '\n'
         fo.write(newline)
 
@@ -93,7 +93,7 @@ for line in fi:
     elif flag == 'atoms':
         items = line.split()
         charge = float(items[6]) * np.sqrt(scale)
-        newitems = items[:6] + str(charge) + items[7:]
+        newitems = items[:6] + [str(charge)] + items[7:]
         newline = '\t'.join(newitems) + '\n'
         fo.write(newline)                   
 
@@ -106,7 +106,7 @@ for line in fi:
             # For ligands, scale k which is in column 4.
             items = line.split()
             charge = float(items[4]) * scale
-            newitems = items[:4] + str(charge) + items[5:]
+            newitems = items[:4] + [str(charge)] + items[5:]
             newline = '\t'.join(newitems) + '\n'
             fo.write(newline)
 
@@ -119,7 +119,7 @@ for line in fi:
             # For ligands, scale cth which is in column 5.
             items = line.split()
             cth = float(items[5]) * scale
-            newitems = items[:5] + str(charge) + items[6:]
+            newitems = items[:5] + [str(charge)] + items[6:]
             newline = '\t'.join(newitems) + '\n'
             fo.write(newline)
 
@@ -140,13 +140,13 @@ for line in fi:
                 c3 = float(items[8]) * scale
                 c4 = float(items[9]) * scale
                 c5 = float(items[10]) * scale
-                newitems = items[:5] + str(c0) + str(c1) + str(c2) + str(c3) + str(c4) + str(c5) + items[11:]
+                newitems = items[:5] + [str(c0)] + [str(c1)] + [str(c2)] + [str(c3)] + [str(c4)] + [str(c5)] + items[11:]
                 newline = '\t'.join(newitems) + '\n'
                 fo.write(newline)
             # For improper dihedrals, scale kd which is in column 6
             elif func == 1:
                 kd =float(items[6]) * scale
-                newitems = items[:6] + str(charge) + items[7:]
+                newitems = items[:6] + [str(charge)] + items[7:]
                 newline = '\t'.join(newitems) + '\n'                
                 fo.write(newline)
                 
