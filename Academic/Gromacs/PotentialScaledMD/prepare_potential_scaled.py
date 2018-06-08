@@ -23,7 +23,6 @@ fo = open(opts["--output"], 'w')
 scale = float(opts["--lambda"])     # Scaling factor.
 
 for line in fi:
-    line = line.strip()
     # Lines starting with '[' are directives. Read the line, allocate a flag for further processing and write the line.
     # Process the lines from top to bottom, one by one. Always remember what kind of line is being processed.
     if line.startswith('['):
@@ -49,7 +48,7 @@ for line in fi:
             flag = 'ELSE'
 
     # Comment lines or empty lines.    
-    elif line.startswith(';') or line.startswith('*') or len(line) == 0:
+    elif line.startswith(';') or line.startswith('*') or len(line.strip()) == 0:
         fo.write(line)
 
     # Other directies that don't need to be scaled.
@@ -61,7 +60,7 @@ for line in fi:
         items = line.split()
         epsilon = float(items[6]) * scale
         newitems = items[:6] + [str(epsilon)] 
-        newline = '\t'.join(newitems) + '\n'
+        newline = '\t'.join(newitems)
         fo.write(newline)
 
     # For bondtypes, scale kb which is in cloumn 4.      
@@ -69,7 +68,7 @@ for line in fi:
         items = line.split()
         kb = float(items[4]) * scale
         newitems = items[:4] + [str(kb)] + items[5:]
-        newline = '\t'.join(newitems) + '\n'
+        newline = '\t'.join(newitems)
         fo.write(newline)
 
     # For angletyples, scale cth which is in column 5.
@@ -77,7 +76,7 @@ for line in fi:
         items = line.split()
         cth = float(items[5]) * scale
         newitems = items[:5] + [str(cth)] + items[6:]
-        newline = '\t'.join(newitems) + '\n'
+        newline = '\t'.join(newitems)
         fo.write(newline)
 
     # For dihedraltypes, scale kd which in column 6.
@@ -87,7 +86,7 @@ for line in fi:
         items = line.split()
         kd = float(items[6]) * scale
         newitems = items[:6] + [str(kd)] + items[7:]
-        newline = '\t'.join(newitems) + '\n'
+        newline = '\t'.join(newitems)
         fo.write(newline)
 
     # For atoms, scale charge which is in cloumn 6 with the squred root of lambda.        
@@ -95,40 +94,41 @@ for line in fi:
         items = line.split()
         charge = float(items[6]) * np.sqrt(scale)
         newitems = items[:6] + [str(charge)] + items[7:]
-        newline = '\t'.join(newitems) + '\n'
+        newline = '\t'.join(newitems) 
         fo.write(newline)                   
 
     # The bonds for protein and ligand are processed separately.             
     elif flag == 'bonds':
         # For protein, no explicit parameters for bonds are written.
         items = line.split()
-        if len(items) == 3:
+        # Don't forget the return '\n' at the end of line.
+        if len(items) == 4:
             fo.write(line)
         else:
             # For ligands, scale k which is in column 4.
             charge = float(items[4]) * scale
             newitems = items[:4] + [str(charge)] + items[5:]
-            newline = '\t'.join(newitems) + '\n'
+            newline = '\t'.join(newitems)
             fo.write(newline)
 
     # The angles for protein and ligand are processed separately.             
     elif flag == 'angles':
         # For protein, no explicit parameters for angles are written.
         items = line.split()
-        if len(items) == 4:
+        if len(items) == 5:
             fo.write(line)
         else:
             # For ligands, scale cth which is in column 5.
             cth = float(items[5]) * scale
             newitems = items[:5] + [str(charge)] + items[6:]
-            newline = '\t'.join(newitems) + '\n'
+            newline = '\t'.join(newitems)
             fo.write(newline)
 
     # The dihedrals for protein and ligand are processed separately.                 
     elif flag == 'dihedrals':
         # For protein, no explicit parameters for dihedrals are written.
         items = line.split()
-        if len(items) == 5:
+        if len(items) == 6:
             fo.write(line)
         else:
         # For the ligand, the dihedrals include proper and improper ones.
@@ -142,13 +142,13 @@ for line in fi:
                 c4 = float(items[9]) * scale
                 c5 = float(items[10]) * scale
                 newitems = items[:5] + [str(c0)] + [str(c1)] + [str(c2)] + [str(c3)] + [str(c4)] + [str(c5)] + items[11:]
-                newline = '\t'.join(newitems) + '\n'
+                newline = '\t'.join(newitems) 
                 fo.write(newline)
             # For improper dihedrals, scale kd which is in column 6
             elif func == 1:
                 kd =float(items[6]) * scale
                 newitems = items[:6] + [str(charge)] + items[7:]
-                newline = '\t'.join(newitems) + '\n'                
+                newline = '\t'.join(newitems)                 
                 fo.write(newline)
                 
 fi.close()
