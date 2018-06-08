@@ -100,7 +100,6 @@ for line in fi:
     # The bonds for protein and ligand are processed separately.             
     elif flag == 'bonds':
         # For protein, no explicit parameters for bonds are written.
-        items = line.split()
         # Don't forget the return '\n' at the end of line.
         if len(items) == 4:
             fo.write(line)
@@ -114,7 +113,6 @@ for line in fi:
     # The angles for protein and ligand are processed separately.             
     elif flag == 'angles':
         # For protein, no explicit parameters for angles are written.
-        items = line.split()
         if len(items) == 5:
             fo.write(line)
         else:
