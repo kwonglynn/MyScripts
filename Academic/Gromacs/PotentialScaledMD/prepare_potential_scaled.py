@@ -26,7 +26,7 @@ for line in fi:
     # Lines starting with '[' are directives. Read the line, allocate a flag for further processing and write the line.
     # Process the lines from top to bottom, one by one. Always remember what kind of line is being processed.
     if line.startswith('['):
-        fo.write(line + '\n')
+        fo.write(line)
         if line.startswith('[ atomtypes ]'):
             flag = 'atomtypes'
         elif line.startswith('[ bondtypes ]'):
@@ -47,17 +47,13 @@ for line in fi:
             #Don't forget other directives that don't need to be scaled.
             flag = 'ELSE'
 
-    # Write comment lines.    
-    elif line.startswith(';') or line.startswith('*'):
-        fo.write(line + '\n')
-    
-    # Write empty lines without adding an additional return as other lines.
-    elif len(line.strip()) == 0:
+    # Write comment lines or empty lines.    
+    elif line.startswith(';') or line.startswith('*') or len(line.strip()) == 0:
         fo.write(line)
 
     # Write Other directies that don't need to be scaled.
     elif flag == 'ELSE':
-        fo.write(line + '\n')
+        fo.write(line)
     
     # For atomstypes, scale epsilon which is in column 6 (starting from 0). 
     # Note the return '\n' at the end of line is removed after splitting.
