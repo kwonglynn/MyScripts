@@ -23,6 +23,7 @@ fo = open(opts["--output"], 'w')
 scale = float(opts["--lambda"])     # Scaling factor.
 
 for line in fi:
+    line = line.strip()
     # Lines starting with '[' are directives. Read the line, allocate a flag for further processing and write the line.
     # Process the lines from top to bottom, one by one. Always remember what kind of line is being processed.
     if line.startswith('['):
@@ -48,7 +49,7 @@ for line in fi:
             flag = 'ELSE'
 
     # Comment lines or empty lines.    
-    elif line.startswith(';') or line.startswith('*') or len(line.strip()) == 0:
+    elif line.startswith(';') or line.startswith('*') or len(line) == 0:
         fo.write(line)
 
     # Other directies that don't need to be scaled.
@@ -100,11 +101,11 @@ for line in fi:
     # The bonds for protein and ligand are processed separately.             
     elif flag == 'bonds':
         # For protein, no explicit parameters for bonds are written.
-        if len(line) == 3:
+        items = line.split()
+        if len(items) == 3:
             fo.write(line)
         else:
             # For ligands, scale k which is in column 4.
-            items = line.split()
             charge = float(items[4]) * scale
             newitems = items[:4] + [str(charge)] + items[5:]
             newline = '\t'.join(newitems) + '\n'
@@ -113,11 +114,11 @@ for line in fi:
     # The angles for protein and ligand are processed separately.             
     elif flag == 'angles':
         # For protein, no explicit parameters for angles are written.
-        if len(line) == 4:
+        items = line.split()
+        if len(items) == 4:
             fo.write(line)
         else:
             # For ligands, scale cth which is in column 5.
-            items = line.split()
             cth = float(items[5]) * scale
             newitems = items[:5] + [str(charge)] + items[6:]
             newline = '\t'.join(newitems) + '\n'
@@ -126,11 +127,11 @@ for line in fi:
     # The dihedrals for protein and ligand are processed separately.                 
     elif flag == 'dihedrals':
         # For protein, no explicit parameters for dihedrals are written.
-        if len(line) == 5:
+        items = line.split()
+        if len(items) == 5:
             fo.write(line)
         else:
         # For the ligand, the dihedrals include proper and improper ones.
-            items = line.split()
             func = int(items[4])
             # For proper dihedrals, scale C0 to C5 (column 5 to 10)
             if func == 3:
