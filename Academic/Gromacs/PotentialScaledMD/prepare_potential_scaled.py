@@ -55,7 +55,7 @@ for line in fi:
     elif len(line.strip()) == 0:
         fo.write(line)
 
-    # Other directies that don't need to be scaled.
+    # Write Other directies that don't need to be scaled.
     elif flag == 'ELSE':
         fo.write(line + '\n')
     
