@@ -22,10 +22,6 @@ opts = docopt(__doc__)
 fi = open(opts["<input>"], 'r')
 fo = open(opts["--output"], 'w')
 
-resName = opts["--resName"]
-chainID = opts["--chainID"]
-resSeq = opts["--resSeq"]
-
 element2 = ['Cl','CL','Br','BR','PB']
 
 N = 0
@@ -77,6 +73,11 @@ for line in fi:
                     name = name + ' ' * 2
                 elif len(name) == 2:
                     name = name + ' ' * 1
+
+        # Standardize naming
+        resName = opts["--resName"]
+        chainID = opts["--chainID"]
+        resSeq = opts["--resSeq"]
 
         fo.write("%-6s%5d %4s%1s%3s %1s%4s%1s   %8.3f%8.3f%8.3f%6.2f%6.2f      %4s%2s%2s\n"  % \
                  (record,serial,name,altLoc,resName,chainID,resSeq,iCode,x,y,z,occu,temp,segID,element,charge))
