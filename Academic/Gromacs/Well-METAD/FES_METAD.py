@@ -17,8 +17,6 @@ Options:
     --cv1 <cv1>                 CV type, can be distance, dihedral or contact [default: distance].
     --cv2 <cv2>                 CV type, can be distance, dihedral or contact [default: dihedral].
     
-    -v, --verbose               Verbose mode.
-
 Note:
     1, Use plumed to generate the free energy data:
        plumed sum_hills --hills HILLS --bin 98,99

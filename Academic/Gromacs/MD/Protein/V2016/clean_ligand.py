@@ -1,21 +1,30 @@
 # -*- coding: utf-8 -*-
-import argparse
+"""
+Author:
+    Guanglin Kuang <guanglin@kth.se>
+    JUN 8, 2018
 
-parser = argparse.ArgumentParser()
-parser.add_argument("input", help="The pdb file of the ligand.")
-parser.add_argument("-o", "--output", default="LIG.pdb", help="The name of the output pdb file.")
+Usage:
+    clean_ligand.py <input> [options]
 
-try:
-    args = parser.parse_args()
-except:
-    print ("\nExample: clean_LIG.py ligand.pdb -o LIG.pdb\n")
-    quit()
+Options:
+    -o, --output <file>         The output file [default: topol_scaled.top].
+    --resName <resName>         The residue name of the ligand [default: LIG].            
+    --chainID <chainID>        The chain ID for the ligand [default: A].
+    --resSeq <resSeq>           The residue ID for the ligand [default: 1].
+    --rename_atom               Whether to rename the atoms.                    
 
-fi = open(args.input,'r')
-fo = open(args.output,'w')
+"""
+from docopt import docopt
 
-resName =  'LIG' 		# The residue name of the ligand.
-rename_atom = 'False'		# Whether to rename the atoms
+opts = docopt(__doc__)
+
+fi = open(opts["<input>"], 'r')
+fo = open(opts["--output"], 'w')
+
+resName = opts["--resName"]
+chainID = opts["--chainID"]
+resSeq = opts["--resSeq"]
 
 element2 = ['Cl','CL','Br','BR','PB']
 
@@ -43,7 +52,21 @@ for line in fi:
         N += 1
         serial = N
 
-        if rename_atom == 'False':
+        if opts["--rename_atom"]:
+            # Refer to the document of PDB format for the details.
+            if len(name) >= 2 and name[:2] in element2:
+                name = name[:2] + str(N)
+                if len(name) == 3:
+                    name = name + ' ' * 1
+            elif 'H' in name:
+                name = 'H' + str(N)
+                if len(name) == 2:
+                    name = name + ' ' * 1                    
+            else:
+                name = name[0] + str(N)
+                if len(name) == 2:
+                    name = name + ' ' * 1
+        else:
             if len(name) > 1 and name[:2] in element2:
                 if len(name) == 2:
                     name = name + ' ' * 2
@@ -54,19 +77,6 @@ for line in fi:
                     name = name + ' ' * 2
                 elif len(name) == 2:
                     name = name + ' ' * 1
-        elif rename_atom == 'True':
-            if len(name) > 1 and name[:2] in element2:
-                name = name[:2] + str(N)
-                if len(name) == 3:
-                    name = name + ' ' * 1
-            else:
-                name = name[0] + str(N)
-                if len(name) == 2:
-                    name = name + ' ' * 1
-
-        resName = 'LIG'
-        chainID = 'A'
-        resSeq = 1
 
         fo.write("%-6s%5d %4s%1s%3s %1s%4s%1s   %8.3f%8.3f%8.3f%6.2f%6.2f      %4s%2s%2s\n"  % \
                  (record,serial,name,altLoc,resName,chainID,resSeq,iCode,x,y,z,occu,temp,segID,element,charge))
