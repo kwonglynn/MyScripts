@@ -8,11 +8,11 @@ Usage:
     clean_ligand.py <input> [options]
 
 Options:
-    -o, --output <file>         The output file [default: topol_scaled.top].
-    --resName <resName>         The residue name of the ligand [default: LIG].            
-    --chainID <chainID>        The chain ID for the ligand [default: A].
-    --resSeq <resSeq>           The residue ID for the ligand [default: 1].
-    --rename_atom               Whether to rename the atoms.                    
+    -o <file>, --output <file>      The output file [default: LIG.top].
+    --resName <resName>             The residue name of the ligand [default: LIG].            
+    --chainID <chainID>             The chain ID for the ligand [default: A].
+    --resSeq <resSeq>               The residue ID for the ligand [default: 1].
+    --rename_atom                   Whether to rename the atoms.                    
 
 """
 from docopt import docopt
