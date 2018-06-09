@@ -8,7 +8,7 @@ Usage:
     clean_ligand.py <input> [options]
 
 Options:
-    -o <file>, --output <file>      The output file [default: LIG.top].
+    -o <file>, --output <file>      The output file [default: LIG.pdb].
     --resName <resName>             The residue name of the ligand [default: LIG].            
     --chainID <chainID>             The chain ID for the ligand [default: A].
     --resSeq <resSeq>               The residue ID for the ligand [default: 1].
