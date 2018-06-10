@@ -48,7 +48,7 @@ for line in fi:
             #Don't forget other directives that don't need to be scaled.
             flag = 'ELSE'
 
-    # Write comment lines or empty lines.    
+    # Write comment lines or empty lines, ignore the flag!    
     elif line.startswith(';') or line.startswith('*') or len(line.strip()) == 0:
         fo.write(line)
 
@@ -105,7 +105,7 @@ for line in fi:
         items = line.split()
         if len(items) == 3:
             fo.write(line)
-        else:
+        elif len(items) > 3:
             # For ligands, scale k which is in column 4.
             charge = float(items[4]) * scale
             newitems = items[:4] + [str(charge)] + items[5:]
