@@ -61,7 +61,7 @@ for line in fi:
     elif flag == 'atomtypes':
         items = line.split()
         epsilon = float(items[6]) * scale
-        newitems = items[:6] + [str(epsilon)] 
+        newitems = items[:6] + ["%.5e" % epsilon] 
         newline = '\t'.join(newitems) + '\n'
         fo.write(newline)
 
@@ -87,7 +87,7 @@ for line in fi:
     elif flag == 'dihedraltypes':
         items = line.split()
         kd = float(items[6]) * scale
-        newitems = items[:6] + [str(kd)] + items[7:]
+        newitems = items[:6] + ["%.5f" % kd] + items[7:]
         newline = '\t'.join(newitems) + '\n'
         fo.write(newline)
 
@@ -95,7 +95,7 @@ for line in fi:
     elif flag == 'atoms':
         items = line.split()
         charge = float(items[6]) * np.sqrt(scale)
-        newitems = items[:6] + [str(charge)] + items[7:]
+        newitems = items[:6] + ["%.6f" % charge] + items[7:]
         newline = '\t'.join(newitems) + '\n' 
         fo.write(newline)                   
 
@@ -121,7 +121,7 @@ for line in fi:
         elif len(items) > 4:
             # For ligands, scale cth which is in column 5.
             cth = float(items[5]) * scale
-            newitems = items[:5] + [str(cth)] + items[6:]
+            newitems = items[:5] + ["%.4e" % cth] + items[6:]
             newline = '\t'.join(newitems) + '\n'
             fo.write(newline)
 
@@ -142,14 +142,14 @@ for line in fi:
                 c3 = float(items[8]) * scale
                 c4 = float(items[9]) * scale
                 c5 = float(items[10]) * scale
-                newitems = items[:5] + [str(c0)] + [str(c1)] + [str(c2)] + [str(c3)] + [str(c4)] + [str(c5)] + items[11:]
+                newitems = items[:5] + ["%.5f" % c0] + ["%.5f" % c1] + ["%.5f" % c2] + ["%.5f" % c3] + ["%.5f" % c4] + ["%.5f" % c5] + items[11:]
                 newline = '\t'.join(newitems) + '\n'
                 fo.write(newline)
             # For improper dihedrals, scale kd which is in column 6
             # func == 9 is the ILDN terms for protein.
             elif func == 1 or func == 9:
                 kd =float(items[6]) * scale
-                newitems = items[:6] + [str(charge)] + items[7:]
+                newitems = items[:6] + ["%.5f" % kd] + items[7:]
                 newline = '\t'.join(newitems) + '\n'              
                 fo.write(newline)
                 
