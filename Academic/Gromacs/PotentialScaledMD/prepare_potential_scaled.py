@@ -107,8 +107,8 @@ for line in fi:
             fo.write(line)
         elif len(items) > 3:
             # For ligands, scale k which is in column 4.
-            charge = float(items[4]) * scale
-            newitems = items[:4] + [str(charge)] + items[5:]
+            k = float(items[4]) * scale
+            newitems = items[:4] + [str(k)] + items[5:]
             newline = '\t'.join(newitems) + '\n'
             fo.write(newline)
 
@@ -121,13 +121,13 @@ for line in fi:
         elif len(items) > 4:
             # For ligands, scale cth which is in column 5.
             cth = float(items[5]) * scale
-            newitems = items[:5] + [str(charge)] + items[6:]
+            newitems = items[:5] + [str(cth)] + items[6:]
             newline = '\t'.join(newitems) + '\n'
             fo.write(newline)
 
     # The dihedrals for protein and ligand are processed separately.                 
     elif flag == 'dihedrals':
-        # For protein, no explicit parameters for dihedrals are written.
+        # For protein (except ILDN), no explicit parameters for dihedrals are written.
         items = line.split()
         if len(items) == 5:
             fo.write(line)
@@ -146,6 +146,7 @@ for line in fi:
                 newline = '\t'.join(newitems) + '\n'
                 fo.write(newline)
             # For improper dihedrals, scale kd which is in column 6
+            # func == 9 is the ILDN terms for protein.
             elif func == 1 or func == 9:
                 kd =float(items[6]) * scale
                 newitems = items[:6] + [str(charge)] + items[7:]
