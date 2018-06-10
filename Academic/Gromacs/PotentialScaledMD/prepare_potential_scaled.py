@@ -117,7 +117,7 @@ for line in fi:
         # For protein, no explicit parameters for angles are written.
         items = line.split()
         if len(items) == 4:
-            fo.write(line + '\n')
+            fo.write(line)
         elif len(items) > 4:
             # For ligands, scale cth which is in column 5.
             cth = float(items[5]) * scale
