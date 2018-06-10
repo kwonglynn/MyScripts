@@ -69,7 +69,7 @@ for line in fi:
     elif flag == 'bondtypes':
         items = line.split()
         kb = float(items[4]) * scale
-        newitems = items[:4] + [str(kb)] + items[5:]
+        newitems = items[:4] + ["%.1f" % kb] + items[5:]
         newline = '\t'.join(newitems) + '\n'
         fo.write(newline)
 
@@ -77,7 +77,7 @@ for line in fi:
     elif flag == 'angletypes':
         items = line.split()
         cth = float(items[5]) * scale
-        newitems = items[:5] + [str(cth)] + items[6:]
+        newitems = items[:5] + ["%.3f" % cth] + items[6:]
         newline = '\t'.join(newitems) + '\n'
         fo.write(newline)
 
