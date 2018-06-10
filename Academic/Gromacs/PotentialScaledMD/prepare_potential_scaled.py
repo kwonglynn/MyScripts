@@ -3,7 +3,7 @@
 """
 Author:
     Guanglin Kuang <guanglin@kth.se>
-    JUN 8, 2018
+    JUN 10, 2018
 
 Usage:
     process_potential_scaled.py [options]
