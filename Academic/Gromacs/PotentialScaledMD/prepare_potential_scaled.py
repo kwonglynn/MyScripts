@@ -108,7 +108,7 @@ for line in fi:
         elif len(items) > 3:
             # For ligands, scale k which is in column 4.
             k = float(items[4]) * scale
-            newitems = items[:4] + [str(k)] + items[5:]
+            newitems = items[:4] + ["%.4e" % k] + items[5:]
             newline = '\t'.join(newitems) + '\n'
             fo.write(newline)
 
