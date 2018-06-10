@@ -40,9 +40,9 @@ for line in fi:
             flag = 'atoms'
         elif line.startswith('[ bonds ]'):
             flag = 'bonds'           
-        elif line.startswith('[ angles]'):
+        elif line.startswith('[ angles ]'):
             flag = 'angles'
-        elif line.startswith('[ dihedrals]'):
+        elif line.startswith('[ dihedrals ]'):
             flag = 'dihedrals'
         else:
             #Don't forget other directives that don't need to be scaled.
@@ -118,7 +118,7 @@ for line in fi:
         items = line.split()
         if len(items) == 4:
             fo.write(line + '\n')
-        else:
+        elif len(items) > 4:
             # For ligands, scale cth which is in column 5.
             cth = float(items[5]) * scale
             newitems = items[:5] + [str(charge)] + items[6:]
@@ -131,7 +131,7 @@ for line in fi:
         items = line.split()
         if len(items) == 5:
             fo.write(line + '\n')
-        else:
+        elif len(items) > 5:
         # For the ligand, the dihedrals include proper and improper ones.
             func = int(items[4])
             # For proper dihedrals, scale C0 to C5 (column 5 to 10)
@@ -146,7 +146,7 @@ for line in fi:
                 newline = '\t'.join(newitems) 
                 fo.write(newline + '\n')
             # For improper dihedrals, scale kd which is in column 6
-            elif func == 1:
+            elif func == 1 or func == 9:
                 kd =float(items[6]) * scale
                 newitems = items[:6] + [str(charge)] + items[7:]
                 newline = '\t'.join(newitems)                 
