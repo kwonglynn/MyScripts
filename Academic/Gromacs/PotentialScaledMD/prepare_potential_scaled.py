@@ -69,7 +69,7 @@ for line in fi:
     elif flag == 'bondtypes':
         items = line.split()
         kb = float(items[4]) * scale
-        newitems = items[:4] + ["%.1f" % kb] + items[5:]
+        newitems = items[:4] + ["-%.1f" % kb] + items[5:]
         newline = '\t'.join(newitems) + '\n'
         fo.write(newline)
 
@@ -77,7 +77,7 @@ for line in fi:
     elif flag == 'angletypes':
         items = line.split()
         cth = float(items[5]) * scale
-        newitems = items[:5] + ["%.3f" % cth] + items[6:]
+        newitems = items[:5] + ["-%.3f" % cth] + items[6:]
         newline = '\t'.join(newitems) + '\n'
         fo.write(newline)
 
@@ -87,7 +87,7 @@ for line in fi:
     elif flag == 'dihedraltypes':
         items = line.split()
         kd = float(items[6]) * scale
-        newitems = items[:6] + ["%.5f" % kd] + items[7:]
+        newitems = items[:6] + ["-%.5f" % kd] + items[7:]
         newline = '\t'.join(newitems) + '\n'
         fo.write(newline)
 
@@ -95,7 +95,7 @@ for line in fi:
     elif flag == 'atoms':
         items = line.split()
         charge = float(items[6]) * np.sqrt(scale)
-        newitems = items[:6] + ["%.6f" % charge] + items[7:]
+        newitems = items[:6] + ["-%.6f" % charge] + items[7:]
         newline = '\t'.join(newitems) + '\n' 
         fo.write(newline)                   
 
@@ -142,14 +142,14 @@ for line in fi:
                 c3 = float(items[8]) * scale
                 c4 = float(items[9]) * scale
                 c5 = float(items[10]) * scale
-                newitems = items[:5] + ["%.5f" % c0] + ["%.5f" % c1] + ["%.5f" % c2] + ["%.5f" % c3] + ["%.5f" % c4] + ["%.5f" % c5] + items[11:]
+                newitems = items[:5] + ["-%.5f" % c0] + ["-%.5f" % c1] + ["-%.5f" % c2] + ["-%.5f" % c3] + ["-%.5f" % c4] + ["-%.5f" % c5] + items[11:]
                 newline = '\t'.join(newitems) + '\n'
                 fo.write(newline)
             # For improper dihedrals, scale kd which is in column 6
             # func == 9 is the ILDN terms for protein.
             elif func == 1 or func == 9:
                 kd =float(items[6]) * scale
-                newitems = items[:6] + ["%.5f" % kd] + items[7:]
+                newitems = items[:6] + ["-%.5f" % kd] + items[7:]
                 newline = '\t'.join(newitems) + '\n'              
                 fo.write(newline)
                 
