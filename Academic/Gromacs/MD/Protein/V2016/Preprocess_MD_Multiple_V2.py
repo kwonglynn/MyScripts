@@ -1,5 +1,3 @@
-from docopt import docopt
-
 """
 Author:
     Guanglin Kuang <guanglin@kth.se>
@@ -24,6 +22,8 @@ Notes:
     If put the ligand before all the chains, insert = 0.
     If put the ligand after the first chain, insert = 1, etc.
 """
+
+from docopt import docopt
 
 #Combine the coordinate files of protein and ligand.
 def combine_coord(coord_prot, coord_LIG, coord_com):
@@ -132,8 +132,6 @@ def combine_top(top_Prot, top_com):
 ##################################################################################
 if __name__ == '__main__':
     opts = docopt(__doc__)
-    if opts["--help"]:
-        quit()
     
     insert = int(opts["--insert"])
     coord_prot = opts["--coord_prot"]
