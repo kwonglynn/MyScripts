@@ -4,7 +4,7 @@ Author:
     JUN 12, 2018
 
 Usage:
-    Preprocess_MD_Multiple_V2.py -i <insert> [options]
+    Preprocess_MD_Multiple_V2.py [(-i <insert> --num_before_LIG <num_before_LIG>)] [options]
     Preprocess_MD_Multiple_V2.py -h | --help
 
 Options:
