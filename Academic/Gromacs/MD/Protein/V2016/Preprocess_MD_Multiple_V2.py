@@ -23,6 +23,10 @@ Notes:
     If put the ligand before all the chains, insert = 1, namely, the ligand is the first chain.
     If put the ligand after the first chain, insert = 2, namely, the ligand in the second chain.
     Etc...
+
+Common:
+    python Preprocess_MD_Multiple_V2.py -i 1 --num_before_LIG 0 --coord_prot protein.gro --coord_LIG LIG.gro --top_prot topol.top --top_LIG LIG_GMX.top
+    
 """
 
 from docopt import docopt
