@@ -23,6 +23,7 @@ fi = open(opts["--input"], 'r')
 fo = open(opts["--output"], 'w')
 scale = float(opts["--lambda"])     # Scaling factor.
 
+flag = 'NULL'
 for line in fi:
     # Lines starting with '[' are directives. Read the line, allocate a flag for further processing and write the line.
     # Process the lines from top to bottom, one by one. Always remember what kind of line is being processed.
