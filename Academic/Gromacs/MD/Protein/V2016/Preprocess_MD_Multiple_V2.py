@@ -118,7 +118,7 @@ def combine_top(top_Prot, top_com):
             fo_topC.writelines(lines[i:i+insert])
             fo_topC.write("; Include ligand topology\n")
             fo_topC.write("#include \"LIG_MD.top\"\n\n")
-            i = i + insert + 1
+            i = i + insert
         
         elif lines[i].startswith('[ molecules ]'):
             fo_topC.writelines(lines[i:i+1+insert]) #There is a comment line before the protein.           
