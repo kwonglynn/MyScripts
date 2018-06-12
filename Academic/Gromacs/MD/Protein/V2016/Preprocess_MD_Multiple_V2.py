@@ -8,16 +8,16 @@ Usage:
     Preprocess_MD_Multiple_V2.py -h | --help
 
 Options:
-    -i, --insert <insert>           The insert position of the ligand, see notes below [default: 1].
-    --num_before_LIG                The number of protein atoms before the ligand [default: 0].
-    --coord_prot <coord_prot>       The coordinates of the protein [default: protein.gro].
-    --coord_LIG <coord_LIG>         The coordinates of the ligand [default: LIG.gro].
-    --coord_com <coord_com>         The coordinates of the complex [default: complex.gro].
-    --top_prot <top_prot>           The topology file of the protein [default: topol.top].
-    --top_LIG0 <top_LIG0>           The raw topology file of the ligand [default: LIG_GMX.top].
-    --top_LIG <top_LIG>             The processed topology file of the ligand [default: LIG_MD.top].
-    --top_com <top_com>             The topology file of the complex [default: complex.top].
-    -h, --help                      Show this screen.
+    -i, --insert <insert>                   The insert position of the ligand, see notes below [default: 1].
+    --num_before_LIG <num_before_LIG>       The number of protein atoms before the ligand [default: 0].
+    --coord_prot <coord_prot>               The coordinates of the protein [default: protein.gro].
+    --coord_LIG <coord_LIG>                 The coordinates of the ligand [default: LIG.gro].
+    --coord_com <coord_com>                 The coordinates of the complex [default: complex.gro].
+    --top_prot <top_prot>                   The topology file of the protein [default: topol.top].
+    --top_LIG0 <top_LIG0>                   The raw topology file of the ligand [default: LIG_GMX.top].
+    --top_LIG <top_LIG>                     The processed topology file of the ligand [default: LIG_MD.top].
+    --top_com <top_com>                     The topology file of the complex [default: complex.top].
+    -h, --help                              Show this screen.
 
 Notes:
     If put the ligand before all the chains, insert = 1, namely, the ligand is the first chain.
