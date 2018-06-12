@@ -8,7 +8,7 @@ Usage:
     Preprocess_MD_Multiple_V2.py -h | --help
 
 Options:
-    -i, --insert <insert>           The insert position of the ligand, see notes below. [default: 0].
+    -i, --insert <insert>           The insert position of the ligand, see notes below. [default: 1].
     --coord_prot <coord_prot>       The coordinates of the protein [default: protein.gro].
     --coord_LIG <coord_LIG>         The coordinates of the ligand [default: LIG.gro].
     --coord_com <coord_com>         The coordinates of the complex [default: complex.gro].
@@ -19,8 +19,9 @@ Options:
     -h, --help                      Show this screen.
 
 Notes:
-    If put the ligand before all the chains, insert = 0.
-    If put the ligand after the first chain, insert = 1, etc.
+    If put the ligand before all the chains, insert = 1, namely, the ligand is the first chain.
+    If put the ligand after the first chain, insert = 2, namely, the ligand in the second chain.
+    Etc...
 """
 
 from docopt import docopt
@@ -114,13 +115,13 @@ def combine_top(top_Prot, top_com):
             i = i + 3
             
         elif lines[i].startswith('; Include chain topologies'):
-            fo_topC.writelines(lines[i:i+insert+1])
+            fo_topC.writelines(lines[i:i+insert])
             fo_topC.write("; Include ligand topology\n")
             fo_topC.write("#include \"LIG_MD.top\"\n\n")
             i = i + insert + 1
         
         elif lines[i].startswith('[ molecules ]'):
-            fo_topC.writelines(lines[i:i+insert+1])            
+            fo_topC.writelines(lines[i:i+1+insert]) #There is a comment line before the protein.           
             fo_topC.write('LIG' + "\t" + "1" + "\n")
             i = i + insert + 1
         
