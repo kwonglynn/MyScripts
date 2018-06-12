@@ -43,8 +43,10 @@ def combine_coord(coord_prot, coord_LIG, coord_com, num_before_LIG):
     fo_coordC.write("Gromacs coordinates for protein and ligand complex\n")
     fo_coordC.write(str(NC) + "\n")
     
-    fo_coordC.writelines(xyz_prot[2:-1])
+    fo_coordC.writelines(xyz_prot[2:-1][:num_before_LIG])
     fo_coordC.writelines(xyz_LIG[2:-1])
+    fo_coordC.writelines(xyz_prot[2:-1][num_before_LIG:])
+   
     fo_coordC.write(xyz_prot[-1])
     
     fi_coordP.close()
