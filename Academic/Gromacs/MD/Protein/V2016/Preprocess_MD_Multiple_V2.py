@@ -132,6 +132,9 @@ def combine_top(top_Prot, top_com):
 ##################################################################################
 if __name__ == '__main__':
     opts = docopt(__doc__)
+    if opts["--help"]:
+        quit()
+    
     insert = int(opts["--insert"])
     coord_prot = opts["--coord_prot"]
     coord_LIG = opts["--coord_LIG"]
