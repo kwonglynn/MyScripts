@@ -25,7 +25,7 @@ Notes:
     Etc...
 
 Common:
-    python Preprocess_MD_Multiple_V2.py -i 1 --num_before_LIG 0 --coord_prot protein.gro --coord_LIG LIG.gro --top_prot topol.top --top_LIG LIG_GMX.top
+    python Preprocess_MD_Multiple_V2.py -i 1 --num_before_LIG 0 --coord_prot protein.gro --coord_LIG LIG_MD.gro --top_prot topol.top --top_LIG LIG_GMX.top
     
 """
 
