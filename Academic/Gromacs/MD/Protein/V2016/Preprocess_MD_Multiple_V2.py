@@ -108,19 +108,19 @@ def combine_top(top_Prot, top_com):
     i = 0
     while i < len(lines):
         if lines[i].startswith('; Include forcefield parameters'):
-            fo_topC.writelines(lines[i:i+2])
+            fo_topC.writelines(lines[i:i+3])
             for line_at in fi_atomtypes:
                 fo_topC.write(line_at)
-            i = i + 2
+            i = i + 3
             
         elif lines[i].startswith('; Include chain topologies'):
-            fo_topC.writelines(lines[i:i+insert])
+            fo_topC.writelines(lines[i:i+insert+1])
             fo_topC.write("; Include ligand topology\n")
             fo_topC.write("#include \"LIG_MD.top\"\n\n")
             i = i + insert + 1
         
         elif lines[i].startswith('[ molecules ]'):
-            fo_topC.write(lines[i:i+insert])            
+            fo_topC.writelines(lines[i:i+insert+1])            
             fo_topC.write('LIG' + "\t" + "1" + "\n")
             i = i + insert + 1
         
