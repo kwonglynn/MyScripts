@@ -7,6 +7,7 @@ Author:
 
 Usage:
     Preprocess_MD_Multiple_V2.py -i <insert> [options]
+    Preprocess_MD_Multiple_V2.py -h | --help
 
 Options:
     -i, --insert <insert>           The insert position of the ligand, see notes below. [default: 0].
@@ -17,6 +18,7 @@ Options:
     --top_LIG0 <top_LIG0>           The raw topology file of the ligand [default: LIG_GMX.top].
     --top_LIG <top_LIG>             The processed topology file of the ligand [default: LIG_MD.top].
     --top_com <top_com>             The topology file of the complex [default: complex.top].
+    -h, --help                      Show this screen.
 
 Notes:
     If put the ligand before all the chains, insert = 0.
