@@ -39,7 +39,7 @@ def combine_coord(coord_prot, coord_LIG, coord_com):
     NC = NP + NL
     
     fo_coordC.write("Gromacs coordinates for protein and ligand complex\n")
-    fo_coordC.write(NC + "\n")
+    fo_coordC.write(str(NC) + "\n")
     
     fo_coordC.writelines(xyz_prot[2:-1])
     fo_coordC.writelines(xyz_LIG[2:-1])
@@ -89,6 +89,7 @@ def process_LIG(top_LIG0, top_LIG):
 #endif\n
 '''
             fo_topL.write(restraint)
+            break
     
     fi_topL0.close()
     fo_atomtypes.close()
@@ -125,6 +126,7 @@ def combine_top(top_Prot, top_com):
         
         else:
             fo_topC.write(lines[i])
+            i = i + 1
             
     fi_topP.close()
     fi_atomtypes.close()
