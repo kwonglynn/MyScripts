@@ -1,8 +1,8 @@
 num_chain1 = 3298
 num_chain2 = 3298
 
-fo_chain1 = open("posre_Protein_free.itp", 'w')
-fo_chain2 = open("posre_Protein2_free.itp", 'w')
+fo_chain1 = open("posre_Protein_scale.itp", 'w')
+fo_chain2 = open("posre_Protein2_scale.itp", 'w')
 
 ######
 import MDAnalysis as mda
