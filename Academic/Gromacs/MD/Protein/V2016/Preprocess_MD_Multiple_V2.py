@@ -125,7 +125,7 @@ def combine_top(top_Prot, top_com, insert):
         elif lines[i].startswith('; Include chain topologies'):
             fo_topC.writelines(lines[i:i+insert])
             fo_topC.write("\n; Include ligand topology\n")
-            fo_topC.write("#include \"LIG_MD.top\"\n\n")
+            fo_topC.write("#include \"LIG_MD.top\"\n")
             i = i + insert
         
         elif lines[i].startswith('[ molecules ]'):
