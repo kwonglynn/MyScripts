@@ -25,7 +25,7 @@ Common:
 from docopt import docopt
 
 #Combine the coordinate files of protein and ligand.
-def combine_coord(coord_prot, coord_LIG, coord_com, before_protein):
+def combine_coord(coord_prot, coord_LIG, coord_com):
     fi_coordP = open(coord_prot, 'r')
     fi_coordL = open(coord_LIG, 'r')
     fo_coordC = open(coord_com, 'w')
@@ -96,7 +96,7 @@ def process_LIG(top_LIG0, top_LIG):
     fo_topL.close()
     
 #Combine the toplogy of file of the ligand and the protein.
-def combine_top(top_Prot, top_com, before_protein):
+def combine_top(top_Prot, top_com):
     fi_topP = open(top_Prot, 'r')
     fi_atomtypes = open('LIG_atomtypes_MD.top', 'r')
     fo_topC = open(top_com, 'w')  #For unbiased MD
