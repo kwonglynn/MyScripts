@@ -19,7 +19,7 @@ Options:
     -h, --help                              Show this screen.
 
 Common:
-    python Preprocess_MD_Single_V1.py --before_protein --coord_prot protein_processed.gro --coord_LIG LIG_MD.gro --top_prot topol.top --top_LIG LIG_GMX.top
+    python Preprocess_MD_Single_V1.py --before_protein --coord_prot protein_processed.gro --coord_LIG LIG_MD.gro --top_prot topol.top --top_LIG0 LIG_GMX.top
     
 """
 
@@ -121,7 +121,8 @@ def combine_top(top_Prot, top_com, before_protein):
         elif lines[i].startswith('; Include Position restraint file'):
             fo_topC.write("; Include ligand topology\n")
             fo_topC.write("#include \"LIG_MD.top\"\n\n")
-            fo_topC.write(lines[i])                          
+            fo_topC.write(lines[i])
+            i = i + 1                          
         
         elif lines[i].startswith('[ molecules ]'):
             if before_protein:
@@ -144,7 +145,6 @@ def combine_top(top_Prot, top_com, before_protein):
 if __name__ == '__main__':
     opts = docopt(__doc__)
     
-    insert = int(opts["--insert"])
     if opts["--before_protein"]:
         before_protein = 'True'
     else:
