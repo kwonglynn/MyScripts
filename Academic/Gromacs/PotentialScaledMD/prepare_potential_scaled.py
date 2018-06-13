@@ -9,9 +9,14 @@ Usage:
     process_potential_scaled.py [options]
 
 Options:
-    -i, --input <input>         The toplogy file of the system processed with -pp [default: processed.top].
+    -i, --input <input>         The toplogy file of the system processed with -pp [default: complex_processed.top].
     -l, --lambda <lambda>       The scaling factor lambda [default: 0.4].
-    -o, --output <file>         The output file. [default: topol_scaled.top].
+    -o, --output <file>         The output file. [default: complex_scaled.top].
+
+Note:
+    Command to generate processed.top:
+    gmx_mpi grompp -f scaled_a7.mdp -c NPT/npt.gro -p complex.top -n index.ndx -pp Scaled/complex_processed.top
+    Potential scaling is only used in the production run with NVT ensemble, therefore the densitiy has to be equilibrated first.
 
 """
 import numpy as np
