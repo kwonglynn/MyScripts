@@ -18,7 +18,7 @@ Options:
     -h, --help                              Show this screen.
 
 Common:
-    python Preprocess_MD_Single_V1.py --before_protein --coord_prot protein_processed.gro --coord_LIG LIG_MD.gro --top_prot topol.top --top_LIG0 LIG_GMX.top
+    python Preprocess_MD_Single_V1.py --coord_prot protein_processed.gro --coord_LIG LIG_MD.gro --top_prot topol.top --top_LIG0 LIG_GMX.top
     
 """
 
