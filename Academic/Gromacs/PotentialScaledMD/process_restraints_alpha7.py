@@ -20,10 +20,10 @@ backbone2 = chain2.select_atoms("backbone").ids
 free2 = chain2.select_atoms("backbone and (byres (around 6 resname LIG))").ids
 
 print ("Free backbone atoms in the first chain:")
-for id in free1: print (*id)
+print (' '.join(str(i) for i in free1.ids))
 print ("\n")
 print ("Free backbone atoms in the second chain:")
-for id in free2: print (*id)
+print (' '.join(str(i) for i in free2.ids))
 
 title = '''\
 [ position_restraints ]
