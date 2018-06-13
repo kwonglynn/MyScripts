@@ -42,6 +42,7 @@ for id in backbone1:
 
 for id in backbone2:
     if id not in free2:
+        id = id - num_chain1
         fo_chain2.write("%d\t%d\t%d\t%f\t%d\n" % (id,func,g,r,k))
 
 fo_chain1.close()
