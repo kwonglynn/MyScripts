@@ -15,7 +15,7 @@ Options:
 
 Note:
     Command to generate processed.top:
-    gmx_mpi grompp -f scaled_a7.mdp -c NPT/npt.gro -p complex.top -n index.ndx -pp Scaled/complex_processed.top
+    gmx_mpi grompp -f scaled.mdp -c NPT/npt.gro -p complex.top -n index.ndx -pp Scaled/complex_processed.top
     Potential scaling is only used in the production run with NVT ensemble, therefore the densitiy has to be equilibrated first.
 
 """
