@@ -152,7 +152,7 @@ if __name__ == '__main__':
     top_LIG0 = opts["--top_LIG0"]
     top_LIG = opts["--top_LIG"]
     top_com = opts["--top_com"]
-
+    
     if coord_prot:    
         combine_coord(coord_prot, coord_LIG, coord_com, num_before_LIG)
     
