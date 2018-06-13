@@ -10,8 +10,8 @@ Usage:
 Options:
     -i, --insert <insert>                   The insert position of the ligand, see notes below [default: 1].
     --num_before_LIG <num_before_LIG>       The number of protein atoms before the ligand [default: 0].
-    --coord_prot <coord_prot>               The coordinates of the protein [default: protein.gro].
-    --coord_LIG <coord_LIG>                 The coordinates of the ligand [default: LIG.gro].
+    --coord_prot <coord_prot>               The coordinates of the protein [default: protein_processed.gro].
+    --coord_LIG <coord_LIG>                 The coordinates of the ligand [default: LIG_MD.gro].
     --coord_com <coord_com>                 The coordinates of the complex [default: complex.gro].
     --top_prot <top_prot>                   The topology file of the protein [default: topol.top].
     --top_LIG0 <top_LIG0>                   The raw topology file of the ligand [default: LIG_GMX.top].
@@ -25,7 +25,7 @@ Notes:
     Etc...
 
 Common:
-    python Preprocess_MD_Multiple_V2.py -i 1 --num_before_LIG 0 --coord_prot protein.gro --coord_LIG LIG_MD.gro --top_prot topol.top --top_LIG LIG_GMX.top
+    python Preprocess_MD_Multiple_V2.py -i 1 --num_before_LIG 0 --coord_prot protein_processed.gro --coord_LIG LIG_MD.gro --top_prot topol.top --top_LIG LIG_GMX.top
     
 """
 
@@ -104,7 +104,7 @@ def process_LIG(top_LIG0, top_LIG):
     fo_topL.close()
     
 #Combine the toplogy of file of the ligand and the protein.
-def combine_top(top_Prot, top_com):
+def combine_top(top_Prot, top_com, insert):
     fi_topP = open(top_Prot, 'r')
     fi_atomtypes = open('LIG_atomtypes_MD.top', 'r')
     fo_topC = open(top_com, 'w')  #For unbiased MD
@@ -160,4 +160,4 @@ if __name__ == '__main__':
         process_LIG(top_LIG0, top_LIG)
     
     if top_prot:
-        combine_top(top_prot, top_com)
+        combine_top(top_prot, top_com, insert)
