@@ -22,6 +22,7 @@ Options:
 Notes:
     If put the ligand before all the chains, insert = 1, namely, the ligand is the first chain.
     If put the ligand after the first chain, insert = 2, namely, the ligand in the second chain.
+    If put the ligand after the second chain, insert = 3, namely, the ligand in the third chain.
     Etc...
 
 Common:
