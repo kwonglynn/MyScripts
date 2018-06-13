@@ -8,7 +8,6 @@ Usage:
     Preprocess_MD_Single_V1.py -h | --help
 
 Options:
-    --before_protein                        Put the ligand coordinates befor the protein's.
     --coord_prot <coord_prot>               The coordinates of the protein [default: protein_processed.gro].
     --coord_LIG <coord_LIG>                 The coordinates of the ligand [default: LIG_MD.gro].
     --coord_com <coord_com>                 The coordinates of the complex [default: complex.gro].
@@ -41,12 +40,8 @@ def combine_coord(coord_prot, coord_LIG, coord_com, before_protein):
     fo_coordC.write("Gromacs coordinates for protein and ligand complex\n")
     fo_coordC.write(str(NC) + "\n")
     
-    if before_protein:
-        fo_coordC.writelines(xyz_LIG[2:-1])
-        fo_coordC.writelines(xyz_prot[2:-1])
-    else:
-        fo_coordC.writelines(xyz_prot[2:-1])        
-        fo_coordC.writelines(xyz_LIG[2:-1])
+    fo_coordC.writelines(xyz_prot[2:-1])        
+    fo_coordC.writelines(xyz_LIG[2:-1])
         
     fo_coordC.write(xyz_prot[-1])
     
@@ -118,21 +113,16 @@ def combine_top(top_Prot, top_com, before_protein):
                 fo_topC.write(line_at)
             i = i + 3
             
-        elif lines[i].startswith('; Include Position restraint file'):
+        elif lines[i].startswith('; Include water topology'):
             fo_topC.write("; Include ligand topology\n")
             fo_topC.write("#include \"LIG_MD.top\"\n\n")
             fo_topC.write(lines[i])
             i = i + 1                          
         
         elif lines[i].startswith('[ molecules ]'):
-            if before_protein:
-                fo_topC.writelines(lines[i:i+2]) # There is a comment line before the protein. 
-                fo_topC.write('LIG' + "\t" + "1" + "\n")
-                i = i + 2
-            else:
-                fo_topC.writelines(lines[i:i+3]) # Write the protein line as well. 
-                fo_topC.write('LIG' + "\t" + "1" + "\n")
-                i = i + 3                
+            fo_topC.writelines(lines[i:i+3]) # Write comment and the protein line first. 
+            fo_topC.write('LIG' + "\t" + "1" + "\n")
+            i = i + 3                
         
         else:
             fo_topC.write(lines[i])
@@ -144,11 +134,7 @@ def combine_top(top_Prot, top_com, before_protein):
 ##################################################################################
 if __name__ == '__main__':
     opts = docopt(__doc__)
-    
-    if opts["--before_protein"]:
-        before_protein = 'True'
-    else:
-        before_protein = 'False'
+
     coord_prot = opts["--coord_prot"]
     coord_LIG = opts["--coord_LIG"]
     coord_com = opts["--coord_com"]
@@ -158,10 +144,10 @@ if __name__ == '__main__':
     top_com = opts["--top_com"]
     
     if coord_prot:    
-        combine_coord(coord_prot, coord_LIG, coord_com, before_protein)
+        combine_coord(coord_prot, coord_LIG, coord_com)
     
     if top_LIG0:
         process_LIG(top_LIG0, top_LIG)
     
     if top_prot:
-        combine_top(top_prot, top_com, before_protein)
+        combine_top(top_prot, top_com)
