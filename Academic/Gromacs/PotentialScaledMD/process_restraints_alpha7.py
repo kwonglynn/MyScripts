@@ -21,7 +21,6 @@ free2 = chain2.select_atoms("backbone and (byres (around 6 resname LIG))").ids
 
 print ("Free backbone atoms in the first chain:")
 print (' '.join(str(i) for i in free1))
-print ("\n")
 print ("Free backbone atoms in the second chain:")
 print (' '.join(str(i) for i in free2))
 
