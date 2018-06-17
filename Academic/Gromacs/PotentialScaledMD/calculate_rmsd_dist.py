@@ -82,7 +82,7 @@ if __name__ == '__main__':
         data.append([time, rmsd_backbone, rmsd_LIG, dist])
 
     fo = open('%s.dat' % prefix, 'w')
-    fo.write("Time\tRMSD_backbone\tRMSD_LIG\tCOM_distance\n")
+    fo.write("#Time\tRMSD_backbone\tRMSD_LIG\tCOM_distance\n")
 
     for item in data:
 #        fo.write('\t'.join(format("%8.2f" % i) for i in item) + '\n')
