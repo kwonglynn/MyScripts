@@ -18,6 +18,9 @@ Options:
 Note:
     1, The toplogy file for Gromacs format is the gro file, not the top file.
 
+Example:
+    ./calculate_rmsd_dist.py -r complex_box.gro -t complex_box.gro -j scaled_noPBC.xtc -p MDAnalysis
+
 """
 
 import MDAnalysis as mda
