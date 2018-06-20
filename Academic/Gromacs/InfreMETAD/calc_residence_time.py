@@ -48,4 +48,4 @@ with open('COLVAR-no-overlap', 'r') as fi:
     resid_time = dt * sum_bias * math.pow(10, -9)      # Convert ps to ms.
 
 print "#Resid_time(ms)\tMetad_time(ns)\tAlpha"
-print "{:8.3f} ms\t{:8.2f} ns\t{:.3e}".format(resid_time, metad_time, alpha)
+print "{:8.3f}\t{:8.2f}\t{:.3e}".format(resid_time, metad_time, alpha)
