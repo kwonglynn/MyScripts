@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import math
-KbT = 2.496           # KbT at room temperature
-dt = 0.2              # Time in picosecond (ps) between two lines of COLVAR
+KbT = 2.479           # KbT at room temperature
+dt = 1.0              # Time in picosecond (ps) between two lines of COLVAR
 sum_bias = 0
 
 ############Remove the overlapping lines of COLVAR##########
