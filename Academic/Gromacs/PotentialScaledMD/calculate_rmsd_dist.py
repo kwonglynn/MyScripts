@@ -17,7 +17,9 @@ Options:
 
 Note:
     1, The toplogy file for Gromacs format is the gro file, not the top file.
-
+    2, The PBC of the trajectory should be processed:
+    gmx_seq trjconv -s scaled.tpr -f scaled.xtc -pbc mol -ur compact -n index.ndx -o scaled_noPBC.xtc
+    
 Example:
     ./calculate_rmsd_dist.py -r complex_box.gro -t complex_box.gro -j scaled_noPBC.xtc -p MDAnalysis
 
