@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import numpy as np
 KbT = 2.496           # KbT at room temperature
 dt = 0.2              # Time in picosecond (ps) between two lines of COLVAR
 sum_bias = 0
@@ -35,7 +36,7 @@ with open('COLVAR-no-overlap', 'r') as fi:
             dist =float(terms[1])
             bias = float(terms[3])
             if dist < 2.0:
-                sum_bias += exp(1 / KbT * bias)
+                sum_bias += np.exp(1 / KbT * bias)
             else:
                 # When the distance is bigger than the cut-off, it is seen as dissociated.
                 metad_time = time       # The metadynamics simulation (ps) when the ligand dissociates.
@@ -43,9 +44,9 @@ with open('COLVAR-no-overlap', 'r') as fi:
     
     resid_time = dt * sum_bias          # Residence time in ps.
     alpha = resid_time / metad_time     # Both in ps.
-    meta_time = metad_time * power(10, -3)          # Convet ps to ns
-    resid_time = dt * sum_bias * power(10, -9)      # Convert ps to ms.
+    meta_time = metad_time * np.power(10, -3)          # Convet ps to ns
+    resid_time = dt * sum_bias * np.power(10, -9)      # Convert ps to ms.
 
-print "Metadynamics time: {:8.3f} ns".format(off_time)
+print "Metadynamics time: {:8.3f} ns".format(metad_time)
 print "Residence time: {:8.3f} ms".format(resid_time)
 print "Alpha is: {:8.3f}".format(alpha)
