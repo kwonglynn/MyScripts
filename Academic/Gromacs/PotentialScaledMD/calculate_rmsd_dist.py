@@ -64,19 +64,21 @@ def measure_dist(ref, mobile):
 if __name__ == '__main__':
     ####Treat the options####
     opts = docopt(__doc__)
-    print opts
+    print (opts)
     ref = mda.Universe(opts['--ref'])
     mobile = mda.Universe(opts['--top'], opts['--traj'])
 
     if opts['--N_frames']:
         N_frames = int(opts['--N_frames'])
     else:
-	N_frames = mobile.trajectory.n_frames
+        N_frames = mobile.trajectory.n_frames
 
     prefix = opts['--prefix']
 
     data = []
     for ts in mobile.trajectory[0:N_frames]:
+        if ts.frame % 1000 == 0:
+            print ("Processing frame: {:d}".format(ts.frame))
         time = ts.time/1000
         trans_rot(ref, mobile)
         rmsd_backbone, rmsd_LIG = measure_rmsd(ref, mobile)
