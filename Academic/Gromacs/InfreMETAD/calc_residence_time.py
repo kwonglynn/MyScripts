@@ -44,9 +44,8 @@ with open('COLVAR-no-overlap', 'r') as fi:
     
     resid_time = dt * sum_bias          # Residence time in ps.
     alpha = resid_time / metad_time     # Both in ps.
-    meta_time = metad_time * math.pow(10, -3)          # Convet ps to ns
+    metad_time = metad_time * math.pow(10, -3)          # Convet ps to ns
     resid_time = dt * sum_bias * math.pow(10, -9)      # Convert ps to ms.
 
-print "Metadynamics time: {:8.3f} ns".format(metad_time)
-print "Residence time: {:8.3f} ms".format(resid_time)
-print "Alpha is: {:8.3f}".format(alpha)
+print "#Resid_time(ms)\tMetad_time(ns)\tAlpha"
+print "{:8.3f} ms\t{:8.2f} ns\t{:.3e}".format(resid_time, metad_time, alpha)
