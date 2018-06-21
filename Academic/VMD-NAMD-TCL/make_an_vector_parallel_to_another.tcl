@@ -23,6 +23,7 @@ set ref_axis {0 0 1}
 
 set prod [vecdot $vec_lig $ref_axis]
 # The length for the reference axis vector is unit.
+# 57.2958 is used to convert radian to degree.
 set angle [expr 57.2958 * acos($prod / $len_vec_lig)]
 
 set norm_vec [veccross $vec_lig $ref_axis]
