@@ -24,7 +24,7 @@ module add gromacs/2016.5-plumed_2.3.5
 ###Scaled###
 #First run
 # aprun -n 1 gmx_mpi grompp -f scaled_a7.mdp -c NPT/npt.gro -t NPT/npt.cpt -p complex_scaled.top -n index.ndx -o Scaled/scaled.tpr
-# aprun $APRUN_OPTIONS gmx_mpi mdrun -deffnm scaled
+# aprun $APRUN_OPTIONS gmx_mpi mdrun -deffnm scaled -plumed plumed_scaled.dat
 
 #Continue run
 aprun $APRUN_OPTIONS gmx_mpi mdrun -s scaled.tpr -cpi scaled.cpt -deffnm scaled -plumed plumed_scaled.dat
