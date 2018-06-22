@@ -1,11 +1,18 @@
 RESTART
-#define ligand
-COM ATOMS=6597-6641 LABEL=lig
+# define ligand and pocket
+lig: GROUP NDX_FILE=index.ndx NDX_GROUP=LIG
+poc: GROUP ATOMS=2291,2298,2309,2333,2957,2978,2993,3064,3851,3862,3881,4187,4211,4230,5182,5846
 
-#define pocket
-COM ATOMS=2291,2298,2309,2333,2957,2978,2993,3064,3851,3862,3881,4187,4211,4230,5182,5846 LABEL=pocket
+# make the ligand and pocket atoms wholemolecule
+WHOLEMOLECULES ENTITY0=lig ENTITY1=poc
 
-dist: DISTANCE ATOMS=lig,pocket
+# define the center of mass for ligand and pocket
+COM_lig: COM ATOMS=lig
+COM_poc: COM ATOMS=poc
+
+# distance should be defined after WHOLEMOLECULES
+
+dist: DISTANCE ATOMS=COM_lig,COM_pocket
 
 COMMITTOR ...
   ARG=dist
