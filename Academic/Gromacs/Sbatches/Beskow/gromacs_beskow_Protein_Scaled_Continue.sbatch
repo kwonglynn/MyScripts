@@ -27,4 +27,4 @@ module add gromacs/2016.5-plumed_2.3.5
 # aprun $APRUN_OPTIONS gmx_mpi mdrun -deffnm scaled
 
 #Continue run
-aprun $APRUN_OPTIONS gmx_mpi mdrun -s scaled.tpr -cpi scaled.cpt -deffnm scaled
+aprun $APRUN_OPTIONS gmx_mpi mdrun -s scaled.tpr -cpi scaled.cpt -deffnm scaled -plumed plumed_scaled.dat
