@@ -76,7 +76,7 @@ if __name__ == '__main__':
         if (dist_int in dists_want) and (dist_int not in dists_now):
             dists_now.append(dist_int)
             data.append([time, dist, 'True'])
-            prot_LIG.write("complex_{:d}.gro".format(ts.frame))          
+            prot_LIG.write("complex_{:d}.gro".format(dist_int))          
         else:
             data.append([time, dist, ''])
 
