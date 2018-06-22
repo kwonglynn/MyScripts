@@ -49,7 +49,7 @@ aprun -n 1 gmx_mpi grompp -f scaled_a7.mdp -c NPT/npt.gro -p complex.top -n inde
 ###Scaled###
 mkdir Scaled
 aprun -n 1 gmx_mpi grompp -f scaled_a7.mdp -c NPT/npt.gro -t NPT/npt.cpt -p complex_scaled.top -n index.ndx -o Scaled/scaled.tpr
-cp index.ndx gromacs_beskow_Protein_Scaled_Continue.sbatch Scaled
+cp plumed_scaled.dat index.ndx gromacs_beskow_Protein_Scaled_Continue.sbatch Scaled
 cd Scaled
 aprun $APRUN_OPTIONS gmx_mpi mdrun -deffnm scaled -plumed plumed_scaled.dat
 cd ..

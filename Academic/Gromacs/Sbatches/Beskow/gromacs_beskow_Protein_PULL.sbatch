@@ -46,5 +46,5 @@ cd ..
 mkdir PULL
 aprun -n 1 gmx_mpi grompp -f pull_backbone.mdp -c NPT/npt.gro -t NPT/npt.cpt -p complex.top -n index.ndx -o PULL/pull.tpr
 cd PULL
-aprun $APRUN_OPTIONS gmx_mpi mdrun $ntmpi -ntomp $ntomp -deffnm pull
+aprun $APRUN_OPTIONS gmx_mpi mdrun -deffnm pull
 cd ..
