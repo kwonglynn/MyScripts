@@ -6,22 +6,22 @@ Author:
     Guanglin Kuang <guanglin@kth.se>
 
 Usage:
-    calculate_rmsd_dist.py [options]
+    Extract_Umbrella_Frames.py [options]
 
 Options:
     -r, --ref <ref>             The reference structure [default: complex_box.gro].
-    -t, --top <top>      	The topology file for the trajectory [default: complex_box.gro].
-    -j, --traj <traj>           The trajectory file after PBC treatment [default: md_noPBC.xtc].
-    -n, --N_frames <N_frames>  	The number frames to process.
-    -p, --prefix <prefix>	The prefix for the output files [default: MDAnalysis].
+    -t, --top <top>             The topology file for the trajectory [default: complex_box.gro].
+    -j, --traj <traj>           The trajectory file after PBC treatment [default: pull_noPBC.xtc].
+    -n, --N_frames <N_frames>   The number frames to process, default is to process frames.
+    -p, --prefix <prefix>       The prefix for the output files [default: Umbrella_Distances.dat].
 
 Note:
     1, The toplogy file for Gromacs format is the gro file, not the top file.
     2, The PBC of the trajectory should be processed:
-    gmx_seq trjconv -s scaled.tpr -f scaled.xtc -pbc mol -ur compact -n index.ndx -o scaled_noPBC.xtc
+    gmx_seq trjconv -s pull.tpr -f pull.xtc -pbc mol -ur compact -n index.ndx -o pull_noPBC.xtc
     
 Example:
-    ./calculate_rmsd_dist.py -r complex_box.gro -t complex_box.gro -j scaled_noPBC.xtc -p MDAnalysis
+    python Extract_Umbrella_Frames.py -r complex_box.gro -t complex_box.gro -j pull_noPBC.xtc -p Umbrella_Distances
 
 """
 
