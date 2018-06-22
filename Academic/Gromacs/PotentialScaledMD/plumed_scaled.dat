@@ -12,7 +12,7 @@ COM_poc: COM ATOMS=poc
 
 # distance should be defined after WHOLEMOLECULES
 
-dist: DISTANCE ATOMS=COM_lig,COM_pocket
+dist: DISTANCE ATOMS=COM_lig,COM_poc
 
 COMMITTOR ...
   ARG=dist
