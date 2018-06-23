@@ -5,3 +5,10 @@ set min [lindex $minmax 0]
 set max [lindex $minmax 1]
 set dim [vecsub $min $max]
 
+#2， Load a series of coordinate files
+for {set x 1} {$x < 71} {incr x} {
+    if {[file exists complex_$x.gro]} {
+    mol new complex_$x.gro}}
+    
+
+
