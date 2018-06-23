@@ -1,4 +1,4 @@
-﻿# !/usr/bin/python
+﻿# Python 3.0
 # -*- coding: utf-8 -*-
 from urllib.request import urlopen
 import tushare as ts
