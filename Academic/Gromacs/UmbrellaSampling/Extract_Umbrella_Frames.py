@@ -63,8 +63,8 @@ if __name__ == '__main__':
     prefix = opts['--prefix']
 
     data = []
-    dists_want = range(1,21)
-    dists_now = []
+    dists_want = range(1,41)            # Distances in Angstrom.
+    dists_now = []                      # Only keep the first frame with desired distance.
     prot_LIG = mobile.select_atoms("protein or resname LIG")
     for ts in mobile.trajectory[0:N_frames]:
         if ts.frame % 1000 == 0:
