@@ -24,7 +24,7 @@ for i in {0..29}; do
     if [ -f complex_$i.gro ]; then
     cd Umbrella${i}/Umbrella
     cp umbrella.tpr umbrella${i}.tpr
-    cp umbrella_pullf.xvg umbralla_pullf${i}.xvg
+    cp umbrella_pullf.xvg umbrella_pullf${i}.xvg
     cp umbrella${i}.tpr umbralla_pullf${i}.xvg ../../Analysis
     cd ../..
     fi
@@ -32,6 +32,6 @@ done
 
 cd Analysis
 ls umbrella*tpr > tpr-files.dat
-ls umbrella_pullf*xvg > pullf-filex.dat
+ls umbrella_pullf*xvg > pullf-files.dat
 gmx_seq wham -it tpr-files.dat -if pullf-files.dat -o -hist -unit kCal
 xmgrace -nxy histogram.xvg
