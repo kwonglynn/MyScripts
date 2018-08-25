@@ -14,7 +14,7 @@ height = np.array(data['height']) / 4.184
 fig1, ax1 = plt.subplots(111)
 ax1.plot(time, dist, 'k-', linewidth=1)
 plt.xlim(0, 5000)
-plt.ylim(0, 62)
+plt.ylim(0, 70)
 plt.xlabel('Time (ns)', fontsize=12)
 plt.ylabel(r'$distance\ (\AA)$', fontsize=12)
 plt.tick_params(labelsize=10)
