@@ -1,3 +1,12 @@
+'''
+Reference:
+1, https://www.shanelynn.ie/python-pandas-read_csv-load-data-from-csv-files/
+2, https://chrisalbon.com/python/data_wrangling/pandas_dataframe_importing_csv/  
+3, https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html
+4, https://matplotlib.org/tutorials/introductory/pyplot.html#sphx-glr-tutorials-introductory-pyplot-py
+5, https://stepik.org/lesson/44680/step/1?unit=22723
+'''
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
