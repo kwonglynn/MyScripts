@@ -1,24 +1,24 @@
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy import stats
 
-with open('results.dat', 'r') as f:
-    n,x,y = np.loadtxt(f, delimiter='\t', comments='#', usecols=(0,1,2), unpack=True, \
-          dtype={'names':('Name', 'DDG', 'Resid_time'), \
-                 'formats':('S8', np.float, np.float)})
+with open('HILLS', 'r') as f:
+    t,d,h = np.loadtxt(f, delimiter='\t', comments='#', usecols=(0,1,5), unpack=True, \
+          dtype={'names':('time', 'distance', 'height'), \
+                 'formats':(np.float, np.float, np.float)})
 
-fig, ax = plt.subplots()
+fig1, ax1 = plt.subplots()
 
-slope, intercept, r_value, p_value, std_err = stats.linregress(x,y)
-line = slope * x + intercept
+ax1.plot(t,d,'bo')
+ax1.plot(t,d,'r-',linewidth=1)
+ax1.set(xlabel='Time (ns)', ylabel='distance (ns)')
 
-ax.plot(x,y,'bo')
-ax.plot(x,line,'r-',linewidth=2)
+fig1.savefig('Metad_distance.png')
 
-ax.set(xlabel=r'$\Delta \Delta G\ (kcal/mol)$', ylabel='Residence time (ns)')
+fig2, ax2 = plt.subplots()
 
-for i,txt in enumerate(n):
-    ax.annotate(txt,(x[i],y[i]))
+ax2.plot(t,h,'bo')
+ax2.plot(t,h,'r-',linewidth=1)
+ax2.set(xlabel='Time (ns)', ylabel='height (kJ/mol)')
 
-fig.savefig('ASEM_Analogues_Results.png')
+fig2.savefig('Metad_HILLS.png')
