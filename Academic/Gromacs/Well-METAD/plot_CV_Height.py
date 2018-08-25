@@ -15,11 +15,13 @@ fig1, ax1 = plt.subplots()
 
 ax1.plot(time, dist, 'k-', linewidth=1)
 ax1.set(xlabel='Time (ns)', ylabel=r'$distance\ (\AA)$')
-
-fig1.savefig('Metad_distance.png')
+ax1.xlim(0, 5000)
+ax1.ylim(0, 62)
+fig1.savefig('Metad_distance.png', dpi=600)
 
 fig2, ax2 = plt.subplots()
 ax2.plot(time, height, 'k-', linewidth=1)
 ax2.set(xlabel='Time (ns)', ylabel='height (kcal/mol)')
-
-fig2.savefig('Metad_HILLS.png')
+ax1.xlim(0, 5000)
+ax1.ylim(0.00, 0.14)
+fig2.savefig('Metad_HILLS.png', dpi=600)
