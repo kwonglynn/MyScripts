@@ -13,13 +13,13 @@ height = np.array(data['height']) / 4.184
 
 fig1, ax1 = plt.subplots()
 
-ax1.plot(time, dist, 'bo')
+ax1.plot(time, dist, 'k-', linewidth=1)
 ax1.set(xlabel='Time (ns)', ylabel=r'$distance\ (\AA)$')
 
 fig1.savefig('Metad_distance.png')
 
 fig2, ax2 = plt.subplots()
-ax2.plot(time, height, 'bo')
+ax2.plot(time, height, 'k-', linewidth=1)
 ax2.set(xlabel='Time (ns)', ylabel='height (kcal/mol)')
 
 fig2.savefig('Metad_HILLS.png')
