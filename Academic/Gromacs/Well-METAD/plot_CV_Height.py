@@ -10,6 +10,8 @@ Reference:
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib as mpl
+mpl.rcParams['mathtext.default'] = 'regular'
 
 data = pd.read_csv('HILLS', \
                    sep='\s*', engine='python', \
