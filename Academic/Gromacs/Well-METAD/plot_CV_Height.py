@@ -22,7 +22,7 @@ time = np.array(data['time']) / 1000
 dist = np.array(data['dist']) * 10
 height = np.array(data['height']) / 4.184
 
-fig1, ax1 = plt.subplots(111)
+fig1, ax1 = plt.subplots()
 ax1.plot(time, dist, 'k-', linewidth=1)
 plt.xlim(0, 5000)
 plt.ylim(0, 70)
@@ -31,7 +31,7 @@ plt.ylabel(r'$distance\ (\AA)$', fontsize=12)
 plt.tick_params(labelsize=10)
 fig1.savefig('Metad_distance.png', dpi=600)
 
-fig2, ax2 = plt.subplots(111)
+fig2, ax2 = plt.subplots()
 ax2.plot(time, height, 'k-', linewidth=1)
 plt.xlim(0, 5000)
 plt.ylim(0.00, 0.14)

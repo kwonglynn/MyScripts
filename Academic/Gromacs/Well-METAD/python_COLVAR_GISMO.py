@@ -26,7 +26,7 @@ fo.close()
 
 # Step 2, Extract the data every 10th line:
 fi = open('COLVAR-no-overlap', 'r')
-fo = open('COLVAR-10', 'w')
+fo = open('COLVAR-100', 'w')
 
 lines = fi.readlines()
 i = 0
@@ -37,7 +37,7 @@ while i < len(lines):
     else:
         try:
             fo.write(lines[i])
-            i += 10
+            i += 100
         except IndexError:
             break
 
