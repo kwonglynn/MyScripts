@@ -28,6 +28,8 @@ Note:
 import matplotlib.pyplot as plt
 import numpy as np
 from docopt import docopt
+import matplotlib as mpl
+mpl.rcParams['mathtext.default'] = 'regular'
 
 ##########Input Stop here###############################
 if __name__ == '__main__':
