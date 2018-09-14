@@ -18,14 +18,14 @@ def ProcessCOLVAR(COLVAR1):
             if line.startswith('#') and i < 3:
                 fo.write(line)
                 i += 1
-            elif not line.startswith('#'):
+            elif not line.startswith('#') and len(line) > 1:
                 time = int(line.strip().split()[0].split('.')[0]) # Only lines with interger ps times are kept.
             # Coninuous output
                 if time > time0:
                     time0 = time
                     fo.write(line)
             # Redundant output, ignore it.
-                elif time < time0:
+                else:
                     continue
         
     fo.close()
@@ -55,9 +55,11 @@ def CalMetad(COLVAR2, KbT, dt):
     return metad_time, resid_time, alpha
 
 def main():
+    ###Define the number of simulations (N), the temperature (T), and time step of COLVAR (dt). Note dt is NOT the time step of MD simulation.
     N = 20                  # Number of independent simulations.
     T = 300                 # The temperature of the simulation in K
     dt = 1.0                # Time in picosecond (ps) between two lines of COLVAR after removing overlapping lines.
+    ###
     KbT0 = 2.479            # KbT at 298 K, in kJ/mol
     KbT = T / 298 * KbT0    # Calculate the KbT at the simulation temperature
 
@@ -67,7 +69,7 @@ def main():
     #for i in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
     for i in range(1, N+1):
         ProcessCOLVAR("Run%d/COLVAR" % i)
-        metad_time, resid_time, alpha = CalMetad("Run%d/COLVAR-no-overlap" %i, KbT, dt)
+        metad_time, resid_time, alpha = CalMetad("Run%d/COLVAR-no-overlap" % i, KbT, dt)
         fo.write("{:8.3f}\t{:8.2f}\t{:.3e}".format(metad_time, resid_time, alpha))
     
     fo.close()
