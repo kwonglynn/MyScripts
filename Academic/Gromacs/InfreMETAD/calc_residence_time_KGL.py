@@ -67,8 +67,7 @@ def main():
     fo.write("#Metad_time(ns)\tResid_time(ms)\tAlpha")
     
     for i in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,18,19,20]:
-    	#for i in range(1, N+1):
-	print i
+        #for i in range(1, N+1):
         ProcessCOLVAR("Run%d/COLVAR" % i, "Run%d/COLVAR-no-overlap" % i)
         metad_time, resid_time, alpha = CalMetad("Run%d/COLVAR-no-overlap" % i, KbT, dt)
         fo.write("{:8.3f}\t{:8.2f}\t{:.3e}\n".format(metad_time, resid_time, alpha))
