@@ -8,11 +8,11 @@ Created on Sept. 13, 2018
 import math
 
 ############Remove the overlapping lines of COLVAR##########
-def ProcessCOLVAR(COLVAR1):
+def ProcessCOLVAR(COLVAR_in, COLVAR_out):
     i = 0
     time0 = -1
-    fo = open('COLVAR-no-overlap', 'w')
-    with open(COLVAR1, 'r') as fi:
+    fo = open(COLVAR_out, 'w')
+    with open(COLVAR_in, 'r') as fi:
         for line in fi:
             # Only write the first comment lines, omit the commet lines for restarting runs.
             if line.startswith('#') and i < 3:
@@ -31,9 +31,9 @@ def ProcessCOLVAR(COLVAR1):
     fo.close()
 
 ###############Process the non-overlapping COLVAR##########
-def CalMetad(COLVAR2, KbT, dt):
+def CalMetad(COLVAR, KbT, dt):
     sum_bias = 0
-    with open(COLVAR2, 'r') as fi:
+    with open(COLVAR, 'r') as fi:
         for line in fi:
             if not line.startswith('#'):
                 terms = line.split()
@@ -66,11 +66,12 @@ def main():
     fo = open("InfreMetad_Results.dat", 'w')
     fo.write("#Metad_time(ns)\tResid_time(ms)\tAlpha")
     
-    #for i in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
-    for i in range(1, N+1):
-        ProcessCOLVAR("Run%d/COLVAR" % i)
+    for i in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,18,19,20]:
+    	#for i in range(1, N+1):
+	print i
+        ProcessCOLVAR("Run%d/COLVAR" % i, "Run%d/COLVAR-no-overlap" % i)
         metad_time, resid_time, alpha = CalMetad("Run%d/COLVAR-no-overlap" % i, KbT, dt)
-        fo.write("{:8.3f}\t{:8.2f}\t{:.3e}".format(metad_time, resid_time, alpha))
+        fo.write("{:8.3f}\t{:8.2f}\t{:.3e}\n".format(metad_time, resid_time, alpha))
     
     fo.close()
     
