@@ -56,7 +56,7 @@ if __name__ == '__main__':
         unit1 = r'$\AA$'
     elif opts["--cv1"] == 'dihedral':
         allX = data[:, 0]
-        unit1 = 'radian'
+        unit1 = 'rad'
     elif opts["--cv1"] == 'contact':
         allX = data[:, 0]
         unit1 = ''
@@ -67,7 +67,7 @@ if __name__ == '__main__':
         unit2 = r'$\AA$'
     elif opts["--cv2"] == 'dihedral':
         allY = data[:, 1]
-        unit2 = 'radian'
+        unit2 = 'rad'
     elif opts["--cv2"] == 'contact':
         allY = data[:, 1]
         unit2 = ''        
