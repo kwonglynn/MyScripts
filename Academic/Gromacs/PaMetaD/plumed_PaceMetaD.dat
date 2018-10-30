@@ -1,0 +1,44 @@
+
+whole: GROUP NDX_FILE=index.ndx NDX_GROUP=Protein
+Peptide:  GROUP NDX_FILE=index.ndx NDX_GROUP=Peptide_&_C-alpha
+Protein:  GROUP NDX_FILE=index.ndx NDX_GROUP=Protein_&_C-alpha
+
+ProteinON:  GROUP ATOMS=158,186,218,260,1813,1836,1876,1908,1942,143,169,205,247,282,1819,1858,1887,1930,1964
+ProteinAsp: GROUP ATOMS=214,215,256,257
+PeptideON:   GROUP ATOMS=2079,2089,2090,2105,2106,2128,2129,2144,2145,2167,2168,2191,2192,2198,2199,2219,2220,2239,2240,2263
+PeptideArg:  GROUP ATOMS=2181,2184,2187,2253,2256,2259
+
+WHOLEMOLECULES ENTITY0=whole
+
+Contacts: COORDINATION GROUPA=PeptideON,PeptideArg GROUPB=ProteinON,ProteinAsp R_0=0.32
+
+METAD ...
+ ARG=Contacts
+ SIGMA=0.3
+ BIASFACTOR=50
+ TEMP=298
+ HEIGHT=0.6
+ FILE=HILLS.PACEMetaD
+ LABEL=meta
+
+ ADAPTIVE_PACE # keyword to activate PaceMetaD
+ PACE=250 # initial frequency (\tau_0 in my paper)
+ AP_MAX_PACE=25000 # maximal frequency (\tau_c in my paper)
+ AP_FREQUENCY=250 # increased frequency per step 
+ AP_MIN_ACC=1e8 # safe upper bound (gamma in my paper)
+ ACCELERATION
+
+ GRID_MIN=-1.0 GRID_MAX=20.0 GRID_BIN=200 GRID_WFILE=GRID.Contacts GRID_WSTRIDE=250000
+
+... METAD
+
+# when the peptide is unbound, then stop the simulation
+COMMITTOR ...
+  ARG=Rcom,Contacts
+  STRIDE=50000
+  BASIN_LL1=4.0,0.0
+  BASIN_UL1=10.0,0.1
+... COMMITTOR
+
+PRINT STRIDE=250 ARG=* FILE=COLVAR
+
