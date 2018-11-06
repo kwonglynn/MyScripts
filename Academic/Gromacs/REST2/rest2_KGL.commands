@@ -1,0 +1,13 @@
+#1. Generate topology file with grompp -pp, which includes all the force field parameters.
+aprun -n 1 gmx_mpi grompp -f rest2_membrane.mdp -c NPT/npt.gro -p topol.top -n index.ndx -pp processed.top
+
+#2. Edit processed.top, and change append all the "hot' atom types with an "_".
+
+#3. Use the script "generate_rest2.sh" to generate the tpr and topology files.
+
+#4. Run the simulation with the following comands, which differs on different platforms.
+gmx_mpi mdrun -plumed plumed.dat -s topol -deffnm md_1 -multi 10 -replex 1000 -hrex -maxh 23.5
+Note:  (1) plumed.dat is an empty file.
+       (2) -multi 10, 10 is the number of replicas.
+       (3) not every gromacs version has the -hrex option, check before submitting the job.	
+       (4) we should leave some time to write the checkpoint files correctly and consistently for all the replicas, by setting the maximum runing time with -maxh
