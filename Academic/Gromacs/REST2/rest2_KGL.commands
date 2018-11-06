@@ -1,5 +1,5 @@
 #1. Generate topology file with grompp -pp, which includes all the force field parameters.
-aprun -n 1 gmx_mpi grompp -f rest2_membrane.mdp -c NPT/npt.gro -p topol.top -n index.ndx -pp processed.top
+aprun -n 1 gmx_mpi grompp -f rest2_membrane.mdp -c npt.gro -p topol.top -n index.ndx -pp processed.top
 
 #2. Edit processed.top, and change append all the "hot' atom types with an "_".
 

@@ -29,5 +29,5 @@ do
 # process topology # (if you are curious, try "diff topol0.top topol1.top" to see the changes)
   plumed partial_tempering $lambda < processed.top > topol$i.top 
 # prepare tpr file # -maxwarn is often needed because box could be charged  
-  gmx_mpi grompp -c NPT/npt.gro -n index.ndx  -maxwarn 1 -o topol$i.tpr -f rest2_membrane.mdp -p topol$i.top
+  gmx_mpi grompp -c npt.gro -n index.ndx  -maxwarn 1 -o topol$i.tpr -f rest2_membrane.mdp -p topol$i.top
 done
