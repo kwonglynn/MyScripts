@@ -1,6 +1,6 @@
 ;title		= NPT Equilibration
 ;--------------------------------
-define		= -DPOSRES	; position restrain the protein
+define          = -DPOSRES_Head ; position restrain the lipid head atoms
 ;--------------------------------
 ; Run parameters
 ;--------------------------------
@@ -44,9 +44,9 @@ fourierspacing	= 0.16		; grid spacing for FFT
 ; Temperature coupling is on
 ;--------------------------------
 tcoupl		= Nose-Hoover		    ; More accurate thermostat
-tc-grps		= Protein POPG	Water_and_ions	; three coupling groups - more accurate
-tau_t		= 0.5	0.5	0.5	        ; time constant, in ps
-ref_t		= 310 	310	310	        ; reference temperature, one for each group, in K
+tc-grps		= POPS	Water_and_ions	; three coupling groups - more accurate
+tau_t		= 0.5	0.5	        ; time constant, in ps
+ref_t		= 310	310	        ; reference temperature, one for each group, in K
 ;--------------------------------
 ; Pressure coupling is on
 ;--------------------------------
@@ -74,7 +74,7 @@ gen_vel		= no		; Velocity generation is off
 ;--------------------------------
 nstcomm         = 1
 comm-mode       = Linear
-comm-grps       = Protein_POPG Water_and_ions
+comm-grps       = POPS Water_and_ions
 ; Scale COM of reference coordinates
 refcoord_scaling = com
 ;--------------------------------

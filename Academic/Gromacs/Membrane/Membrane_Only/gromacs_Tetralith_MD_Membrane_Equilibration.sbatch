@@ -8,7 +8,7 @@
 #SBATCH --output=MD_%J.out
 ####SBATCH --mail-type=ALL
 
-#SBATCH --time=7-00:00:00                #Requested walltime 
+#SBATCH --time=2-00:00:00                #Requested walltime 
 #SBATCH --nodes=10
 #SBATCH --exclusive          #Number of compute nodes to allocate
 ####SBATCH --account=snic2017-1-425       #Tu, Account string for the project that you wish to account the job to
@@ -20,7 +20,7 @@ run=`which gmx_mpi`
 
 ###EM###
 mkdir EM
-$run grompp -f em_membrane.mdp -c complex_wi.gro -r complex_wi.gro -p topol.top -o EM/em.tpr
+$run grompp -f em_membrane.mdp -c POPS_wi.gro -r POPS_wi.gro -p topol.top -o EM/em.tpr
 cd EM
 mpprun $run mdrun -deffnm em
 cd ..
@@ -32,16 +32,23 @@ cd NVT
 mpprun $run mdrun -deffnm nvt
 cd ..
 
-###NPT###
-mkdir NPT
-$run grompp -f npt_membrane.mdp -c NVT/nvt.gro -r NVT/nvt.gro -t NVT/nvt.cpt -p topol.top -n index.ndx -o NPT/npt.tpr
-cd NPT
-mpprun $run mdrun -deffnm npt
+###NPT1###
+mkdir NPT1
+$run grompp -f npt1_membrane.mdp -c NVT/nvt.gro -r NVT/nvt.gro -t NVT/nvt.cpt -p topol.top -n index.ndx -o NPT1/npt1.tpr
+cd NPT1
+mpprun $run mdrun -deffnm npt1
+cd ..
+
+###NPT2###
+mkdir NPT2
+$run grompp -f npt2_membrane.mdp -c NPT1/npt1.gro -r NPT1/npt1.gro -t NPT1/npt1.cpt -p topol.top -n index.ndx -o NPT2/npt2.tpr
+cd NPT2
+mpprun $run mdrun -deffnm npt2
 cd ..
 
 ###MD###
 mkdir MD
-$run grompp -f md_membrane.mdp -c NPT/npt.gro -t NPT/npt.cpt -p topol.top -n index.ndx -o MD/md1.tpr
+$run grompp -f md_membrane.mdp -c NPT2/npt2.gro -t NPT2/npt2.cpt -p topol.top -n index.ndx -o MD/md1.tpr
 cd MD
 mpprun $run mdrun -deffnm md1
 cd ..
