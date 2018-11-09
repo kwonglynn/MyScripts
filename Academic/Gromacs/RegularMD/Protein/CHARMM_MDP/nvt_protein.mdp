@@ -1,0 +1,70 @@
+; LINES STARTING WITH ';' ARE COMMENTS
+; nvt.mdp - used as input into grompp to generate nvt.tpr
+;-------------------------------
+define      = -DPOSRES  ; position restrain the protein
+;-------------------------------
+; Run parameters
+;-------------------------------
+integrator  = md        ; leap-frog integrator
+nsteps      = 100000    ; 200 ps
+dt          = 0.002     ; 2 fs
+;-------------------------------
+; Output control
+;-------------------------------
+nstxout     = 1000       ; save coordinates every 2 ps
+nstvout     = 1000       ; save velocities every 2 ps
+nstenergy   = 1000       ; save energies every 2 ps
+nstlog      = 1000       ; update log file every 2 ps
+energygrps  = Protein
+;-------------------------------
+; Bond parameters
+;-------------------------------
+continuation    = no            ; first dynamics run
+constraint_algorithm = lincs    ; holonomic constraints 
+constraints     = h-bonds       ; CHARMM36
+lincs_iter      = 1             ; accuracy of LINCS
+lincs_order     = 4             ; also related to accuracy
+;-------------------------------
+; Neighborsearching
+;-------------------------------
+cutoff-scheme   = Verlet 	; CHARMM36
+vdwtype     = cutoff		; CHARMM36
+vdw-modifier = force-switch	; CHARMM36
+rvdw-switch = 1.0		; CHARMM36
+rlist       = 1.2               ; CHARMM36
+rcoulomb    = 1.2               ; CHARMM36
+rvdw        = 1.2               ; CHARMM36
+ns_type     = grid      	; search neighboring grid cells
+nstlist     = 10        	; 20 fs
+;-------------------------------
+; Electrostatics
+;-------------------------------
+coulombtype     = PME       ; CHARMM36
+pme_order       = 4         ; cubic interpolation
+fourierspacing  = 0.16      ; grid spacing for FFT
+;-------------------------------
+; Temperature coupling
+;-------------------------------
+tcoupl      = V-rescale                     ; modified Berendsen thermostat
+tc-grps     = Protein Water_and_ions    ; two coupling groups - more accurate
+tau_t       = 0.1   0.1                     ; time constant, in ps
+ref_t       = 310   310                     ; reference temperature, one for each group, in K
+;-------------------------------
+; Pressure coupling
+;-------------------------------
+pcoupl      = no        ; no pressure coupling in NVT
+;-------------------------------
+; Periodic boundary conditions
+;-------------------------------
+pbc         = xyz       ; 3-D PBC
+;--------------------------------
+; Dispersion correction
+;--------------------------------
+DispCorr    = no   	; CHARMM36
+;--------------------------------
+; Velocity generation
+;--------------------------------
+gen_vel     = yes       ; assign velocities from Maxwell distribution
+gen_temp    = 310       ; temperature for Maxwell distribution
+gen_seed    = -1        ; generate a random seed
+;--------------------------------
