@@ -1,0 +1,19 @@
+# This file was created Fri Oct 26 19:39:26 2018
+# Created by:
+#                       :-) GROMACS - gmx rms, 2018.1 (-:
+# 
+# Executable:   /software/sse/easybuild/prefix/software/GROMACS/2018.1-foss-2018a-nsc2/bin/gmx_mpi
+# Data prefix:  /software/sse/easybuild/prefix/software/GROMACS/2018.1-foss-2018a-nsc2
+# Working dir:  /proj/molmat/users/x_guaku/Alzheimer/nAChR/a4b2/Loop_C/5KXI_based/select_manually/CA_only
+# Command line:
+#   gmx_mpi rms -s 1UV6-CA.pdb -f 5O8T-CA.pdb -o 1UV6-5O8T.xvg -n index.ndx
+# gmx rms is part of G R O M A C S:
+#
+# Green Red Orange Magenta Azure Cyan Skyblue
+#
+@    title "RMSD"
+@    xaxis  label "Time (ps)"
+@    yaxis  label "RMSD (nm)"
+@TYPE xy
+@ subtitle "r_196-203 after lsq fit to r_185-195_r_204-210"
+   0.0000000    0.0831130
