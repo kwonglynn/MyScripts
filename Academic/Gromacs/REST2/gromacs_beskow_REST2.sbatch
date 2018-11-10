@@ -4,8 +4,8 @@
 #SBATCH -J REST2
 
 ## Names the error and output files according to the jobid
-#SBATCH --error=EMNVTNPTMD_%J.err
-#SBATCH --output=EMNVTNPTMD_%J.out
+#SBATCH --error=REST2_%J.err
+#SBATCH --output=REST2_%J.out
 ####SBATCH --mail-type=ALL
 
 #SBATCH --time=23:59:50                #Requested walltime 
@@ -23,7 +23,7 @@ module add gromacs/2016.5-plumed_2.3.5
 
 ###REST2###
 #First run
-# aprun $APRUN_OPTIONS gmx_mpi mdrun -plumed plumed.dat -s topol -deffnm md_r -multi 10 -replex 1000 -hrex -maxh 23.5
+aprun $APRUN_OPTIONS gmx_mpi mdrun -plumed plumed.dat -s topol -deffnm md_r -multi 10 -replex 1000 -hrex -maxh 23.5
 
 ##Continue Run
-aprun $APRUN_OPTIONS gmx_mpi mdrun -plumed plumed.dat -s topol -cpi md_r -deffnm md_r -multi 10 -replex 1000 -hrex -maxh 23.5
+# aprun $APRUN_OPTIONS gmx_mpi mdrun -plumed plumed.dat -s topol -cpi md_r -deffnm md_r -multi 10 -replex 1000 -hrex -maxh 23.5
