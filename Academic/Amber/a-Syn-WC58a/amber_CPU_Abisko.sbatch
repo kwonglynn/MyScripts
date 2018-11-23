@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -A SNIC2017-12-49
 #SBATCH -J Amber-CPU
-#SBATCH -n 96
+#SBATCH -n 192
 #SBATCH --ntasks-per-node=48
 #SBATCH --time=7-00:00:00
 
