@@ -1,12 +1,18 @@
 #!/bin/bash
 # Change to your actual SNIC project number
 #SBATCH -A SNIC2017-12-49
+# Name of the job
+#SBATCH -J MD-GPU
 # Asking for walltime
 #SBATCH -t 7-00:00:00
-# Use 14 tasks
-#SBATCH -n 140
-# Use 2 threads per task
-#SBATCH -c 2
+# Use for 4 tasks
+#SBATCH -n 4
+# Usefor 7 threads per task
+#SBATCH -c 7
+# Remember the total number of cores = 28 (kebnekaise) so that
+# n x c = 28 (running on a single node, or multiples of 28 for multi node runs)
+# Asking for 2 K80 GPU cards per node
+#SBATCH --gres=gpu:k80:2
 
 # It is always best to do a ml purge before loading modules in a submit file
 ml purge > /dev/null 2>&1
@@ -14,18 +20,12 @@ ml purge > /dev/null 2>&1
 # Load the module for GROMACS and its prerequisites.
 # Use spider to check if the GOMACS version is GPU-enabled.
 module load GCC/7.3.0-2.30  CUDA/9.2.88  OpenMPI/3.1.1
-module load GROMACS/2018.3
+module load GROMACS/2018.3-PLUMED
 
 # Automatic selection of single or multi node based GROMACS
-if [ $SLURM_JOB_NUM_NODES -gt 1 ]; then
-    GMX="gmx_mpi"
-    MPIRUN="mpirun"
-    ntmpi=""
-else
-    GMX="gmx"
-    MPIRUN=""
-    ntmpi="-ntmpi $SLURM_NTASKS"
-fi
+GMX="gmx_mpi"
+MPIRUN="mpirun"
+ntmpi=""
 
 # Automatic selection of ntomp argument based on "-c" argument to sbatch
 if [ -n "$SLURM_CPUS_PER_TASK" ]; then
@@ -72,21 +72,21 @@ mkdir NPT3
 gmx grompp -f npt3_membrane.mdp -c NPT2/npt2.gro -r NPT2/npt2.gro -t NPT2/npt2.cpt -p topol.top -n index.ndx -o NPT3/npt3.tpr
 cp index.ndx protein.pdb plumed_NPT.dat NPT3
 cd NPT3
-$MPIRUN $GMX mdrun -deffnm npt3 -plumed plumed_NPT.dat
+$MPIRUN $GMX mdrun $ntmpi -ntomp $ntomp -deffnm npt3 -plumed plumed_NPT.dat
 cd ..
 
 ###MD1###
 mkdir MD1
 gmx grompp -f md1_membrane.mdp -c NPT3/npt3.gro -t NPT3/npt3.cpt -p topol.top -n index.ndx -o MD1/md1.tpr
 cp index.ndx protein.pdb plumed_MD1.dat MD1
-cd MD
-$MPIRUN $GMX mdrun $ntmpi -ntomp $ntomp -deffnm md1
+cd MD1
+$MPIRUN $GMX mdrun $ntmpi -ntomp $ntomp -deffnm md1 -plumed plumed_MD1.dat
 cd ..
 
 ###MD2###
 mkdir MD2
-$run grompp -f md2_membrane.mdp -c MD1/md1.gro -t MD1/md1.cpt -p topol.top -n index.ndx -o MD2/md2.tpr
+gmx grompp -f md2_membrane.mdp -c MD1/md1.gro -t MD1/md1.cpt -p topol.top -n index.ndx -o MD2/md2.tpr
 cp index.ndx protein.pdb plumed_MD2.dat MD2
 cd MD2
-$MPIRUN $GMX mdrun -deffnm md2 -plumed plumed_MD2.dat
+$MPIRUN $GMX mdrun $ntmpi -ntomp $ntomp -deffnm md2 -plumed plumed_MD2.dat
 cd ..

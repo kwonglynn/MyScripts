@@ -26,4 +26,4 @@ srun pmemd.MPI -O -i 04_Density.in -o 04_Density.out -p complex_wi.prmtop -c 03_
 srun pmemd.MPI -O -i 05_Prod.in -o 05_Prod.out -p complex_wi.prmtop -c 04_Density.rst -r 05_Prod.rst -x 05_Prod.nc
 
 #(6) MMPBSA Calculation.
-srun MMPBSA.py.MPI -O -i 06_MMPBSA.in -o MMPBSA.dat -sp complex_wi.prmtop -cp complex.prmtop -rp protein.prmtop -lp LIG.prmtop -y 05_Prod.mdcrd >& 06_MMPBSA.log
+srun MMPBSA.py.MPI -O -i 06_MMPBSA.in -o MMPBSA.dat -sp complex_wi.prmtop -cp complex.prmtop -rp protein.prmtop -lp LIG.prmtop -y 05_Prod.nc >& 06_MMPBSA.log
