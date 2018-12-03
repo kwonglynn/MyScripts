@@ -1,10 +1,11 @@
 Production run
  &cntrl
    imin=0, irest=1, ntx=5,
-   nstlim=25000000, dt=0.002,
-   ntpr=5000, ntwr=5000, ntwx=5000, ntwe=5000, nscm=1000,
+   nstlim=10000000, dt=0.002,
+   ntpr=2000, ntwr=2000, ntwx=2000, ntwe=2000, nscm=1000,
    ntf=2, ntc=2, cut=8.0,
    ntb=2, ntp=1, tautp=1.0, taup=1.0, 
-   ntt=3, temp0=300.0, gamma_ln=2.0, ig = -1
+   ntt=3, temp0=300.0, gamma_ln=2.0, ig = -1,
+   ntr=1, restraintmask=':2-376&@CA,C,N', restraint_wt=0.5,
    ioutfm=1, ntxo=2,
  &end

@@ -1,13 +1,22 @@
 source oldff/leaprc.ff99SBildn
 source leaprc.gaff
+
+set default PBRadii mbondi2
+
 loadamberparams LIG.frcmod
 loadoff LIG.lib
+saveamberparm LIG LIG.prmtop LIG.inpcrd
+
+protein = loadpdb protein.pdb
+saveamberparm protein protein.prmtop protein.inpcrd
+
 complex = loadpdb complex.pdb
-set default PBRadii mbondi2
 saveamberparm complex complex.prmtop complex.inpcrd
+
 solvateoct complex TIP3PBOX 10.0
 charge complex
 addions complex Cl- 0
 charge complex
 saveamberparm complex complex_wi.prmtop complex_wi.inpcrd
+
 quit
