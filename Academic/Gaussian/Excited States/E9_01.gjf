@@ -1,0 +1,16 @@
+#T RCIS(NStates=2,50-50)/6-31+G(d) Test
+ 
+Ethylene Excited States
+ 
+0,1
+C
+C,1,R(C-C)
+H,1,R(C-H),2,A(CCH)
+H,1,R(C-H),2,A(CCH),3,180.
+H,2,R(C-H),1,A(CCH),3,0.
+H,2,R(C-H),1,A(CCH),3,180.
+ 
+R(C-C)=1.31696
+R(C-H)=1.07601
+A(CCH)=121.81335
+
