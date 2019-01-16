@@ -1,13 +1,18 @@
 #!/bin/bash
 # Change to your actual SNIC project number
-#SBATCH -A SNIC2017-12-49
+#SBATCH -A SNIC2018-2-38
+# Name of the job
+#SBATCH -J MD-GPU
 # Asking for walltime
-#SBATCH -J MD-CPU
 #SBATCH -t 2-00:00:00
-# Use 14 tasks
-#SBATCH -n 140
-# Use 2 threads per task
-#SBATCH -c 2
+# Use for 4 tasks
+#SBATCH -n 4
+# Usefor 7 threads per task
+#SBATCH -c 7
+# Remember the total number of cores = 28 (kebnekaise) so that
+# n x c = 28 (running on a single node, or multiples of 28 for multi node runs)
+# Asking for 2 K80 GPU cards per node
+#SBATCH --gres=gpu:k80:2
 
 # It is always best to do a ml purge before loading modules in a submit file
 ml purge > /dev/null 2>&1
@@ -56,7 +61,7 @@ cd ..
 ###MD###
 mkdir MD
 cp plumed-MD.dat MD
-gmx grompp -f md_protein.mdp -c NPT/npt.gro -r NPT/npt.gro -t NPT/npt.cpt -p complex.top -n index.ndx -o MD/md.tpr
+gmx grompp -f md_backbone.mdp -c NPT/npt.gro -r NPT/npt.gro -t NPT/npt.cpt -p complex.top -n index.ndx -o MD/md.tpr
 cd MD
 $MPIRUN $GMX mdrun $ntmpi -ntomp $ntomp -deffnm md -plumed plumed-MD.dat
 cd ..

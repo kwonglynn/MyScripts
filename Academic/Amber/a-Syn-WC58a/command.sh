@@ -1,4 +1,4 @@
-for i in {2..15}; do
+for i in {3..15}; do
     cd State$i
     cp ../common/* .
     python process_complex_for_amber.py

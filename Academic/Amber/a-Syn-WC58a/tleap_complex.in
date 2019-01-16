@@ -7,7 +7,7 @@ loadamberparams LIG.frcmod
 loadoff LIG.lib
 saveamberparm LIG LIG.prmtop LIG.inpcrd
 
-protein = loadpdb protein.pdb
+protein = loadpdb protein-amber.pdb
 saveamberparm protein protein.prmtop protein.inpcrd
 
 complex = loadpdb complex.pdb

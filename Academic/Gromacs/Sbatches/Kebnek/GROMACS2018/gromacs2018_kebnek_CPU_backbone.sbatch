@@ -3,7 +3,7 @@
 #SBATCH -A SNIC2017-12-49
 # Asking for walltime
 #SBATCH -J MD-CPU
-#SBATCH -t 2-00:00:00
+#SBATCH -t 7-00:00:00
 # Use 14 tasks
 #SBATCH -n 140
 # Use 2 threads per task

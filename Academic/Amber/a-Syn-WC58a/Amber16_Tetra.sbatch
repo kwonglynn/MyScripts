@@ -13,7 +13,9 @@
 ##SBATCH --account=snic2013-1-236       
 ##SBATCH --account=snic2017-12-49
 
-module load Amber/16-nsc1-intel-2018a-eb 
+module purge
+module load buildenv-intel/2018a-eb
+module load Amber/16-nsc1-intel-2018a-eb
 
 echo Started at `date`
 
@@ -35,8 +37,7 @@ pmemd.MPI.run -O -i 04_Density.in -o 04_Density.out -p complex_wi.prmtop -c 03_H
 pmemd.MPI.run -O -i 05_Prod.in -o 05_Prod.out -p complex_wi.prmtop -c 04_Density.rst -ref 04_Density.rst -r 05_Prod.rst -x 05_Prod.nc
 
 #(6) MMGBSA Calculation.
-mpprun MMPBSA.py.MPI -O -i 06_MMPBSA.in -o MMPBSA.dat -sp complex_wi.prmtop -cp complex.prmtop -rp protein.prmtop -lp LIG.prmtop -y 05_Prod.nc >& 06_MMPBSA.log
-
+mpiexec.hydra -bootstrap slurm MMPBSA.py.MPI -O -i 06_MMPBSA.in -o MMPBSA.dat -sp complex_wi.prmtop -cp complex.prmtop -rp protein.prmtop -lp LIG.prmtop -y 05_Prod.nc >& 06_MMPBSA.log
 
 
 echo Ended at: `date`

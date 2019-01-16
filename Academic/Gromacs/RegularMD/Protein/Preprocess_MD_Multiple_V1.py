@@ -3,7 +3,7 @@ import os
 #User input
 #Protein coordinate file (In)
 #Note: Normally only change here!!!
-coorP = "2N0A_processed.gro"
+coorP = "6CU7_processed.gro"
 #Ligand coordinate file (Check the naming with the topology file, must be consistent!!!) (In)
 coorL = "LIG_MD.gro"
 #Complex coordinate (Out)
