@@ -13,8 +13,9 @@ today = datetime.date.today().strftime('%Y-%m-%d')
 fo = open('Fund_Rating-%s.txt' % today, 'w')
 fo.write("Code\tThisYear\tRecent1Y\tRecent2Y\tRecent3Y\tRecent5Y\tY2018\tY2017\tY2016\tY2015\tY2014\n")
 
-# StartDate = '2013-01-01'
-# EndDate = '2019-03-03'
+# The start date should be 6 years ago!
+StartDate = '2013-01-01'
+EndDate = '2019-03-03'
 
 AllFundsList = ['519068', '162605', '000628', '000527', '160505', '450002', '020026', '090013', '519069', '519066', \
                 '000577', '110011', '180012', '040008', '519732', '000619', '519736', '260108', '540012', '001938', \
@@ -34,8 +35,8 @@ def getValue(date):
 # 循环处理每个基金
 for code in AllFundsList:
     print (code)
-    fund = ts.fund.nav.get_nav_history(code)
-#    fund = ts.fund.nav.get_nav_history(code, start=StartDate, end=EndDate)
+    # By defalut only the values in one year are returned.
+    fund = ts.fund.nav.get_nav_history(code, start=StartDate, end=EndDate)
     # Use cumulative value
     prices = fund.total.dropna()
     # Use daily value
