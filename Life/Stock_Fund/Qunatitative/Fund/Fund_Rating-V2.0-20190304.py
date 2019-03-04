@@ -27,11 +27,11 @@ def CalComInterest(InputChanges):
     ComInterest = 1.0
     for change in ListChanges:
         # For dividend
-        if abs(change) > 10:
+        if abs(change) > 11:
             print (change)
             change = 0
         ComInterest = ComInterest * (1.0 + change/100.0)
-    increase = ComInterest - 1.0
+    increase = (ComInterest - 1.0) * 100
     return increase
 
 # 循环处理每个基金
