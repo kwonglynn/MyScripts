@@ -10,16 +10,23 @@ import datetime
 
 ##################################Main#######################################
 today = datetime.date.today().strftime('%Y-%m-%d')
-fo = open('Fund_Rating-%s.txt' % today, 'w')
-fo.write("Code\tThisYear\tRecent1Y\tRecent2Y\tRecent3Y\tRecent5Y\tY2018\tY2017\tY2016\tY2015\tY2014\n")
 
 # The start date should be 6 years ago!
 StartDate = '2013-01-01'
-EndDate = '2019-03-03'
+EndDate = '2019-03-04'
 
-AllFundsList = ['519068', '162605', '000628', '000527', '160505', '450002', '020026', '090013', '519069', '519066', \
-                '000577', '110011', '180012', '040008', '519732', '000619', '519736', '260108', '540012', '001938', \
-                '000742', '000751', '340008', '540006', '070032']
+# General funds
+# fo = open('General-Fund_Rating-%s.txt' % today, 'w')
+# AllFundsList = ['519068', '162605', '000628', '000527', '160505', '450002', '020026', '090013', '519069', '519066', \
+#                '000577', '110011', '180012', '040008', '519732', '000619', '519736', '260108', '540012', '001938', \
+#                '000742', '000751', '340008', '540006', '070032']
+
+# Computer science, information technology:
+fo = open('Computer-Fund_Rating-%s.txt' % today, 'w')
+AllFundsList = ['002900', '004347', '165523', '001630', '002974', '161631', '005885', '005036', '519929', '160626']
+
+# Column names
+fo.write("Code\tThisYear\tRecent1Y\tRecent2Y\tRecent3Y\tRecent5Y\tY2018\tY2017\tY2016\tY2015\tY2014\n")
 
 def CalComInterest(InputChanges):
     # This is the right way to calculate fund increae.
