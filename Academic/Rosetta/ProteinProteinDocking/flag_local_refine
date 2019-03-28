@@ -1,0 +1,15 @@
+# docking_protocol.static.linuxgccrelease @flag_local_refine
+
+-in:file:s NB_ZF456_prep_relax_0001_local_dock_0001.pdb
+
+-nstruct 1
+
+-docking_local_refine
+-use_input_sc
+
+-ex1
+-ex2aro
+
+-out:file:fullatom
+#-out:path:all output_files
+-out:suffix _local_refine

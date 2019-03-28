@@ -1,0 +1,15 @@
+# https://www.rosettacommons.org/demos/latest/tutorials/input_and_output/input_and_output#controlling-input_preparing-a-structure-by-refinement
+# relax.static.linuxgccrelease -in:file:s input.pdb @flag_input_relax
+-nstruct 2
+
+-relax:constrain_relax_to_start_coords
+-relax:ramp_constraints false
+
+-ex1
+-ex2
+
+-use_input_sc
+-flip_HNQ
+-no_optH false
+
+-out:suffix _relax

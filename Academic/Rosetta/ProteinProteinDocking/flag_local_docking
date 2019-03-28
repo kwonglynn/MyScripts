@@ -1,0 +1,17 @@
+# https://www.rosettacommons.org/demos/latest/tutorials/Protein-Protein-Docking/Protein-Protein-Docking
+# docking_protocol.static.linuxgccrelease @flag_local_docking
+
+-in:file:s NB_ZF456_prep_relax_0001.pdb
+-unboundrot NB_ZF456_prep_relax_0001.pdb
+
+-nstruct 500
+
+-partners A_B
+-dock_pert 1 5
+
+-ex1
+-ex2aro
+
+#-out:path:all output_files/
+-out:suffix _local_dock
+
