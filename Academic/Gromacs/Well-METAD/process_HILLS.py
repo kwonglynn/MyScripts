@@ -17,7 +17,7 @@ for line_no, line in enumerate(fi):
     N = time // 1000000
     # There is overlap in each HILLS file.
     for i in range(N, 6):
-        fos[N].write(line)
+        fos[i].write(line)
 
 fi.close()
 for fo in fos:
