@@ -22,3 +22,6 @@ for line_no, line in enumerate(fi):
 fi.close()
 for fo in fos:
     fo.close()
+
+## Plumed commands:
+## for i in {1..6};do plumed sum_hills --hills HILLS-$i --bin 98,99 --outfile fes-$i.dat; done
