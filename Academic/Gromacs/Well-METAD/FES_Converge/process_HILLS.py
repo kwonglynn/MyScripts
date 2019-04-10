@@ -38,7 +38,7 @@ for fo in fos:
 ## for i in {0..56}; do plumed sum_hills --hills HILLS-$i --bin 98,99 --outfile fes-$i.dat; done
 
 ## 3. Run FES_METAD.py
-## for i in {0..56}; do python FES_METAD.py fes-$i.dat -o fes-$i.png
+## for i in {0..56}; do python FES_METAD.py fes-$i.dat -o fes-$i.png; done
 
 ## 4. Calculate the similarity between the FES images.
 ## python compare_FES_SSIM.py

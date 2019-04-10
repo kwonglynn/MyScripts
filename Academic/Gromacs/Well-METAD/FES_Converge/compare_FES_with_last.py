@@ -22,24 +22,25 @@ def calc_ssim(imageA, imageB, color):
 N = len(glob.glob('fes-*.png')) 
 
 sim_list = []
-for i in range(N - 1):
+for i in range(N):
     imageA = 'fes-{}.png'.format(i)
-    imageB = 'fes-{}.png'.format(i + 1)
+    imageB = 'fes-{}.png'.format(N-1)
+    #imageB = 'fes-{}.png'.format(i + 1)
     imageA = cv2.imread(imageA)
     imageB = cv2.imread(imageB)
     sim_image = calc_ssim(imageA, imageB, color = 'rgb')
     sim_list.append(sim_image)
 
 times = []
-for i in range(1, N):
+for i in range(1, N+1):
     times.append(i)
 
 times = np.array(times) / 10
-
+    
 fo = open('FES_similarity.csv', 'w')
 fo.write('Time(ms),Similarity\n')
 for i in range(0, N - 1):
-    fo.write("{},{.2f}\n".format(times[i],sim_list[i]))
+    fo.write("{},{}\n".format(times[i],sim_list[i]))
 
 fo.close()
     
