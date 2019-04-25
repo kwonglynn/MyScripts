@@ -24,44 +24,43 @@ def cal_com_interest(fund_changes):
 # 循环处理每个基金
 def process_fund(code, fo):
     # By defalut only the values in one year are returned.
-    fund = ts.fund.nav.get_nav_history(code, start=start_date, end=end_date)
+    fund = ts.fund.nav.get_nav_history(code, start = start_date, end = end_date)
     changes = fund.change.dropna()
 
     #Return in one, two and three years
-    this_year = cal_com_interest(changes.loc[today:'2019-01-01'])
-#    ThisYear = changes.loc[today:'2019-01-01'].sum()
+    this_year = cal_com_interest(changes.loc[today : '2019-01-01'])
+    
+    #Three months
+    three_months_ago = (datetime.datetime.strptime(today, '%Y-%m-%d') - datetime.timedelta(days = 30 * 3)).strftime('%Y-%m-%d')
+    recent3M = cal_com_interest(changes.loc[today : three_months_ago])
     
     one_year_ago = (datetime.datetime.strptime(today, '%Y-%m-%d') - datetime.timedelta(days = 365)).strftime('%Y-%m-%d')
-    recent1Y = cal_com_interest(changes.loc[today:one_year_ago])
-#    Recent1Y = changes.loc[today:OneYearAgo].sum()
+    recent1Y = cal_com_interest(changes.loc[today : one_year_ago])
 
     two_years_ago = (datetime.datetime.strptime(today, '%Y-%m-%d') - datetime.timedelta(days = 365 * 2)).strftime('%Y-%m-%d')
-#    Recent2Y = changes.loc[today:TwoYearsAgo].sum()
-    recent2Y = cal_com_interest(changes.loc[today:two_years_ago])
+    recent2Y = cal_com_interest(changes.loc[today : two_years_ago])
 
     three_years_ago = (datetime.datetime.strptime(today, '%Y-%m-%d') - datetime.timedelta(days = 365 * 3)).strftime('%Y-%m-%d')
-#    Recent3Y = changes.loc[today:ThreeYearsAgo].sum()
-    recent3Y = cal_com_interest(changes.loc[today:three_years_ago])
+    recent3Y = cal_com_interest(changes.loc[today : three_years_ago])
 
     five_years_ago = (datetime.datetime.strptime(today, '%Y-%m-%d') - datetime.timedelta(days = 365 * 5)).strftime('%Y-%m-%d')
-#    Recent5Y = changes.loc[today:FiveYearsAgo].sum()
-    recent5Y = cal_com_interest(changes.loc[today:five_years_ago])
+    recent5Y = cal_com_interest(changes.loc[today : five_years_ago])
     
-    Y2018 = cal_com_interest(changes.loc['2018-12-31':'2018-01-01'])
-    Y2017 = cal_com_interest(changes.loc['2017-12-31':'2017-01-01'])
-    Y2016 = cal_com_interest(changes.loc['2016-12-31':'2016-01-01'])
-    Y2015 = cal_com_interest(changes.loc['2015-12-31':'2015-01-01'])
-    Y2014 = cal_com_interest(changes.loc['2014-12-31':'2014-01-01'])     
+    Y2018 = cal_com_interest(changes.loc['2018-12-31' : '2018-01-01'])
+    Y2017 = cal_com_interest(changes.loc['2017-12-31' : '2017-01-01'])
+    Y2016 = cal_com_interest(changes.loc['2016-12-31' : '2016-01-01'])
+    Y2015 = cal_com_interest(changes.loc['2015-12-31' : '2015-01-01'])
+    Y2014 = cal_com_interest(changes.loc['2014-12-31' : '2014-01-01'])     
 
-    fo.write("'%s'\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\n" % \
-             (code, this_year, recent1Y, recent2Y, recent3Y, recent5Y, Y2018, Y2017, Y2016, Y2015, Y2014))
+    fo.write("'%s'\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\t%6.2f\n" % \
+             (code, recent3M, this_year, recent1Y, recent2Y, recent3Y, recent5Y, Y2018, Y2017, Y2016, Y2015, Y2014))
 
 ##################################Main#######################################
 today = datetime.date.today().strftime('%Y-%m-%d')
 
 # The start date should be 6 years ago!
 start_date = '2013-01-01'
-end_date = '2019-03-21'
+end_date = '2019-04-11'
 
 fund_types = ['flexible', 'large', 'small']
 
@@ -69,7 +68,7 @@ fund_types = ['flexible', 'large', 'small']
 # 1. Flexible funds
 if 'flexible' in fund_types:
     fo = open('Flexible-Fund_Rating-%s.txt' % today, 'w')
-    fo.write("Code\tThisYear\tRecent1Y\tRecent2Y\tRecent3Y\tRecent5Y\tY2018\tY2017\tY2016\tY2015\tY2014\n")
+    fo.write("Code\tRecent3M\tThisYear\tRecent1Y\tRecent2Y\tRecent3Y\tRecent5Y\tY2018\tY2017\tY2016\tY2015\tY2014\n")
     fund_list = ['000742', '001102', '020005', '450002', '000628', 
                  '001208', '000577', '519697', '519688', '000527', '519091']
     for code in fund_list:
@@ -80,7 +79,7 @@ if 'flexible' in fund_types:
 # 2. Large funds
 if 'large' in fund_types:
     fo = open('Large-Fund_Rating-%s.txt' % today, 'w')
-    fo.write("Code\tThisYear\tRecent1Y\tRecent2Y\tRecent3Y\tRecent5Y\tY2018\tY2017\tY2016\tY2015\tY2014\n")
+    fo.write("Code\tRecent3M\tThisYear\tRecent1Y\tRecent2Y\tRecent3Y\tRecent5Y\tY2018\tY2017\tY2016\tY2015\tY2014\n")
     fund_list = ['040008', '162605', '260108', '000619', '110011', 
                  '180012', '540012', '540006', '519068', '519066']
     for code in fund_list:
@@ -90,7 +89,7 @@ if 'large' in fund_types:
 # 3. Small funds
 if 'small' in fund_types:
     fo = open('Small-Fund_Rating-%s.txt' % today, 'w')
-    fo.write("Code\tThisYear\tRecent1Y\tRecent2Y\tRecent3Y\tRecent5Y\tY2018\tY2017\tY2016\tY2015\tY2014\n")
+    fo.write("Code\tRecent3M\tThisYear\tRecent1Y\tRecent2Y\tRecent3Y\tRecent5Y\tY2018\tY2017\tY2016\tY2015\tY2014\n")
     fund_list = ['000751', '020026', '090013', '001938', '519732',
                  '001985', '001178', '519712', '519736', '001410',
                  '040011', '420003']
