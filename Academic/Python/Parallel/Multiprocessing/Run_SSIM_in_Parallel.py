@@ -40,6 +40,7 @@ if __name__ == '__main__':
     pool.close()
     
     results.sort(key=lambda x: x[0])
+    print(results)
     ssim_list = [r for i, r in results]
 
     print("All FES images files processed.")

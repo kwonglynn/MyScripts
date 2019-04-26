@@ -9,7 +9,6 @@ import multiprocessing as mp
 import glob
 import os
 
-fes_list = glob.glob("fes-*.dat")
 def calc_FES(fes):
     print("Processing" + fes)
     N = fes.split('.')[0].split('-')[1]
@@ -17,6 +16,8 @@ def calc_FES(fes):
     os.system("./FES_METAD.py fes-{}.dat -o fes-{}.png".format(N, N))
     
 if __name__ == '__main__':
+    fes_list = glob.glob("fes-*.dat")
+    
     pool = mp.Pool(32)
     pool.map(calc_FES, fes_list)
     pool.close()
