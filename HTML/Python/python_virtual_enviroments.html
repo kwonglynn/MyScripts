@@ -5,46 +5,252 @@
     <title>Python virutal environments</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style media="screen">
+      .kkcodebg {
+        background-color:#eef;
+      }
+    </style>
   </head>
+
   <body>
+  <h1 class="w3-center">Virtual environments</h1>
+  <div class="w3-container">
+    <h2>References</h2>
+      <ul>
+        <li><a href="https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/20/conda/">
+          Create virtual environments for python with conda</a></li>
+        <li><a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">
+          Managing environments</a></li>
+        <li><a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html">
+          Managing packages with conda</a></li>
+        <li><a href="https://virtualenvwrapper.readthedocs.io/en/latest/install.html">
+          Use pip to manage python environments</a></li>
+        <li><a href="https://kapeli.com/cheat_sheets/Conda.docset/Contents/Resources/Documents/index">
+          Common conda commands</a></li>
+        <li><a href="https://docs.conda.io/projects/conda/en/latest/commands/create.html">
+          Command reference</a></li>
+        </ul>
+  </div>
 
-    <div class="w3-container">
-      <h1 class="w3-center">Virtual environments</h1>
+  <div class="w3-container">
+    <h2>What is a virtual environment?</h2>
+    <div class="w3-panel">
+      A virtual environment is a named, isolated, working copy of
+      <b>Python</b> that that maintains its own files, directories, and paths
+      so that you can work with specific versions of libraries or Python
+      itself without affecting other Python projects. Virtual environmets
+      make it easy to cleanly separate different projects and avoid problems
+      with different dependencies and version requiremetns across components.
+      The <code class="w3-codespan">conda</code> command is the preferred
+      interface for managing intstallations and virtual environments with the
+      Anaconda Python distribution. If you  have a vanilla Python
+      installation or other Python distribution, see
+      <a href="https://virtualenv.readthedocs.io/en/latest/">virtualenv</a>.
+    </div>
+  </div>
 
-      <div class="w3-container">
-        <h2>References</h2>
-        <p><a href="https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/20/conda/">
-          Create virtual environments for python with <code class="w3-codespan">conda</code></a></p>
-        <p><a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html">
-          Managing packages with <code class="w3-codespan">conda</code></a></p>
-        <p><a href="https://virtualenvwrapper.readthedocs.io/en/latest/install.html">
-          Use <code class="w3-codespan">pip</code> to manage python environments</a></p>
-      </div>
-
-
-      <div class="w3-container">
-        <h3>What is a virtual environment?</h3>
-        A virtual environment is a named, isolated, working copy of
-        <b>Python</b> that that maintains its own files, directories, and paths
-        so that you can work with specific versions of libraries or Python
-        itself without affecting other Python projects. Virtual environmets
-        make it easy to cleanly separate different projects and avoid problems
-        with different dependencies and version requiremetns across components.
-        The <code class="w3-codespan">conda</code> command is the preferred
-        interface for managing intstallations and virtual environments with the
-        Anaconda Python distribution. If you  have a vanilla Python
-        installation or other Python distribution, see
-        <a href="https://virtualenv.readthedocs.io/en/latest/">virtualenv</a>.
+  <div class="w3-panel">
+    <h3>conda channels</h3>
+    <p>Channels are locations where Navigator and conda look for packages.
+    The easiest way to use and manage custom channels is to use a
+    private or public repository on Anaconda.org.
+    Common conda channels:</p>
+    <ul>
+      <li><a href="https://repo.anaconda.com/">default (anconda)</a></li>
+      <li><a href="http://conda-forge.org/docs/user/introduction.html">
+        conda-forge</a></li>
+    </ul>
+    <p>How to install packages from a specified channel?</p>
+    <div class="w3-card kkcodebg">
+      <h6>You have to register the specified channel as a package source
+          for conda. After that, using conda install package-name
+          will also find packages in the specified channel:</h6>
+      <div class="w3-code pythonHigh notranslate">
+        conda config --add channels conda-forge <br>
       </div>
     </div>
+  </div>
 
-    <div class="">
-
+  <h2 class="w3-panel">Useful commands</h2>
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>1. Check the status of conda.</h6>
+      <div class="w3-code pythonHigh notranslate">
+        conda -V <br>
+      </div>
     </div>
+  </div>
 
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>2. Check if conda is up to date.</h6>
+      <div class="w3-code pythonHigh notranslate">
+        conda update conda <br>
+      </div>
+    </div>
+  </div>
 
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>3. Create a virtual environment for your project.</h6>
+      <p>You can optionally specify the version of Python and a specific
+         pacakage to be created with the environment.</p>
+      <div class="w3-code pythonHigh notranslate">
+        conda create -n yourenvname (python=x.x) (anaconda) <br>
+      </div>
+    </div>
+  </div>
 
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>4. To see a list of all your environments, use the command:</h6>
+      <div class="w3-code pythonHigh notranslate">
+        conda info -e <br>
+        conda info --envs <br>
+      </div>
+    </div>
+  </div>
 
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>5. To activate or deactivate a virtual environment:</h6>
+      <div class="w3-code pythonHigh notranslate">
+        conda activate yourenvname <br>
+        conda deactivate <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>6. Delete a no longer needed virtual environment
+          and associated packages:</h6>
+      <div class="w3-code pythonHigh notranslate">
+        conda remove -n yourenvname -all <br>
+        conda env remove --name myenv <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>7. Search for a specific package.</h6>
+      <p>If you want to use a specific Python version, it is best to use
+         an environment with that version. </p>
+      <div class="w3-code pythonHigh notranslate" style="margin-bottom:1px;">
+        conda search "^python$" <br>
+        conda search scipy <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>8. To install a specific package such as SciPy into an
+          existing environment "myenv".</h6>
+      <p>If you do not specify the environment name, which in this example is
+         done by --name myenv, the package installs into the current
+         environment:</p>
+      <div class="w3-code pythonHigh notranslate">
+        conda install --name myenv scipy <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>9. To install a specific version of a package such as SciPy:</h6>
+      <div class="w3-code pythonHigh notranslate">
+        conda install scipy=0.15.0 <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>10. To install multiple packages at once, such as SciPy and
+        cURL::</h6>
+      <div class="w3-code pythonHigh notranslate">
+        conda install scipy=0.15.0 curl=7.26.0 <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>11. To check the packages installed</h6>
+      <div class="w3-code pythonHigh notranslate">
+        conda list <br>
+        conda list -n myenv <br>
+        conda list -n myenv scipy
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>12. To list all of the packages in a deactivated environment:</h6>
+      <div class="w3-code pythonHigh notranslate">
+        conda list -n myenv <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>13. To remove a package such as SciPy in an environment
+         such as myenv:</h6>
+      <div class="w3-code pythonHigh notranslate">
+        conda remove -n myenv scipy <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>14. Create an environment for the scrapy package from the conda-forge
+          channel:</h6>
+      <div class="w3-code pythonHigh notranslate">
+        conda create -n scrapy -c conda-forge scrapy <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-container">
+  <h3>Installing non-conda packages</h3>
+    <p>If a package is not available from conda or Anaconda.org, you
+       may be able to find and install the package with another package
+       manager like pip.</p>
+    <p>Pip packages do not have all the features of conda packages and
+       we recommend first trying to install any package with conda. If
+        the package is unavailable through conda, try installing it
+         with pip.</p>
+    <p>To gain the benefits of conda integration, be sure to install pip
+       inside the currently active conda environment and then install
+       packages with that instance of pip. </p>
+  <div class="w3-container w3-border kkcodebg">
+    <p>To install a non-conda package with <span class="w3-codespan">
+       pip</span>:</p>
+    <ol>
+      <li><p>To use pip to install a program such as See:</p>
+          <div class="w3-code pythonHigh notranslate">
+            conda install -n myenv pip <br>
+            conda activate myenv <br>
+            pip install see <br>
+          </div>
+          </li>
+      <li><p>To verify the package was installed:</p>
+          <div class="w3-code pythonHigh notranslate">
+            conda list <br>
+          </div></li>
+    </ol>
+  </div>
+  </div>
 
   <script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
   <script>

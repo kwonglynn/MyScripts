@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Use Scrapy to do web crawling</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style media="screen">
+      .kkcodebg {
+        background-color:#eef;
+      }
+    </style>
+  </head>
+  <body>
+  <h1 class="w3-center">Use Scrapy to do web crawling</h1>
+  <div class="w3-container">
+    <h3>References</h3>
+      <ul>
+        <li><a href="https://docs.scrapy.org/en/latest/intro/overview.html">
+          Srapy document</a></li>
+        <li><a href="https://docs.scrapy.org/en/latest/topics/shell.html#topics-shell">
+          Scrapy shell document</a></li>
+        </ul>
+  </div>
+
+  <div class="w3-container">
+    <h3>What is Scrapy?</h3>
+    <div class="w3-panel">
+      Scrapy is an application framework for crawling web sites and extracting
+      structured data which can be used for a wide range of useful applications,
+      like data mining, information processing or historical archival.
+    </div>
+  </div>
+
+  <div class="w3-container">
+    <h3>What are spiders?</h3>
+    <div class="w3-panel">
+      Spiders are classes that you define and that Scrapy uses to scrape
+      information from a website (or a group of websites). They must subclass
+      scrapy.Spider and define the initial requests to make, optionally how to
+      follow links in the pages, and how to parse the downloaded page content
+      to extract data.
+    </div>
+  </div>
+
+  <div class="w3-container">
+    <h3>Scrapy shell</h3>
+    <div class="w3-panel">
+      The Scrapy shell is an interactive shell where you can try and debug your
+      scraping code very quickly, without having to run the spider.<br>
+      The shell is used for testing XPath or CSS expressions and see how they
+      work and what data they extract from the web pages you’re trying to
+      scrape. It allows you to interactively test your expressions while you’re
+      writing your spider, without having to run the spider to test every
+      change.<br>
+    </div>
+  </div>
+  <h2 class="w3-panel">Useful commands</h2>
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>1. Launch the shell.</h6>
+      <p>Note that double quotes should be used!</p>
+      <div class="w3-code pythonHigh notranslate">
+        scrapy shell &lt;url&gt; <br>
+        scrapy shell "http://quotes.toscrape.com/page/1/" <br>
+        scrapy shell ./path/to/file.html <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>2. Get the html data use XPath.</h6>
+      <p><span class="w3-codespan">response</span> - a <b>Response</b> object
+        containing the last fetched page</p>
+      <div class="w3-code pythonHigh notranslate">
+        response.xpath('//title/text()').get() <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>3. Fetch a new response from the given request and update all
+        related objects accordingly.</h6>
+      <p><span class="w3-codespan">request</span> - a <b>Request</b> object of
+        the last fetched page. You can modify this request using
+        <span class="w3-codespan">replace()</span> or fetch a new request
+        (without leaving the shell) using the <span class="w3-codespan">
+          fetch</span> shortcut.</p>
+      <div class="w3-code pythonHigh notranslate">
+        fetch("https://reddit.com") <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>4. Fetch a new response from the given request and update all
+        related objects accordingly.</h6>
+      <div class="w3-code pythonHigh notranslate">
+        fetch("https://reddit.com") <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>5. Print the response in a nice way.</h6>
+      <div class="w3-code pythonHigh notranslate">
+        from pprint import pprint <br>
+        pprint(response.headers) <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-container kkcodebg">
+      <h6>6. Open the response int the web browser.</h6>
+      <div class="w3-code pythonHigh notranslate">
+        view(response) <br>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  </body>
+</html>
