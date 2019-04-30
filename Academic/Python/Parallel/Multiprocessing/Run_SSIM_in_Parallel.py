@@ -10,6 +10,7 @@ from skimage.measure import compare_ssim as ssim
 import multiprocessing as mp
 import matplotlib.pyplot as plt
 import numpy as np
+from natsort import natsorted
 import cv2
 import glob
 
@@ -29,18 +30,17 @@ def calc_ssim(i, imageA, imageB, color = 'rgb'):
 if __name__ == '__main__':
     ## Number of images files:
     fes_pngs = glob.glob('fes-*.png')
-    fes_pngs.sort()
+    fes_pngs = natsorted(fes_pngs)
     N = len(fes_pngs)
     
     ## Use the last image as reference.
     ref = 'fes-{}.png'.format(N-1)
     
-    pool = mp.Pool(32)
+    pool = mp.Pool(16)
     results = pool.starmap_async(calc_ssim, [(i, image, ref, 'rgb') for i, image in enumerate(fes_pngs)]).get()
     pool.close()
     
     results.sort(key=lambda x: x[0])
-    print(results)
     ssim_list = [r for i, r in results]
 
     print("All FES images files processed.")
@@ -52,9 +52,9 @@ if __name__ == '__main__':
     times = np.array(times) / 10
     
     fo = open('FES_similarity.csv', 'w')
-    fo.write('Time(ms),Similarity\n')
+    fo.write('#Time(ms),Similarity\n')
     for i in range(0, N):
-        fo.write("{:.1f},{:.2f}\n".format(times[i],ssim_list[i]))
+        fo.write("{:.1f}\t{:.2f}\n".format(times[i],ssim_list[i]))
     
     fo.close()
     
