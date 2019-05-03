@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Important tools or Python modules for chemoinformatics.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="w3_kgl.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style media="screen">
+      .kkbold {
+        font-weight: bold;
+        color: DarkBlue;
+      }
+      .kkcenter {
+        align="center";
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="w3-container">
+      <h2 class="w3-center w3-panel" style="padding-bottom:15px;">
+        Important tools or Python modules for chemoinformatics.</h2>
+    </div> <!-- The heading -->
+
+    <div class="w3-responsive"
+         style="margin-left:50px;margin-right:50px;">
+      <table class="w3-table-all">
+        <thead>
+          <tr class="w3-teal">
+            <th align="center" valign="middle" style="width:20%">Module name</th>
+            <th style="width:80%">Usage and Examples</th>
+          </tr>
+        </thead>
+
+        <tr>
+          <td class="kkbold"><a href="https://www.rdkit.org/docs/index.html">
+              RDKit</a></td>
+          <td>
+            <p>
+            RDKit is a open source toolkit for cheminformatics. It can generate
+            descriptorfor machine learning.</p>
+            <h5>References:</h5>
+            <ol>
+              <li><a href="https://www.rdkit.org/docs/GettingStartedInPython.html">
+                  Getting Started with the RDKit in Python</a></li>
+              <li><a href="https://www.rdkit.org/docs/Cookbook.html">
+                  RDKit Cookbook</a></li>
+              <li><a href="https://www.rdkit.org/docs/RDKit_Book.html">
+                  RDKit Book</a></li>
+            </ol>
+            <h5>Examples:</h5>
+            <div class="w3-panel2">
+              <h6>1. Create an environment for the RDKit package from the rdkit
+                  channel:</h6>
+              <p class="w3-code pythonHigh notranslate">
+                conda create -n rdkit -c rdkit rdkit <br>
+              </p>
+            </div>
+
+            <div class="w3-panel2">
+              <h6>2. Activate the rdkit environment:</h6>
+              <p class="w3-code pythonHigh notranslate">
+                conda activate rdkit <br>
+              </p>
+            </div>
+
+            <div class="w3-panel2">
+              <h6>3. Read a single molecule:</h6>
+              <p class="w3-code pythonHigh notranslate">
+                >>> from rdkit import Chem <br>
+                >>> m = Chem.MolFromSmiles('Cc1ccccc1') <br>
+                >>> m = Chem.MolFromMolFile('data/input.mol') <br>
+              </p>
+            </div>
+
+            <div class="w3-panel2">
+              <h6>4. Read a set of molecules, for instance, from a SDF file:</h6>
+              <p class="w3-code pythonHigh notranslate">
+                >>> mols = Chem.SDMolSupplier('data/5ht3ligs.sdf')
+                >>> for mol in mols:
+                        if mol is None: continue
+                        print(mol.GetNumAtoms()) <br>
+              </p>
+            </div>
+
+            <div class="w3-panel2">
+              <h6>5. Set the name of a molecule:</h6>
+              <p class="w3-code pythonHigh notranslate">
+                >>> m = Chem.MolFromSmiles('Cc1ccccc1') <br>
+                >>> m.SetProp("_Name","cyclobutane") <br>
+              </p>
+            </div>
+
+            <div class="w3-panel2">
+              <h6>6. Print the MDL Mol block:</h6>
+              <p class="w3-code pythonHigh notranslate">
+                >>> m = Chem.MolFromSmiles('Cc1ccccc1') <br>
+                >>> m_H = Chem.AddHs(m) <br>
+                >>> m_noH = Chem.RemoveHs(m_H) <br>
+              </p>
+            </div>
+
+            <div class="w3-panel2">
+              <h6>7. To add and remove hydrogens:</h6>
+              <p class="w3-code pythonHigh notranslate">
+                >>> m = Chem.MolFromSmiles('Cc1ccccc1') <br>
+                >>> print(Chem.MolToMolBlock(m)) <br>
+              </p>
+            </div>
+
+            <div class="w3-panel2">
+              <h6>8. Convert molecule to canonical SMILES:</h6>
+              <p class="w3-code pythonHigh notranslate">
+                >>> m = Chem.MolFromMolFile('data/chiral.mol') <br>
+                >>> Chem.MolToSmiles(m) <br>
+                'C[C@H](O)c1ccccc1' <br>
+                >>> Chem.MolToSmiles(m,isomericSmiles=False) <br>
+                'CC(O)c1ccccc1' <br>
+              </p>
+            </div>
+
+            <div class="w3-panel2">
+              <h6>9. Write to a MOL/SDF file:</p>
+              <p class="w3-code pythonHigh notranslate">
+                >>> w1 = Chem.SDWriter('molecule1.mol') <br>
+                >>> w1.write(m) <br>
+                >>> w1.close() <br>
+                >>> w2 = Chem.SDWriter('molecule2.sdf') <br>
+                >>> for m in mols: <br>
+                &emsp;&emsp;&emsp;&emsp;w2.write(m) <br>
+                >>> w2.close() <br>
+              </p>
+              <p>
+                Note: use <a href="https://www.w3.org/MarkUp/html3/specialchars.html">
+                <span class="w3-codespan">&amp;emsp;</span></a>to add a horizontal
+                tab to the code. Also use <a href="https://www.w3schools.com/html/html_entities.asp">
+                HTML Entities</a> to display <span class="w3-codespan">&amp;emsp;</span>.
+              </p>
+            </div>
+
+            <div class="w3-panel2">
+              <h6>10. Compute the 2D coordinates for a molecule. The resulting
+                  coordinates are stored on each atom of the molecule (in place).</h6>
+              <p class="w3-code pythonHigh notranslate">
+                >>> from rdkit.Chem import AllChem <br>
+                >>> AllChem.Compute2DCoords(m) <br>
+              </p>
+            </div>
+
+            <div class="w3-panel2">
+              <h6>11. Draw molecules,and save as an image file:</h6>
+              <p class="w3-code pythonHigh notranslate">
+                >>> from rdkit.Chem import Draw <br>
+                >>> m = Chem.MolFromSmiles('Cc1ccccc1') <br>
+                >>> Draw.MolToFile(m, 'molecule.png') <br>
+              </p>
+            </div>
+
+            <div class="w3-panel2">
+              <h6>12. Generate the MACSS fingerprint:</h6>
+              <p><a href="http://www.dalkescientific.com/writings/NBN/fingerprints.html">
+                 MACCS (Molecular ACCess System) keys</a> are 166 bit structural
+                 key descriptors in which each bit is associated with a SMARTS
+                 pattern. <a href="https://www.sciencedirect.com/science/article/pii/S1046202314002631">
+                 Literature</a>
+                 <img src="https://ars.els-cdn.com/content/image/1-s2.0-S1046202314002631-fx1.jpg" alt="Molecular Fingerprint">
+              <p class="w3-code pythonHigh notranslate">
+                >>> from rdkit.Chem import MACCSkeys <br>
+                >>> m1 = Chem.MolFromSmiles('C1(=C(SSC1=O)Cl)Cl') <br>
+                >>> maccs = MACCSkeys.GenMACCSKeys(m1) <br>
+                >>> maccs_bits = maccs.ToBitString() <br>
+              </p>
+            </div>
+
+          </td> <!-- The content of the RDKit row -->
+        </tr> <!-- The whole RDKit row -->
+
+        <tr>
+          <td> <a href="http://www.yapcwsoft.com/dd/padeldescriptor/">
+            PaDEL-Descriptor</a> </td>
+          <td>
+            <p>
+              A software to calculate molecular descriptors and fingerprints.
+              The software currently calculates 1875 descriptors (1444 1D, 2D
+              descriptors and 431 3D descriptors) and 12 types of fingerprints
+              (total 16092 bits). The descriptors and fingerprints are calculated
+              using the <a href="https://cdk.github.io/">Chemistry Development
+              Kit (CDK)</a> with additional descriptors and fingerprints.
+              <a href="https://github.com/cdk/cdk">CDK on GitHub</a>.
+            </p>
+            <h6>Usage:</h6>
+            <p>
+              Launch the software from <a href="http://www.yapcwsoft.com/dd/padeldescriptor/PaDEL-Descriptor.jnlp">
+              here</a> (recommended but requires Java Web Start) or download
+              it from <a href="http://www.yapcwsoft.com/dd/padeldescriptor/PaDEL-Descriptor.zip">
+              here</a>. If you download the zipped file, unzip the files to any
+              directory and launch the software using:
+            </p>
+            <p class="w3-code pythonHigh notranslate">
+              java -jar PaDEL-Descriptor.jar <br>
+            </p>
+            <div class="w3-row">
+              <div class="w3-half">
+                <img src="PaDel.png" alt="PaDel" style="width:100%">
+              </div>
+              <div class="w3-half">
+                <img src="PaDel_MACCS.png" alt="PaDel_MACCS" style="width:100%">
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td><a href="http://cinfony.github.io/">Cinfony</a></td>
+          <td>
+            <p><b>Cinfony</b>  presents a common API to several cheminformatics
+               toolkits. It uses the Python programming language, and builds on
+               top of Open <i>Babel</i>, <i>RDKit</i>, <i>CDK</i>, <i>Indigo</i>,
+               <i>JChem</i>, <i>OPSIN</i> and cheminformatics webservices.</p>
+            <p>Note: <b>cinfony</b> is not actively updated on
+               <a href="https://github.com/cinfony/cinfony">GitHub</a>.</p>
+            </td>
+        </tr>
+
+
+
+      </table> <!--The whole Talbe -->
+    </div> <!-- The container for the table -->
+
+    <script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
+    <script>
+      w3CodeColor();
+    </script>
+
+  </body>
+</html>

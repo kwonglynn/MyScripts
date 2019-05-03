@@ -5,134 +5,340 @@
     <title>Use Scrapy to do web crawling</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="w3_kgl.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-    <style media="screen">
-      .kkcodebg {
-        background-color:#eef;
-      }
-    </style>
   </head>
   <body>
-  <h1 class="w3-center">Use Scrapy to do web crawling</h1>
-  <div class="w3-container">
-    <h3>References</h3>
-      <ul>
-        <li><a href="https://docs.scrapy.org/en/latest/intro/overview.html">
-          Srapy document</a></li>
-        <li><a href="https://docs.scrapy.org/en/latest/topics/shell.html#topics-shell">
-          Scrapy shell document</a></li>
-        </ul>
-  </div>
-
-  <div class="w3-container">
-    <h3>What is Scrapy?</h3>
-    <div class="w3-panel">
-      Scrapy is an application framework for crawling web sites and extracting
-      structured data which can be used for a wide range of useful applications,
-      like data mining, information processing or historical archival.
+    <h2 class="w3-panel w3-center">Use Scrapy to do web crawling</h2>
+    <div class="w3-container"> <!-- References -->
+      <h4>References</h4>
+        <ul>
+          <li><a href="https://docs.scrapy.org/en/latest/intro/overview.html">
+            Srapy document</a></li>
+          <li><a href="https://docs.scrapy.org/en/latest/intro/tutorial.html#intro-tutorial">
+            Scrapy tutorial</a></li>
+          <li><a href="https://docs.scrapy.org/en/latest/topics/shell.html#topics-shell">
+            Scrapy shell document</a></li>
+          <li><a href="https://docs.scrapy.org/en/latest/topics/selectors.html">
+            Scrapy Selectors</a></li>
+          </ul>
     </div>
-  </div>
 
-  <div class="w3-container">
-    <h3>What are spiders?</h3>
-    <div class="w3-panel">
-      Spiders are classes that you define and that Scrapy uses to scrape
-      information from a website (or a group of websites). They must subclass
-      scrapy.Spider and define the initial requests to make, optionally how to
-      follow links in the pages, and how to parse the downloaded page content
-      to extract data.
-    </div>
-  </div>
-
-  <div class="w3-container">
-    <h3>Scrapy shell</h3>
-    <div class="w3-panel">
-      The Scrapy shell is an interactive shell where you can try and debug your
-      scraping code very quickly, without having to run the spider.<br>
-      The shell is used for testing XPath or CSS expressions and see how they
-      work and what data they extract from the web pages you’re trying to
-      scrape. It allows you to interactively test your expressions while you’re
-      writing your spider, without having to run the spider to test every
-      change.<br>
-    </div>
-  </div>
-  <h2 class="w3-panel">Useful commands</h2>
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>1. Launch the shell.</h6>
-      <p>Note that double quotes should be used!</p>
-      <div class="w3-code pythonHigh notranslate">
-        scrapy shell &lt;url&gt; <br>
-        scrapy shell "http://quotes.toscrape.com/page/1/" <br>
-        scrapy shell ./path/to/file.html <br>
+    <div class="w3-panel"> <!-- Scrapy -->
+      <h4>What is Scrapy?</h4>
+      <div class="w3-container">
+        Scrapy is an application framework for crawling web sites and extracting
+        structured data which can be used for a wide range of useful applications,
+        like data mining, information processing or historical archival.
       </div>
     </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>2. Get the html data use XPath.</h6>
+    <div class="w3-panel"> <!-- Spider -->
+      <h4>What are spiders?</h4>
+      <div class="w3-container">
+        Spiders are classes that you define and that Scrapy uses to scrape
+        information from a website (or a group of websites). They must subclass
+        scrapy.Spider and define the initial requests to make, optionally how to
+        follow links in the pages, and how to parse the downloaded page content
+        to extract data.
+      </div>
+    </div>
+
+    <div class="w3-panel"> <!-- Scrapy Shell -->
+      <h4>Scrapy shell</h4>
+      <div class="w3-container">
+        The Scrapy shell is an interactive shell where you can try and debug your
+        scraping code very quickly, without having to run the spider.<br>
+        The shell is used for testing XPath or CSS expressions and see how they
+        work and what data they extract from the web pages you’re trying to
+        scrape. It allows you to interactively test your expressions while you’re
+        writing your spider, without having to run the spider to test every
+        change.<br>
+      </div>
+    </div>
+
+    <h4 class="w3-panel">Useful commands</h4>
+    <!-- w3-container2 is re-defined for the commnad sectin -->
+    <div class="w3-container2"> <!-- 1. Create a project -->
+      <h6>1. Create a project.</h6>
+      <p class="w3-code pythonHigh notranslate">
+        >>> scrapy startproject tutorial <br>
+      </p>
+      <p>This will create a tutorial directory with the project files.</p>
+    </div>
+
+    <div class="w3-container2"> <!-- 2. Run a spider -->
+      <h6>2. Run a spider.</h6>
+      <p>Go to the project's root folder and run:</p>
+      <p class="w3-code pythonHigh notranslate">
+        >>> scrapy crawl spidername -o results.json <br>
+      </p>
+      <p>The <span class="w3-codespan">spidername</span> is the name of the
+         spider defined in the spider script, and the <span class="w3-codespan">-o results.json</span> option stores
+         the scraped data in a <span class="w3-codespan">.json</span> file. <br>
+         Scrapy appends to a given file instead of overwriting its contents.
+         If you run this command twice without removing the file before the
+         second time, you’ll end up with a broken JSON file.</p>
+      <p>The output can also be stored in other formats, like JSON Lines:</p>
+      <p class="w3-code pythonHigh notranslate">
+        >>> scrapy crawl spidername -o results.jl <br>
+      </p>
+      <p>The <a href="http://jsonlines.org/">JSON Lines</a> format is useful
+         because it’s stream-like, you can easily append new records to it. It
+         doesn’t have the same problem of JSON when you run twice. Also, as
+         each record is a separate line. </p>
+    </div>
+
+    <div class="w3-container2"> <!-- 3. Launch the shell. -->
+      <h6>3. Launch the shell.</h6>
+      <p>Note that double quotes should be used!</p>
+      <p class="w3-code pythonHigh notranslate">
+        >>> scrapy shell &lt;url&gt; <br>
+        >>> scrapy shell "http://quotes.toscrape.com/page/1/" <br>
+        >>> scrapy shell "./path/to/file.html" <br>
+      </p>
+    </div>
+
+    <div class="w3-container2"> <!-- 4. Use XPath -->
+      <h6>4. Get the html data use XPath.</h6>
       <p><span class="w3-codespan">response</span> - a <b>Response</b> object
         containing the last fetched page</p>
-      <div class="w3-code pythonHigh notranslate">
-        response.xpath('//title/text()').get() <br>
-      </div>
+      <p class="w3-code pythonHigh notranslate">
+        >>> response.xpath('//title/text()').get() <br>
+        'Quotes to Scrape' <br>
+      </p>
     </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>3. Fetch a new response from the given request and update all
+    <div class="w3-container2"> <!-- 5. Use CSS -->
+      <h6>5. Get the html data use CSS.</h6>
+      <p class="w3-code pythonHigh notranslate">
+        >>> response.css('title').getall() <br>
+        ['<title>Quotes to Scrape</title>'] <br>
+        >>> response.css('title::text').getall() <br>
+        ['Quotes to Scrape'] <br>
+        >>> response.css('title::text').get() <br>
+        'Quotes to Scrape' <br>
+        >>> response.css('title::text')[0].get() <br>
+        'Quotes to Scrape' <br>
+      </p>
+    </div>
+
+    <div class="w3-container2"> <!-- 6. Use regular expressions -->
+      <h6> 6. use the re() method to extract using regular expressions.</h6>
+      <p class="w3-code pythonHigh notranslate">
+        >>> response.css('title::text').re(r'Quotes.*') <br>
+        ['Quotes to Scrape'] <br>
+        >>> response.css('title::text').re(r'Q\w+') <br>
+        ['Quotes'] <br>
+        >>> response.css('title::text').re(r'(\w+) to (\w+)') <br>
+        ['Quotes', 'Scrape'] <br>
+      </p>
+    </div>
+
+    <div class="w3-container2"> <!-- 7. Use fetch to get a new webpage -->
+      <h6>7. Fetch a new response from the given request and update all
         related objects accordingly.</h6>
-      <p><span class="w3-codespan">request</span> - a <b>Request</b> object of
-        the last fetched page. You can modify this request using
-        <span class="w3-codespan">replace()</span> or fetch a new request
-        (without leaving the shell) using the <span class="w3-codespan">
-          fetch</span> shortcut.</p>
-      <div class="w3-code pythonHigh notranslate">
-        fetch("https://reddit.com") <br>
-      </div>
+      <p class="w3-code pythonHigh notranslate">
+        >>> fetch("https://reddit.com") <br>
+      </p>
     </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>4. Fetch a new response from the given request and update all
-        related objects accordingly.</h6>
-      <div class="w3-code pythonHigh notranslate">
-        fetch("https://reddit.com") <br>
-      </div>
+    <div class="w3-container2"> <!-- 8. Use pprint to print nicely -->
+      <h6>8. Print the response in a nice way.</h6>
+      <p class="w3-code pythonHigh notranslate">
+        >>> from pprint import pprint <br>
+        >>> pprint(response.headers) <br>
+      </p>
     </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>5. Print the response in a nice way.</h6>
-      <div class="w3-code pythonHigh notranslate">
-        from pprint import pprint <br>
-        pprint(response.headers) <br>
-      </div>
+    <div class="w3-container2"> <!-- 9. Use view to open the response -->
+      <h6>9. Open the response int the web browser.</h6>
+      <p class="w3-code pythonHigh notranslate">
+        >>> view(response) <br>
+      </p>
     </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>6. Open the response int the web browser.</h6>
-      <div class="w3-code pythonHigh notranslate">
-        view(response) <br>
-      </div>
+    <div class="w3-container2"> <!-- 10. Change the default return value -->
+      <h6>10. Change the default return value.</h6>
+      <p class="w3-code pythonHigh notranslate">
+        >>> response.xpath('//div[@id="not-exists"]/text()').get(default='not-found') <br>
+      </p>
     </div>
-  </div>
 
+    <div class="w3-container2"> <!-- 11. Select attribute -->
+      <h6>11. Select attribute values.</h6>
+      <p>Per W3C standards, CSS selectors do not support selecting text nodes
+        or attribute values. Scrapy (parsel) implements a couple of non-standard
+        pseudo-elements: <br>
+        <ul>
+          <li>to select text nodes, use <span class="w3-codespan">::text
+            <span></li>
+          <li>to select attribute values, use <span class="w3-codespan">::attr(name)
+            <span></li>
+        </ul> </p>
+      <p class="w3-code pythonHigh notranslate">
+        >>> response.xpath('//base/@href').get() <br>
+        >>> response.css('base::attr(href)').get() <br>
+        >>> response.css('base').attrib['href'] <br>
+        <br>
+        >>> response.xpath('//a[contains(@href, "image")]/@href').getall() <br>
+        >>> response.css('a[href*=image]::attr(href)').getall() <br>
+      </p>
+    </div>
 
+    <div class="w3-container2"> <!-- 12. Construct a Selector maually -->
+      <h6>12. Construct a Selecotr manually, which is useful on command line dubuging.</h6>
+      <p class="w3-code pythonHigh notranslate">
+        >>> from scrapy.selector import Selector <br>
+        >>> body = '&lt;body&gt;&lt;span&gt;good&lt;/span&gt;&lt;/body&gt;' <br>
+        >>> Selector(text=body).xpath('//span/text()').get() <br>
+        'good'
+      </p>
+    </div>
 
+    <div class="w3-container2"> <!-- 13. For special text -->
+      <h6>13. When the text node contains the b, i or strong, etc nodes.
+          Use the string method of xpath to get an intact text.</h6>
+      <p class="w3-code pythonHigh notranslate">
+        >>> from scrapy.selector import Selector <br>
+        >>> text = '&lt;a href="#"&gt;Go to the &lt;b&gt;Next Page&lt;/b&gt;&lt;/a&gt;' <br>
+        >>> sel = Selector(text=text) <br>
+        >>> sel.xpath('//a//text()').getall() <br>
+        ['Go to the ', 'Next Page'] <br>
+        >>> sel.xpath('string(//a)').getall() <br>
+        ['Go to the Next Page'] <br>
+      </p>
+    </div>
 
+    <div class="w3-container2"> <!-- 14. Match of text node -->
+      <h6>14. Use '.' rather than './/text()' to perform match in the text node.</h6>
+      <p class="w3-code pythonHigh notranslate">
+        >>> from scrapy.selector import Selector <br>
+        >>> text = '&lt;a href="#"&gt;Go to the &lt;b&gt;Next Page&lt;/b&gt;&lt;/a&gt;' <br>
+        >>> sel = Selector(text=text) <br>
+        >>> sel.xpath("//a[contains(.//text(), 'Next Page')]").getall()
+            # Nothing will be returned <br>
+        [] <br>
+        >>> sel.xpath("string(//a[contains(., 'Next Page')])").get() <br>
+        'Go to the Next Page' <br>
+      </p>
+    </div>
 
+    <div class="w3-container2"> <!-- 15. Use variables -->
+      <h6>15. Variables in XPath expressions</h6>
+      <p>XPath allows you to reference variables in your XPath expressions,
+         using the $variable_name syntax. <br>
+         This example to match an element based on its “id” attribute value.</p>
+      <p class="w3-code pythonHigh notranslate">
+        >>> response.xpath('//div[@id=$val]/a/text()', val='images').get() <br>
+      </p>
+      <p>The second example example find the “id” attribute of a &lt;div&gt; tag
+         containing five &lt;a&gt; children</p>
+      <p class="w3-code pythonHigh notranslate">
+        >>> response.xpath('//div[count(a)=$cnt]/@id', cnt=5).get() <br>
+      </p>
+    </div>
 
+    <h2 class="w3-panel">Script examples</h2>
+    <p class="w3-container2">Our spider code should be placed in the
+        <span class="w3-codespan"> spiders</span> directory in the project folder.</p>
+
+    <div class="w3-container2"> <!-- Example 1 -->
+      <h6>Example 1, scrape some webpages and save the results as
+          dictionary(python)/object(JavaScript)/JOSN.</h6>
+      <p>Run the spider with the following command:</p>
+      <p class="w3-code pythonHigh notranslate">
+        >>> scrapy crawl quotes -o results.json <br>
+      </p>
+      <pre class="w3-code pythonHigh notranslate">
+import scrapy
+
+class QuotesSpider(scrapy.Spider):
+    name = "quotes"
+    start_urls = ['http://quotes.toscrape.com/page/1/']
+
+    def parse(self, response):
+        for quote in response.css('div.quote'):
+            yield {
+                'text': quote.css('span.text::text').get(),
+                'author': quote.css('small.author::text').get(),
+                'tags': quote.css('div.tags a.tag::text').getall(),
+            }
+        for a in response.css('li.next a::attr(href)'):
+            yield response.follow(a, callback=self.parse)</pre>
+    </div>
+
+    <div class="w3-container2"> <!-- Example 2 -->
+      <h6>Example 2, scrape the links on different pages </h6>
+      <pre class="w3-code pythonHigh notranslate">
+import scrapy
+
+class AuthorSpider(scrapy.Spider):
+    name = 'author'
+
+    start_urls = ['http://quotes.toscrape.com/']
+
+    def parse(self, response):
+        for href in response.css('.author + a::attr(href)'):
+            yield response.follow(href, self.parse_author)
+
+        for href in response.css('li.next a::attr(href)'):
+            yield response.follow(href, self.parse)
+
+    def parse_author(self, response):
+        def extract_with_css(query):
+            return response.css(query).get(default='').strip()
+
+        yield {
+            'name': extract_with_css('h3.author-title::text'),
+            'birthdate': extract_with_css('.author-born-date::text'),
+            'bio': extract_with_css('.author-description::text'),
+        }</pre>
+    </div>
+
+    <div class="w3-container2"> <!-- Example 3 -->
+      <h6>Example 3: Using spider arguments. </h6>
+      <p>You can provide command line arguments to your spiders by using
+        the <span class="w3-codespan">-a</span> option when running them:</p>
+      <p class="w3-code pythonHigh notranslate">
+        scrapy crawl quotes -o quotes-humor.json -a tag=humor <br><p>
+      <p>These arguments are passed to the Spider’s <span class="w3-codespan">
+        __init__</span> method and become spider attributes by default. In
+        this  example, the value provided for the <span class="w3-codespan">
+        tag</span> argument will be available via <span class="w3-codespan">
+        self.tag.</span></p>
+      <pre class="w3-code kkcodebg pythonHigh notranslate">
+import scrapy
+
+class QuotesSpider(scrapy.Spider):
+    name = "quotes"
+
+    def start_requests(self):
+        url = 'http://quotes.toscrape.com/'
+        tag = getattr(self, 'tag', None)
+        if tag is not None:
+            url = url + 'tag/' + tag
+        yield scrapy.Request(url, self.parse)
+
+    def parse(self, response):
+        for quote in response.css('div.quote'):
+            yield {
+                'text': quote.css('span.text::text').get(),
+                'author': quote.css('small.author::text').get(),
+            }
+
+        next_page = response.css('li.next a::attr(href)').get()
+        if next_page is not None:
+            yield response.follow(next_page, self.parse)</pre>
+          </div>
+
+    <script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
+    <script>
+      w3CodeColor();
+    </script>
 
   </body>
 </html>
