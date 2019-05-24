@@ -2,270 +2,413 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Python virutal environments</title>
+    <title>Virtual environment management with conda.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel="stylesheet" href="../kk.w3.css">
+    <link rel="stylesheet" href="../kk.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <style media="screen">
-      .kkcodebg {
-        background-color:#eef;
-      }
-    </style>
   </head>
-
   <body>
-  <h1 class="w3-center">Virtual environments</h1>
-  <div class="w3-container">
-    <h2>References</h2>
-      <ul>
-        <li><a href="https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/20/conda/">
-          Create virtual environments for python with conda</a></li>
-        <li><a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">
-          Managing environments</a></li>
-        <li><a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html">
-          Managing packages with conda</a></li>
-        <li><a href="https://virtualenvwrapper.readthedocs.io/en/latest/install.html">
-          Use pip to manage python environments</a></li>
-        <li><a href="https://kapeli.com/cheat_sheets/Conda.docset/Contents/Resources/Documents/index">
-          Common conda commands</a></li>
-        <li><a href="https://docs.conda.io/projects/conda/en/latest/commands/create.html">
-          Command reference</a></li>
-        </ul>
-  </div>
+    <!-- The navigaton bar -->
+    <div class="w3-top" style="height:35px;z-index:5;">
+      <div class="w3-bar w3-black">
+       <a href="#" class="w3-bar-item w3-button w3-green">
+         <i class="fa fa-home"></i> Home</a>
+       <a href="../../Python/Python_modules.html" class="w3-bar-item w3-button">Python</a>
+       <a href="#" class="w3-bar-item w3-button">Online Server</a>
+       <div class="w3-dropdown-hover w3-hide-medium w3-hide-small">
+         <button class="w3-button">Web Front End <i class="fa fa-caret-down"></i></button>
+         <div class="w3-dropdown-content w3-bar-block w3-light-grey" style="width:143.5px;">
+           <a href="#" class="w3-bar-item w3-button">HTML</a>
+           <a href="#" class="w3-bar-item w3-button">CSS</a>
+           <a href="#" class="w3-bar-item w3-button">JavaScript</a>
+         </div>
+       </div>
+       <div class="w3-dropdown-hover w3-hide-medium w3-hide-small">
+         <button class="w3-button">Web Back End <i class="fa fa-caret-down"></i></button>
+         <div class="w3-dropdown-content w3-bar-block w3-light-grey" style="width:139px;">
+           <a href="#" class="w3-bar-item w3-button">Python</a>
+           <a href="#" class="w3-bar-item w3-button">Django</a>
+           <a href="#" class="w3-bar-item w3-button">PHP</a>
+           <a href="#" class="w3-bar-item w3-button">SQL</a>
+         </div>
+       </div>
+       <div class="w3-dropdown-hover w3-hide-medium w3-hide-small">
+         <button class="w3-button">Machine Learning <i class="fa fa-caret-down"></i></button>
+         <div class="w3-dropdown-content w3-bar-block w3-light-grey" style="width:163px;">
+           <a href="#" class="w3-bar-item w3-button">SVM</a>
+           <a href="#" class="w3-bar-item w3-button">ANN</a>
+           <a href="#" class="w3-bar-item w3-button">Random Forest</a>
+         </div>
+       </div>
+       <div class="w3-dropdown-hover w3-hide-medium w3-hide-small">
+         <button class="w3-button">Deep Learning <i class="fa fa-caret-down"></i></button>
+         <div class="w3-dropdown-content w3-bar-block w3-light-grey" style="width:142px;">
+           <a href="#" class="w3-bar-item w3-button">PyTorch</a>
+           <a href="#" class="w3-bar-item w3-button">Tensor Flow</a>
+           <a href="#" class="w3-bar-item w3-button">Keras</a>
+         </div>
+       </div>
 
-  <div class="w3-container">
-    <h2>What is a virtual environment?</h2>
-    <div class="w3-panel">
-      A virtual environment is a named, isolated, working copy of
-      <b>Python</b> that that maintains its own files, directories, and paths
-      so that you can work with specific versions of libraries or Python
-      itself without affecting other Python projects. Virtual environmets
-      make it easy to cleanly separate different projects and avoid problems
-      with different dependencies and version requiremetns across components.
-      The <code class="w3-codespan">conda</code> command is the preferred
-      interface for managing intstallations and virtual environments with the
-      Anaconda Python distribution. If you  have a vanilla Python
-      installation or other Python distribution, see
-      <a href="https://virtualenv.readthedocs.io/en/latest/">virtualenv</a>.
-    </div>
-  </div>
-
-  <div class="w3-panel">
-    <h3>conda channels</h3>
-    <p>Channels are locations where Navigator and conda look for packages.
-    The easiest way to use and manage custom channels is to use a
-    private or public repository on Anaconda.org.
-    Common conda channels:</p>
-    <ul>
-      <li><a href="https://repo.anaconda.com/">default (anconda)</a></li>
-      <li><a href="http://conda-forge.org/docs/user/introduction.html">
-        conda-forge</a></li>
-    </ul>
-    <p>How to install packages from a specified channel?</p>
-    <div class="w3-card kkcodebg">
-      <h6>You have to register the specified channel as a package source
-          for conda. After that, using conda install package-name
-          will also find packages in the specified channel:</h6>
-      <div class="w3-code pythonHigh notranslate">
-        conda config --add channels conda-forge <br>
+       <div class="w3-dropdown-click w3-hide-large"> <!-- Hide some menus on medium and small screens -->
+         <button class="w3-button" onclick="w3_menuDrop('menuDrop')">
+           More <i class="fa fa-caret-down"></i></button>
+         <div id="menuDrop" class="w3-dropdown-content w3-bar-block w3-card w3-dark-grey" style="width:165px;">
+           <div class="w3-dropdown-click ">
+             <button class="w3-button" onclick="w3_menuDrop('webFrontEnd')">
+               Web Front End <i class="fa fa-caret-down"></i></button>
+             <div id="webFrontEnd" class="w3-card w3-hide w3-light-grey">
+               <a href="#" class="w3-bar-item w3-button">HTML</a>
+               <a href="#" class="w3-bar-item w3-button">CSS</a>
+               <a href="#" class="w3-bar-item w3-button">JavaScript</a>
+             </div>
+           </div>
+           <div class="w3-dropdown-click">
+             <button class="w3-button" onclick="w3_menuDrop('webBackEnd')">
+               Web Back End <i class="fa fa-caret-down"></i></button>
+             <div id="webBackEnd" class="w3-card w3-hide w3-light-grey">
+               <a href="#" class="w3-bar-item w3-button">Python</a>
+               <a href="#" class="w3-bar-item w3-button">Django</a>
+               <a href="#" class="w3-bar-item w3-button">PHP</a>
+               <a href="#" class="w3-bar-item w3-button">SQL</a>
+             </div>
+           </div>
+           <div class="w3-dropdown-click">
+             <button class="w3-button" onclick="w3_menuDrop('machine')">
+               Machine Learning <i class="fa fa-caret-down"></i></button>
+             <div id="machine" class="w3-card w3-hide w3-light-grey">
+               <a href="#" class="w3-bar-item w3-button">SVM</a>
+               <a href="#" class="w3-bar-item w3-button">ANN</a>
+               <a href="#" class="w3-bar-item w3-button">Random Forest</a>
+             </div>
+           </div>
+           <div class="w3-dropdown-hover">
+             <button class="w3-button" onclick="w3_menuDrop('deep')">
+               Deep Learning <i class="fa fa-caret-down"></i></button>
+             <div id="deep" class="w3-card w3-hide w3-light-grey">
+               <a href="#" class="w3-bar-item w3-button">PyTorch</a>
+               <a href="#" class="w3-bar-item w3-button">Tensor Flow</a>
+               <a href="#" class="w3-bar-item w3-button">Keras</a>
+             </div>
+           </div>
+        </div>
+      </div>
       </div>
     </div>
-  </div>
 
-  <h2 class="w3-panel">Useful commands</h2>
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>1. Check the status of conda.</h6>
-      <div class="w3-code pythonHigh notranslate">
-        conda -V <br>
-      </div>
+    <!-- Sidebar. Note: w3-collapse and z-index are important! -->
+    <div id="leftSidebar" class="w3-sidebar w3-collapse w3-bar-block w3-light-grey"
+      style="width:200px;z-index:3;top:35px;">
+      <p class="w3-container w3-xlarge w3-left">&#9776;</p>
+      <button class="w3-bar-item w3-button w3-large w3-hide-large"
+        onclick="w3_close()">Close &times;</button>
+      <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html"
+        class="w3-bar-item w3-button" onclick="w3_close()">Conda Document</a>
+      <a href="https://kapeli.com/cheat_sheets/Conda.docset/Contents/Resources/Documents/index"
+        class="w3-bar-item w3-button" onclick="w3_close()">Conda Commands</a>
     </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>2. Check if conda is up to date.</h6>
-      <div class="w3-code pythonHigh notranslate">
-        conda update conda <br>
+    <!-- Overlay definition -->
+    <div id="myOverlay" class="w3-overlay w3-animate-opacity" onclick="w3_close()"
+      style="cursor:pointer"></div>
+
+    <!-- Main part: Note for collapsible sibar the margin-left of main content
+      should match the width of the sidebar -->
+    <!-- Use height: 100vh to set the height of the main section to that of the screen -->
+    <div class="w3-main"style="position:relative;left:200px;margin-right:300px;top:50px;margin-bottom:50px;min-height:100vh;">
+      <!-- The heading -->
+      <p  id="top"></p> <!-- For a better view when click on a tag -->
+      <div class="w3-panel">
+        <h2><a class="w3-bar-item w3-button w3-xlarge w3-left w3-hide-large" onclick="w3_open_left()">&#9776;</a>
+          Virtual environment management with conda.</h2>
       </div>
-    </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>3. Create a virtual environment for your project.</h6>
-      <p>You can optionally specify the version of Python and a specific
-         pacakage to be created with the environment.</p>
-      <div class="w3-code pythonHigh notranslate">
-        conda create -n yourenvname (python=x.x) (anaconda) <br>
+      <div class="w3-panel">
+        <h4>References</h4>
+          <ul>
+            <li><a href="https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/20/conda/">
+              Create virtual environments for python with conda</a></li>
+            <li><a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">
+              Managing environments</a></li>
+            <li><a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html">
+              Managing packages with conda</a></li>
+            <li><a href="https://virtualenvwrapper.readthedocs.io/en/latest/install.html">
+              Use pip to manage python environments</a></li>
+            <li><a href="https://kapeli.com/cheat_sheets/Conda.docset/Contents/Resources/Documents/index">
+              Common conda commands</a></li>
+            <li><a href="https://docs.conda.io/projects/conda/en/latest/commands/create.html">
+              Command reference</a></li>
+            </ul>
       </div>
-    </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>4. To see a list of all your environments, use the command:</h6>
-      <div class="w3-code pythonHigh notranslate">
-        conda info -e <br>
-        conda info --envs <br>
+      <div class="w3-panel">
+        <h4>What is a virtual environment?</h4>
+        <div class="w3-panel">
+          A virtual environment is a named, isolated, working copy of
+          <b>Python</b> that that maintains its own files, directories, and paths
+          so that you can work with specific versions of libraries or Python
+          itself without affecting other Python projects. Virtual environmets
+          make it easy to cleanly separate different projects and avoid problems
+          with different dependencies and version requiremetns across components.
+          The <code class="w3-codespan">conda</code> command is the preferred
+          interface for managing intstallations and virtual environments with the
+          Anaconda Python distribution. If you  have a vanilla Python
+          installation or other Python distribution, see
+          <a href="https://virtualenv.readthedocs.io/en/latest/">virtualenv</a>.
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>5. To activate or deactivate a virtual environment:</h6>
-      <div class="w3-code pythonHigh notranslate">
-        conda activate yourenvname <br>
-        conda deactivate <br>
+      <div class="w3-panel">
+        <h4>Conda channels</h4>
+        <div class="w3-container">
+          <p>Channels are locations where Navigator and conda look for packages.
+          The easiest way to use and manage custom channels is to use a
+          private or public repository on Anaconda.org.
+          Common conda channels:</p>
+          <ul>
+            <li><a href="https://repo.anaconda.com/">default (anconda)</a></li>
+            <li><a href="http://conda-forge.org/docs/user/introduction.html">
+              conda-forge</a></li>
+          </ul>
+          <p>How to install packages from a specified channel?</p>
+          <p>You have to register the specified channel as a default package
+            source for conda. After that, using conda install package-name will
+            also find packages in the specified channel:</p>
+          <div class="w3-code pythonHigh notranslate">
+            conda config --add channels conda-forge <br>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>6. Delete a no longer needed virtual environment
-          and associated packages:</h6>
-      <div class="w3-code pythonHigh notranslate">
-        conda remove -n yourenvname -all <br>
-        conda env remove --name myenv <br>
+      <h4 class="w3-panel">Useful commands</h4>
+      <div class="w3-panel">
+        <div class="w3-container">
+          <h6>1. Check the status of conda.</h6>
+          <div class="w3-code pythonHigh notranslate">
+            conda -V <br>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>7. Search for a specific package.</h6>
-      <p>If you want to use a specific Python version, it is best to use
-         an environment with that version. </p>
-      <div class="w3-code pythonHigh notranslate" style="margin-bottom:1px;">
-        conda search "^python$" <br>
-        conda search scipy <br>
+      <div class="w3-panel">
+        <div class="w3-container ">
+          <h6>2. Check if conda is up to date.</h6>
+          <div class="w3-code pythonHigh notranslate">
+            conda update conda <br>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>8. To install a specific package such as SciPy into an
-          existing environment "myenv".</h6>
-      <p>If you do not specify the environment name, which in this example is
-         done by --name myenv, the package installs into the current
-         environment:</p>
-      <div class="w3-code pythonHigh notranslate">
-        conda install --name myenv scipy <br>
+      <div class="w3-panel">
+        <div class="w3-container ">
+          <h6>3. Create a virtual environment for your project.</h6>
+          <p>You can optionally specify the version of Python and a specific
+             pacakage to be created with the environment.</p>
+          <div class="w3-code pythonHigh notranslate">
+            conda create -n yourenvname (python=x.x) (anaconda) <br>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>9. To install a specific version of a package such as SciPy:</h6>
-      <div class="w3-code pythonHigh notranslate">
-        conda install scipy=0.15.0 <br>
+      <div class="w3-panel">
+        <div class="w3-container ">
+          <h6>4. To see a list of all your environments, use the command:</h6>
+          <div class="w3-code pythonHigh notranslate">
+            conda info -e <br>
+            conda info --envs <br>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>10. To install multiple packages at once, such as SciPy and
-        cURL::</h6>
-      <div class="w3-code pythonHigh notranslate">
-        conda install scipy=0.15.0 curl=7.26.0 <br>
+      <div class="w3-panel">
+        <div class="w3-container">
+          <h6>5. To activate or deactivate a virtual environment:</h6>
+          <div class="w3-code pythonHigh notranslate">
+            conda activate yourenvname <br>
+            conda deactivate <br>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>11. To check the packages installed</h6>
-      <div class="w3-code pythonHigh notranslate">
-        conda list <br>
-        conda list -n myenv <br>
-        conda list -n myenv scipy
+      <div class="w3-panel">
+        <div class="w3-container">
+          <h6>6. Delete a no longer needed virtual environment
+              and associated packages:</h6>
+          <div class="w3-code pythonHigh notranslate">
+            conda remove -n yourenvname --all <br>
+            conda env remove --name myenv <br>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>12. To list all of the packages in a deactivated environment:</h6>
-      <div class="w3-code pythonHigh notranslate">
-        conda list -n myenv <br>
+      <div class="w3-panel">
+        <div class="w3-container">
+          <h6>7. Search for a specific package.</h6>
+          <p>If you want to use a specific Python version, it is best to use
+             an environment with that version. </p>
+          <div class="w3-code pythonHigh notranslate" style="margin-bottom:1px;">
+            conda search "^python$" <br>
+            conda search scipy <br>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>13. To remove a package such as SciPy in an environment
-         such as myenv:</h6>
-      <div class="w3-code pythonHigh notranslate">
-        conda remove -n myenv scipy <br>
+      <div class="w3-panel">
+        <div class="w3-container">
+          <h6>8. To install a specific package such as SciPy into an
+              existing environment "myenv".</h6>
+          <p>If you do not specify the environment name, which in this example is
+             done by --name myenv, the package installs into the current
+             environment:</p>
+          <div class="w3-code pythonHigh notranslate">
+            conda install --name myenv scipy <br>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>14. Create an environment for the scrapy package from the conda-forge
-          channel:</h6>
-      <div class="w3-code pythonHigh notranslate">
-        conda create -n scrapy -c conda-forge scrapy <br>
+      <div class="w3-panel">
+        <div class="w3-container">
+          <h6>9. To install a specific version of a package such as SciPy:</h6>
+          <div class="w3-code pythonHigh notranslate">
+            conda install scipy=0.15.0 <br>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="w3-panel">
-    <div class="w3-container kkcodebg">
-      <h6>15. Create an environment for the RDKit package from the rdkit
-          channel:</h6>
-      <div class="w3-code pythonHigh notranslate">
-        conda create -n rdkit -c rdkit rdkit <br>
+      <div class="w3-panel">
+        <div class="w3-container">
+          <h6>10. To install multiple packages at once, such as SciPy and
+            cURL::</h6>
+          <div class="w3-code pythonHigh notranslate">
+            conda install scipy=0.15.0 curl=7.26.0 <br>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="w3-container">
-  <h3>Installing non-conda packages</h3>
-    <p>If a package is not available from conda or Anaconda.org, you
-       may be able to find and install the package with another package
-       manager like pip.</p>
-    <p>Pip packages do not have all the features of conda packages and
-       we recommend first trying to install any package with conda. If
-        the package is unavailable through conda, try installing it
-         with pip.</p>
-    <p>To gain the benefits of conda integration, be sure to install pip
-       inside the currently active conda environment and then install
-       packages with that instance of pip. </p>
-  <div class="w3-container w3-border kkcodebg">
-    <p>To install a non-conda package with <span class="w3-codespan">
-       pip</span>:</p>
-    <ol>
-      <li><p>To use pip to install a program such as See:</p>
+      <div class="w3-panel">
+        <div class="w3-container">
+          <h6>11. To check the packages installed</h6>
+          <div class="w3-code pythonHigh notranslate">
+            conda list <br>
+            conda list -n myenv <br>
+            conda list -n myenv scipy
+          </div>
+        </div>
+      </div>
+
+      <div class="w3-panel">
+        <div class="w3-container">
+          <h6>12. To list all of the packages in a deactivated environment:</h6>
+          <div class="w3-code pythonHigh notranslate">
+            conda list -n myenv <br>
+          </div>
+        </div>
+      </div>
+
+      <div class="w3-panel">
+        <div class="w3-container">
+          <h6>13. To remove a package such as SciPy in an environment
+             such as myenv:</h6>
+          <div class="w3-code pythonHigh notranslate">
+            conda remove -n myenv scipy <br>
+          </div>
+        </div>
+      </div>
+
+      <div class="w3-panel">
+        <div class="w3-container">
+          <h6>14. Create an environment for the scrapy package from the conda-forge
+              channel:</h6>
+          <div class="w3-code pythonHigh notranslate">
+            conda create -n scrapy -c conda-forge scrapy <br>
+          </div>
+        </div>
+      </div>
+
+      <div class="w3-panel">
+        <div class="w3-container">
+          <h6>15. Create an environment for the RDKit package from the rdkit
+              channel:</h6>
+          <div class="w3-code pythonHigh notranslate">
+            conda create -n rdkit -c rdkit rdkit <br>
+          </div>
+        </div>
+      </div>
+
+      <div class="w3-container">
+        <h4>Installing non-conda packages</h4>
+        <div class="w3-container">
+          <p>If a package is not available from conda or Anaconda.org, you
+             may be able to find and install the package with another package
+             manager like pip.</p>
+          <p>Pip packages do not have all the features of conda packages and
+             we recommend first trying to install any package with conda. If
+              the package is unavailable through conda, try installing it
+               with pip.</p>
+          <p>To gain the benefits of conda integration, be sure to install pip
+             inside the currently active conda environment and then install
+             packages with that instance of pip. </p>
+          <p>To install a non-conda package with <span class="w3-codespan">
+             pip</span>:</p>
+          <h6>1. To use pip to install a program such as See:</h6>
           <div class="w3-code pythonHigh notranslate">
             conda install -n myenv pip <br>
             conda activate myenv <br>
             pip install see <br>
           </div>
-          </li>
-      <li><p>To verify the package was installed:</p>
+          <h6>2. To verify the package was installed:</h6>
           <div class="w3-code pythonHigh notranslate">
             conda list <br>
-          </div></li>
-    </ol>
-  </div>
-  </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
-  <script>
-    w3CodeColor();
-  </script>
+    <!-- Footer -->
+    <!-- Set z-index to be higher than that of the sidebar to make it visable -->
+    <div class="w3-bar w3-teal" style="position:relative;height:50px;bottom:0;z-index:10">
+      <a href="#top" class="w3-bar-item w3-button">Top</a>
+      <a href="#2" class="w3-bar-item w3-button">About Us</a>
+      <a href="#3" class="w3-bar-item w3-button">Contact</a>
+      <span href="#4" class="w3-bar-item w3-right">Copyright  &copy; 2019 KGL</span>
+    </div>
+
+    <!-- Functions to open/close the navigation bar and sidebar. -->
+    <script>
+      function w3_open_left() {
+        document.getElementById("leftSidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+      }
+
+      function w3_close() {
+        document.getElementById("leftSidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+      }
+
+      function w3_menuDrop(menuId) {
+        var x = document.getElementById(menuId);
+        if (x.className.indexOf("w3-show") == -1) {
+          x.className += " w3-show";
+          x.previousElementSibling.className += " w3-green";
+        } else {
+          x.className = x.className.replace(" w3-show", "");
+          x.previousElementSibling.className =
+          x.previousElementSibling.className.replace(" w3-green", "");
+        }
+      }
+    </script>
+
+    <!-- w3codecolor.js must be put at the of the HTML file -->
+    <script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
+    <script>
+      w3CodeColor();
+    </script>
 
   </body>
 </html>

@@ -2,12 +2,12 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Important Python Modules</title>
+    <title>My Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-    <link rel="stylesheet" href="../kk.w3.css">
-    <link rel="stylesheet" href="../kk.css">
+    <link rel="stylesheet" href="C:\Google\Work\MyScripts\HTML\kk.w3.css">
+    <link rel="stylesheet" href="C:\Google\Work\MyScripts\HTML\kk.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -103,10 +103,8 @@
       <p class="w3-container w3-xlarge w3-left">&#9776;</p>
       <button class="w3-bar-item w3-button w3-large w3-hide-large"
         onclick="w3_close()">Close &times;</button>
-      <a href="#natsort" class="w3-bar-item w3-button" onclick="w3_close()">natsort</a>
-      <a href="#scrapy" class="w3-bar-item w3-button" onclick="w3_close()">scrapy</a>
-      <a href="#json" class="w3-bar-item w3-button" onclick="w3_close()">JSON</a>
-      <a href="#pillow" class="w3-bar-item w3-button" onclick="w3_close()">pillow</a>
+      <a href="#ID1" class="w3-bar-item w3-button" onclick="w3_close()">Method 1</a>
+      <a href="#ID2" class="w3-bar-item w3-button" onclick="w3_close()">Method 2</a>
     </div>
 
     <!-- Overlay definition -->
@@ -119,88 +117,54 @@
     <div class="w3-main"style="position:relative;margin-left:200px;margin-right:200px;top:50px;margin-bottom:50px;min-height:100vh;">
       <!-- The heading -->
       <p  id="top"></p> <!-- For a better view when click on a tag -->
-      <div class="w3-container2">
-        <h2>Important Python Modules.</h2>
+      <div class="w3-container">
+        <h2>The main title of the webpage.</h2>
       </div>
 
-      <div class="w3-container2 w3-border-bottom"> <!-- natsort -->
-        <p id="natsort"> </p> <!-- For a better view when click on a tag -->
-        <h5 style="padding-top:20px;">1. natsort:</h5>
-        <p>References:</p>
-        <ol>
-          <li><a href="https://pypi.org/project/natsort/">natsort manual</a></li>
-        </ol>
-        <p>Simple yet flexible natural sorting in Python.</p>
-        <div class="w3-code pythonHigh notranslate">
-          >>> from natsort import natsorted <br>
-          >>> a = ['2 ft 7 in', '1 ft 5 in', '10 ft 2 in', '2 ft 11 in', '7 ft 6 in'] <br>
-          >>> a = natsorted(a) <br>
-          >>> print (a) <br>
-          ['1 ft 5 in', '2 ft 7 in', '2 ft 11 in', '7 ft 6 in', '10 ft 2 in'] <br>
+      <div class="w3-container w3-border-bottom"> <!-- Method 1 -->
+        <p  id="ID1"></p> <!-- For a better view when click on a tag -->
+        <div class="kk-subtitle"><a href="https://www.rdkit.org/docs/index.html">Method 1</a></div>
+        <p>Introduction.</p>
+        <h5>References:</h5>
+          <ol>
+            <li><a href="https://www.rdkit.org/docs/GettingStartedInPython.html">
+                Reference 1</a></li>
+            <li><a href="https://www.rdkit.org/docs/Cookbook.html">
+                Reference 2</a></li>
+            <li><a href="https://www.rdkit.org/docs/RDKit_Book.html">
+                Reference 3</a></li>
+          </ol>
+
+        <h5>Examples:</h5>
+        <div class="w3-panel">
+          <h6>1. Example 1:</h6>
+          <p class="w3-code pythonHigh notranslate">
+            Code 1 <br>
+          </p>
         </div>
+
       </div>
 
-      <div class="w3-container2 w3-border-bottom"> <!-- scrapy -->
-        <p id="scrapy"> </p> <!-- For a better view when click on a tag -->
-        <h5 style="padding-top:20px;">2. scrapy:</h5>
-        <p>References:</p>
-        <ol>
-          <li><a href="https://docs.scrapy.org/en/latest/intro/overview.html">scrapy manual</a></li>
-          <li><a href="C:\Google\Work\MyScripts\HTML\Python\Use_Scrapy_to_do_web_crawling.html">My scrapy notebook</a></li>
-        </ol>
-        <p>Scrapy is an application framework for crawling web sites and extracting structured data</p>
-        <div class="w3-code pythonHigh notranslate">
-          >>> scrapy startproject tutorial <br>
-          >>> scrapy crawl spidername -o results.jl <br>
+      <div class="w3-container w3-border-bottom"> <!-- Method 2 -->
+        <p  id="ID1"></p> <!-- For a better view when click on a tag -->
+        <div class="kk-subtitle">
+          <a href="http://www.yapcwsoft.com/dd/padeldescriptor/">Method 2</a>
+          <a href="#top" class='fas fa-arrow-alt-circle-up kk-up'></a>
         </div>
-      </div>
+        <p>Introduction.
+        </p>
 
-      <div class="w3-container2 w3-border-bottom"> <!-- JSON -->
-        <p id="json"> </p> <!-- For a better view when click on a tag -->
-        <h5 style="padding-top:20px;">3. JSON:</h5>
-        <p>References:</p>
-        <ol>
-          <li><a href="https://www.w3schools.com/python/python_json.asp">W3C School JSON tutorial</a></li>
-        </ol>
-        <p>JSON is a syntax for storing and exchanging data.<br>
-          JSON is text, written with JavaScript object notation.<br>
-          Python has a built-in package called json, which can be used to
-          work with JSON data. <br>
-          You can also convert list to string and back the json module.</p>
-        <div class="w3-code pythonHigh notranslate">
-          >>> import json <br>
-          >>> # Read a JSON object: <br>
-          >>> x = '{ "name":"John", "age":30, "city":"New York"}' <br>
-          >>> y = json.loads(x) <br>
-          >>> print(y["age"]) <br>
-          30 <br>
-          >>> # Read a list in string format: <br>
-          >>> str_lst = '["apple", "bananas"]' <br>
-          >>> lst = json.loads(str_lst) <br>
-          >>> print (lst) <br>
-          ['apple', 'bananas'] <br>
+        <h5>Examples:</h5>
+        <div class="w3-panel">
+          <h6>1. Example 1:</h6>
+          <p class="w3-code pythonHigh notranslate">
+            Code 1 <br>
+          </p>
         </div>
+
       </div>
 
-      <div class="w3-container2 w3-border-bottom"> <!-- Pillow -->
-        <p id="pillow"> </p> <!-- For a better view when click on a tag -->
-        <h5 style="padding-top:20px;">4. Pillow:</h5>
-        <p>References:</p>
-        <ol>
-          <li><a href="https://pillow.readthedocs.io/en/stable/index.html">Pillow manual</a></li>
-        </ol>
-        <p>Python Imaging Library (abbreviated as PIL) (in newer versions
-          known as Pillow) is a free library for the Python programming
-          language that adds support for opening, manipulating, and saving
-          many different image file formats.</p>
-        <div class="w3-code pythonHigh notranslate">
-          >>> from PIL import Image <br>
-          >>> im = Image.open("bride.jpg") <br>
-          >>> im.show() <br>
-        </div>
-      </div>
-
-    </div> <!-- The end of the main section -->
+    </div>
 
     <!-- Footer -->
     <!-- Set z-index to be higher than that of the sidebar to make it visable -->

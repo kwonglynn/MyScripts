@@ -6,6 +6,8 @@ Created on Tue Apr 30 15:59:32 2019
 """
 import scrapy
 
+import pandas as pd
+
 
 class QuotesSpider(scrapy.Spider):
     name = "quotes"

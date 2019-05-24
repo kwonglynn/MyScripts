@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Python Figure and Image.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel="stylesheet" href="C:\Google\Work\MyScripts\HTML\kk.w3.css">
+    <link rel="stylesheet" href="C:\Google\Work\MyScripts\HTML\kk.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  </head>
+  <body>
+    <!-- The navigaton bar -->
+    <div class="w3-top" style="height:35px;z-index:5;">
+      <div class="w3-bar w3-black">
+        <a class="w3-bar-item w3-button  w3-left w3-hide-large" onclick="w3_open_left()">&#9776;</a>
+        <a href="#" class="w3-bar-item w3-button w3-green"><i class="fa fa-home"></i> Home</a>
+        <a href="../../Python/Python_modules.html" class="w3-bar-item w3-button">Python</a>
+        <a href="#" class="w3-bar-item w3-button">Online Server</a>
+        <div class="w3-dropdown-hover w3-hide-medium w3-hide-small">
+          <button class="w3-button">Web Front End <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-light-grey" style="width:143.5px;">
+            <a href="#" class="w3-bar-item w3-button">HTML</a>
+            <a href="#" class="w3-bar-item w3-button">CSS</a>
+            <a href="#" class="w3-bar-item w3-button">JavaScript</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover w3-hide-medium w3-hide-small">
+          <button class="w3-button">Web Back End <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-light-grey" style="width:139px;">
+            <a href="#" class="w3-bar-item w3-button">Python</a>
+            <a href="#" class="w3-bar-item w3-button">Django</a>
+            <a href="#" class="w3-bar-item w3-button">PHP</a>
+            <a href="#" class="w3-bar-item w3-button">SQL</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover w3-hide-medium w3-hide-small">
+          <button class="w3-button">Machine Learning <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-light-grey" style="width:163px;">
+            <a href="#" class="w3-bar-item w3-button">SVM</a>
+            <a href="#" class="w3-bar-item w3-button">ANN</a>
+            <a href="#" class="w3-bar-item w3-button">Random Forest</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover w3-hide-medium w3-hide-small">
+          <button class="w3-button">Deep Learning <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-light-grey" style="width:142px;">
+            <a href="#" class="w3-bar-item w3-button">PyTorch</a>
+            <a href="#" class="w3-bar-item w3-button">Tensor Flow</a>
+            <a href="#" class="w3-bar-item w3-button">Keras</a>
+          </div>
+        </div>
+
+        <div class="w3-dropdown-click w3-hide-large"> <!-- Hide some menus on medium and small screens -->
+          <button class="w3-button" onclick="w3_menuDrop('menuDrop')">More <i class="fa fa-caret-down"></i></button>
+          <div id="menuDrop" class="w3-dropdown-content w3-bar-block w3-card w3-dark-grey" style="width:165px;">
+            <div class="w3-dropdown-click ">
+              <button class="w3-button" onclick="w3_menuDrop('webFrontEnd')">Web Front End <i class="fa fa-caret-down"></i></button>
+              <div id="webFrontEnd" class="w3-card w3-hide w3-light-grey">
+                <a href="#" class="w3-bar-item w3-button">HTML</a>
+                <a href="#" class="w3-bar-item w3-button">CSS</a>
+                <a href="#" class="w3-bar-item w3-button">JavaScript</a>
+              </div>
+            </div>
+            <div class="w3-dropdown-click">
+              <button class="w3-button" onclick="w3_menuDrop('webBackEnd')">Web Back End <i class="fa fa-caret-down"></i></button>
+              <div id="webBackEnd" class="w3-card w3-hide w3-light-grey">
+                <a href="#" class="w3-bar-item w3-button">Python</a>
+                <a href="#" class="w3-bar-item w3-button">Django</a>
+                <a href="#" class="w3-bar-item w3-button">PHP</a>
+                <a href="#" class="w3-bar-item w3-button">SQL</a>
+              </div>
+            </div>
+            <div class="w3-dropdown-click">
+              <button class="w3-button" onclick="w3_menuDrop('machine')">Machine Learning <i class="fa fa-caret-down"></i></button>
+              <div id="machine" class="w3-card w3-hide w3-light-grey">
+                <a href="#" class="w3-bar-item w3-button">SVM</a>
+                <a href="#" class="w3-bar-item w3-button">ANN</a>
+                <a href="#" class="w3-bar-item w3-button">Random Forest</a>
+              </div>
+            </div>
+            <div class="w3-dropdown-hover">
+              <button class="w3-button" onclick="w3_menuDrop('deep')">Deep Learning <i class="fa fa-caret-down"></i></button>
+              <div id="deep" class="w3-card w3-hide w3-light-grey">
+                <a href="#" class="w3-bar-item w3-button">PyTorch</a>
+                <a href="#" class="w3-bar-item w3-button">Tensor Flow</a>
+                <a href="#" class="w3-bar-item w3-button">Keras</a>
+              </div>
+            </div>
+          </div> <!-- End of the collapsible drop down content -->
+        </div> <!-- End of the collapsible menu -->
+      </div> <!-- End of the whole menu -->
+    </div> <!-- End of the w3-top container -->
+
+    <!-- Sidebar. Note: w3-collapse and z-index are important! -->
+    <div id="leftSidebar" class="w3-sidebar w3-collapse w3-bar-block w3-light-grey"
+      style="width:200px;z-index:3;top:35px;">
+      <p class="w3-container w3-xlarge w3-left">&#9776;</p>
+      <button class="w3-bar-item w3-button w3-large w3-hide-large"
+        onclick="w3_close()">Close &times;</button>
+      <a href="#read_csv" class="w3-bar-item w3-button" onclick="w3_close()">Read CSV</a>
+      <a href="#missing_data" class="w3-bar-item w3-button" onclick="w3_close()">Missing data</a>
+      <a href="#category" class="w3-bar-item w3-button" onclick="w3_close()">Category</a>
+    </div>
+
+    <!-- Overlay definition -->
+    <div id="myOverlay" class="w3-overlay w3-animate-opacity" onclick="w3_close()"
+      style="cursor:pointer"></div>
+
+    <!-- Main part: Note for collapsible sibar the margin-left of main content
+      should match the width of the sidebar -->
+    <!-- Use height: 100vh to set the height of the main section to that of the screen -->
+    <div class="w3-main"style="position:relative;margin-left:200px;margin-right:200px;top:50px;margin-bottom:50px;min-height:100vh;">
+      <!-- The heading -->
+      <p  id="top"></p> <!-- For a better view when click on a tag -->
+      <div class="w3-container">
+        <h2>Python Figure and Image.</h2>
+      </div>
+
+      <div class="w3-container w3-border-bottom"> <!-- Method 1 -->
+        <p  id="pyplot"></p> <!-- For a better view when click on a tag -->
+        <div class="kk-subtitle">matplotlib.pyplot</div>
+        <p>Use matplotlib.pyplot to generate figures.</p>
+        <h5>References:</h5>
+        <ol>
+          <li><a href="https://matplotlib.org/tutorials/index.html">
+              Matplotlib tutorials</a></li>
+          <li><a href="https://matplotlib.org/gallery/index.html">
+              Matplotlib gallery</a></li>
+        </ol>
+
+        <h5>Examples:</h5>
+        <div class="w3-panel"> <!-- 1. Complete pyplot tutorial: -->
+          <h6>1. Complete pyplot tutorial:</h6>
+          <p class="w3-code pythonHigh notranslate">
+            >>> import numpy as np <br>
+            >>> import matplotlib <br>
+            >>> import matplotlib.pyplot as plt <br>
+            <br>
+            >>> x = np.linspace(start=0, stop=10, num=100) #Return evenly spaced numbers over a specified interval.<br>
+            <br>
+            >>> fig, ax = plt.subplots(figsize=(12,6)) <br>
+            >>> # Now use the axes object to add stuff to plot <br>
+            >>> ax.plot(x, x**2, 'r.-', label='line 1') <br>
+            >>> # The one below is use explicit names for line features.<br>
+            >>> ax.plot(x, x**3, color='red', alpha=0.5, linewidth=1.0, linestyle='-', <br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            marker='s', markersize=8, markerfacecolor='green', label='line 2') <br>
+            <br>
+            >>> # Add a legend to the figure, here at the best position (0). <br>
+            >>> ax.legend(loc=0) <br>
+            <br>
+            >>> # Set the axis ranges. <br>
+            >>> ax.set_xlim([1,10]) <br>
+            >>> ax.set_ylim([1,100]) <br>
+            <br>
+            >>> # Set the labels and titles. <br>
+            >>> ax.set_xlabel('x', fontsize=16) <br>
+            >>> ax.set_ylabel('y', fontsize=16) <br>
+            >>> ax.set_title('title', fontsize=20); <br>
+            <br>
+            >>> # Set the ticks on the axes. <br>
+            >>> ax.tick_params(labelsize=15) # Set the tick size on the axes. <br>
+            >>> ax.set_xticks(np.arange(0,11,2)) <br>
+            >>> ax.set_xticklabels([r'$\alpha$', r'$\beta$', r'$\gamma$', r'$\delta$', r'$\epsilon$'], fontsize=15) <br>
+            >>> mpl.rcParams['mathtext.default'] = 'regular' # Set the math text to be regular, rather than italic. <br>
+            >>> yticks = np.arange(0,101, 10) <br>
+            >>> ax.set_yticks(yticks) <br>
+            >>> ax.set_yticklabels(["$%.1f$" % y for y in yticks], fontsize=15) # use LaTeX formatted labels <br>
+            <br>
+            >>> # Set scientific notation for axes with large numbers: <br>
+            >>> from matplotlib import ticker <br>
+            >>> formatter = ticker.ScalarFormatter(useMathText=True) <br>
+            >>> formatter.set_scientific(True) <br>
+            >>> formatter.set_powerlimits((-1,1)) <br>
+            >>> ax.yaxis.set_major_formatter(formatter) <br>
+            <br>
+            >>> # Set the distance between x and y axis and the numbers on the axes (tick labels) <br>
+            >>> matplotlib.rcParams['xtick.major.pad'] = 5 <br>
+            >>> matplotlib.rcParams['ytick.major.pad'] = 5 <br>
+            >>> # Set the padding between axis label and axis numbers <br>
+            >>> ax.xaxis.labelpad = 5 <br>
+            >>> ax.yaxis.labelpad = 5 <br>
+            <br>
+            >>> # Add axis grid: <br>
+            >>> ax.grid(True) # Default grid apperance. <br>
+            >>> ax.grid(color='b', alpha=0.5, linestyle='dashed', linewidth=0.5) # Custom grid appearance. <br>
+            <br>
+            >>> # Customize axis spines: <br>
+            >>> ax.spines['bottom'].set_color('blue') <br>
+            >>> ax.spines['left'].set_linewidth(2) <br>
+            >>> # Hide the top and right spines. <br>
+            >>> ax.spines['top'].set_linewidth(0) <br>
+            >>> ax.spines['right'].set_linewidth(0) <br>
+            <br>
+            >>> # Text annotaton, label the datapoints: <br>
+            >>> y = x ** 2 <br>
+            >>> for i in range(0, len(x), 10): <br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            plt.text(x[i], y[i], str(x[i]), horizontalalignment='left', size='medium', color='black', fontsize=12) <br>
+            <br>
+            >>> # Adjust the figure so that the lables are not clipped. <br>
+            >>> fig.subplots_adjust(left=0.15, right=0.9, bottom=0.1, top=0.9); <br>
+            >>> fig.savefig("filename.png", dpi=600) <br>
+          </p>
+          <p>Check <a href="https://matplotlib.org/users/legend_guide.html#legend-location">
+            here</a> for more about legend loacation</p>
+          <p>Check <a href="https://matplotlib.org/users/mathtext.html">
+            here</a>for the special letters in Matplotlib.</p>
+        </div>
+
+        <div class="w3-panel"> <!-- 2. Draw multiple figures: -->
+          <h6>2. Draw multiple figures:</h6>
+          <p class="w3-code pythonHigh notranslate">
+            >>> import matplotlib.pyplot as plt <br>
+            >>> import numpy as np <br>
+            <br>
+            >>> x = np.linspace(0, 10, 100) <br>
+            >>> y = np.exp(x) <br>
+            <br>
+            >>> fig, axes = plt.subplots(1, 2, figsize=(10,5)) <br>
+            >>> axes[0].plot(x, y) <br>
+            >>> axes[1].plot(x, y) <br>
+            >>> axes[1].set_yscale("log") # Set a logarithmic scale for one ax. <br>
+            <br>
+            >>> fig.tight_layout() # Used to avoid axes overlap and make the figures more compact. <br>
+          </p>
+          <img src="C:\Google\Work\MyScripts\HTML\Machine_Learning\multiple_figure.png"
+            alt="Inset" style="width:70%">
+        </div>
+
+        <div class="w3-panel"> <!-- 3. Twin axes -->
+          <h6>3. Twin axes:</h6>
+          <p>Sometimes it is useful to have dual y axes in a figure.
+            For example, when plotting curves with different units together. </p>
+          <p class="w3-code pythonHigh notranslate">
+            >>> fig, ax1 = plt.subplots() <br>
+            >>> x = np.linspace(0, 5, 11) <br>
+            <br>
+            >>> ax1.plot(x, x**2, lw=2, color="blue") <br>
+            >>> ax1.set_ylabel(r"area $(m^2)$", fontsize=18, color="blue") <br>
+            >>> for label in ax1.get_yticklabels(): <br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;label.set_color("blue") <br>
+            <br>
+            >>> ax2 = ax1.twinx() <br>
+            >>> ax2.plot(x, x**3, lw=2, color="red") <br>
+            >>> ax2.set_ylabel(r"volume $(m^3)$", fontsize=18, color="red") <br>
+            >>> for label in ax2.get_yticklabels(): <br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;label.set_color("red") <br>
+          </p>
+          <img src="C:\Google\Work\MyScripts\HTML\Machine_Learning\twin_axes.png"
+            alt="Inset" style="width:60%">
+        </div>
+
+        <div class="w3-panel"> <!-- 4. Customize the axes: -->
+          <h6>4. Customize the axes:</h6>
+          <p class="w3-code pythonHigh notranslate">
+            >>> import numpy as np <br>
+            >>> x = np.linspace(0, 5, 11) <br>
+            >>> y = x ** 2 <br>
+            >>> fig = plt.figure() <br>
+            <br>
+            >>> axes1 = fig.add_axes([0.1, 0.1, 0.8, 0.8]) # main axes <br>
+            >>> axes2 = fig.add_axes([0.2, 0.5, 0.4, 0.3]) # inset axes <br>
+            <br>
+            >>> # Larger Figure Axes 1 <br>
+            >>> axes1.plot(x, y, 'b') <br>
+            >>> axes1.set_xlabel('X_label_axes2') <br>
+            >>> axes1.set_ylabel('Y_label_axes2') <br>
+            >>> axes1.set_title('Axes 2 Title') <br>
+            <br>
+            >>> # Insert Figure Axes 2 <br>
+            >>> axes2.plot(y, x, 'r') <br>
+            >>> axes2.set_xlabel('X_label_axes2') <br>
+            >>> axes2.set_ylabel('Y_label_axes2') <br>
+            >>> axes2.set_title('Axes 2 Title'); <br>
+          </p>
+          <img src="C:\Google\Work\MyScripts\HTML\Machine_Learning\inset.png"
+            alt="Inset" style="width:50%">
+        </div>
+
+        <div class="w3-panel"> <!-- 5. Axes where x and y is zero -->
+          <h6>5. Axes where x and y is zero:</h6>
+          <p>Check <a href="https://matplotlib.org/api/spines_api.html#matplotlib.spines.Spine.set_position">
+            here</a> to see how to set the zero of the axes.</p>
+          <p class="w3-code pythonHigh notranslate">
+            >>> import matplotlib.pyplot as plt <br>
+            >>> import numpy as np <br>
+            >>> fig, ax = plt.subplots() <br>
+            <br>
+            >>> ax.spines['right'].set_color('none') <br>
+            >>> ax.spines['top'].set_color('none') <br>
+            <br>
+            >>> ax.xaxis.set_ticks_position('bottom') <br>
+            >>> ax.spines['bottom'].set_position(('data',0)) # set position of x spine to x=0  <br>
+            >>> ax.yaxis.set_ticks_position('left') <br>
+            >>> ax.spines['left'].set_position(('data',0))   # set position of y spine to y=0 <br>
+            <br>
+            >>> x = np.linspace(-2, 2., 50) <br>
+            >>> ax.plot(x, x**3); <br>
+          </p>
+          <img src="C:\Google\Work\MyScripts\HTML\Machine_Learning\x_y_axes_zero.png"
+            alt="Axes where x and y is zero." style="width:50%">
+        </div>
+
+        <div class="w3-panel"> <!-- 6. Make a contour -->
+          <h6>6. Make a contour:</h6>
+          <p><a href="https://matplotlib.org/gallery/images_contours_and_fields/contour_demo.html#sphx-glr-gallery-images-contours-and-fields-contour-demo-py">
+            Contour tutorial</a> </p>
+          <p class="w3-code pythonHigh notranslate">
+            >>> import matplotlib <br>
+            >>> import numpy as np <br>
+            >>> import matplotlib.cm as cm <br>
+            >>> import matplotlib.pyplot as plt <br>
+            <br>
+            >>> delta = 0.025 <br>
+            >>> x = np.arange(-3.0, 3.0, delta) <br>
+            >>> y = np.arange(-2.0, 2.0, delta) <br>
+            >>> X, Y = np.meshgrid(x, y) <br>
+            >>> Z1 = np.exp(-X**2 - Y**2) <br>
+            >>> Z2 = np.exp(-(X - 1)**2 - (Y - 1)**2) <br>
+            >>> Z = (Z1 - Z2) * 2 <br>
+            <br>
+            >>> fig, ax = plt.subplots() <br>
+            >>> CS = ax.contour(X, Y, Z) <br>
+            >>> ax.clabel(CS, inline=1, fontsize=10) <br>
+            >>> ax.set_title('Simple contour with default labels') <br>
+          </p>
+          <img src="C:\Google\Work\MyScripts\HTML\Machine_Learning\contour.png"
+            alt="Contour" style="width:50%">
+        </div>
+
+      </div>
+
+      <div class="w3-container w3-border-bottom"> <!-- Method 2 -->
+        <p id="seaborn"></p> <!-- For a better view when click on a tag -->
+        <div class="kk-subtitle">
+          Seaborn <a href="#top" class='fas fa-arrow-alt-circle-up kk-up'></a>
+        </div>
+        <p>Use Seaborn to generate more decent figures.</p>
+        <h5>References:</h5>
+        <ol>
+          <li><a href="https://matplotlib.org/tutorials/index.html">
+              Matplotlib tutorials</a></li>
+          <li><a href="https://matplotlib.org/gallery/index.html">
+              Matplotlib gallery</a></li>
+        </ol>
+
+        <h5>Examples:</h5>
+        <div class="w3-panel">
+          <h6>1. Example 1:</h6>
+          <div class="w3-code pythonHigh notranslate">
+            Code 1 <br>
+          </div>
+        </div>
+
+      </div>
+
+    </div> <!-- The end of the w3-main section -->
+
+    <!-- Footer -->
+    <!-- Set z-index to be higher than that of the sidebar to make it visable -->
+    <div class="w3-bar w3-teal" style="position:relative;height:50px;bottom:0;z-index:10">
+      <a href="#top" class="w3-bar-item w3-button">Top</a>
+      <a href="#2" class="w3-bar-item w3-button">About Us</a>
+      <a href="#3" class="w3-bar-item w3-button">Contact</a>
+      <span href="#4" class="w3-bar-item w3-right">Copyright  &copy; 2019 KGL</span>
+    </div>
+
+    <!-- Functions to open/close the navigation bar and sidebar. -->
+    <script>
+      function w3_open_left() {
+        document.getElementById("leftSidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+      }
+
+      function w3_close() {
+        document.getElementById("leftSidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+      }
+
+      function w3_menuDrop(menuId) {
+        var x = document.getElementById(menuId);
+        if (x.className.indexOf("w3-show") == -1) {
+          x.className += " w3-show";
+          x.previousElementSibling.className += " w3-green";
+        } else {
+          x.className = x.className.replace(" w3-show", "");
+          x.previousElementSibling.className =
+          x.previousElementSibling.className.replace(" w3-green", "");
+        }
+      }
+    </script>
+
+    <!-- w3codecolor.js must be put at the of the HTML file -->
+    <script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
+    <script>
+      w3CodeColor();
+    </script>
+
+  </body>
+</html>

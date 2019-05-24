@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Basic machine learning methods.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel="stylesheet" href="C:\Google\Work\MyScripts\HTML\kk.w3.css">
+    <link rel="stylesheet" href="C:\Google\Work\MyScripts\HTML\kk.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  </head>
+  <body>
+    <!-- The navigaton bar -->
+    <div class="w3-top" style="height:35px;z-index:5;">
+      <div class="w3-bar w3-black">
+        <a class="w3-bar-item w3-button  w3-left w3-hide-large" onclick="w3_open_left()">&#9776;</a>
+        <a href="#" class="w3-bar-item w3-button w3-green"><i class="fa fa-home"></i> Home</a>
+        <a href="../../Python/Python_modules.html" class="w3-bar-item w3-button">Python</a>
+        <a href="#" class="w3-bar-item w3-button">Online Server</a>
+        <div class="w3-dropdown-hover w3-hide-medium w3-hide-small">
+          <button class="w3-button">Web Front End <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-light-grey" style="width:143.5px;">
+            <a href="#" class="w3-bar-item w3-button">HTML</a>
+            <a href="#" class="w3-bar-item w3-button">CSS</a>
+            <a href="#" class="w3-bar-item w3-button">JavaScript</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover w3-hide-medium w3-hide-small">
+          <button class="w3-button">Web Back End <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-light-grey" style="width:139px;">
+            <a href="#" class="w3-bar-item w3-button">Python</a>
+            <a href="#" class="w3-bar-item w3-button">Django</a>
+            <a href="#" class="w3-bar-item w3-button">PHP</a>
+            <a href="#" class="w3-bar-item w3-button">SQL</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover w3-hide-medium w3-hide-small">
+          <button class="w3-button">Machine Learning <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-light-grey" style="width:163px;">
+            <a href="#" class="w3-bar-item w3-button">SVM</a>
+            <a href="#" class="w3-bar-item w3-button">ANN</a>
+            <a href="#" class="w3-bar-item w3-button">Random Forest</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hover w3-hide-medium w3-hide-small">
+          <button class="w3-button">Deep Learning <i class="fa fa-caret-down"></i></button>
+          <div class="w3-dropdown-content w3-bar-block w3-light-grey" style="width:142px;">
+            <a href="#" class="w3-bar-item w3-button">PyTorch</a>
+            <a href="#" class="w3-bar-item w3-button">Tensor Flow</a>
+            <a href="#" class="w3-bar-item w3-button">Keras</a>
+          </div>
+        </div>
+
+        <div class="w3-dropdown-click w3-hide-large"> <!-- Hide some menus on medium and small screens -->
+          <button class="w3-button" onclick="w3_menuDrop('menuDrop')">More <i class="fa fa-caret-down"></i></button>
+          <div id="menuDrop" class="w3-dropdown-content w3-bar-block w3-card w3-dark-grey" style="width:165px;">
+            <div class="w3-dropdown-click ">
+              <button class="w3-button" onclick="w3_menuDrop('webFrontEnd')">Web Front End <i class="fa fa-caret-down"></i></button>
+              <div id="webFrontEnd" class="w3-card w3-hide w3-light-grey">
+                <a href="#" class="w3-bar-item w3-button">HTML</a>
+                <a href="#" class="w3-bar-item w3-button">CSS</a>
+                <a href="#" class="w3-bar-item w3-button">JavaScript</a>
+              </div>
+            </div>
+            <div class="w3-dropdown-click">
+              <button class="w3-button" onclick="w3_menuDrop('webBackEnd')">Web Back End <i class="fa fa-caret-down"></i></button>
+              <div id="webBackEnd" class="w3-card w3-hide w3-light-grey">
+                <a href="#" class="w3-bar-item w3-button">Python</a>
+                <a href="#" class="w3-bar-item w3-button">Django</a>
+                <a href="#" class="w3-bar-item w3-button">PHP</a>
+                <a href="#" class="w3-bar-item w3-button">SQL</a>
+              </div>
+            </div>
+            <div class="w3-dropdown-click">
+              <button class="w3-button" onclick="w3_menuDrop('machine')">Machine Learning <i class="fa fa-caret-down"></i></button>
+              <div id="machine" class="w3-card w3-hide w3-light-grey">
+                <a href="#" class="w3-bar-item w3-button">SVM</a>
+                <a href="#" class="w3-bar-item w3-button">ANN</a>
+                <a href="#" class="w3-bar-item w3-button">Random Forest</a>
+              </div>
+            </div>
+            <div class="w3-dropdown-hover">
+              <button class="w3-button" onclick="w3_menuDrop('deep')">Deep Learning <i class="fa fa-caret-down"></i></button>
+              <div id="deep" class="w3-card w3-hide w3-light-grey">
+                <a href="#" class="w3-bar-item w3-button">PyTorch</a>
+                <a href="#" class="w3-bar-item w3-button">Tensor Flow</a>
+                <a href="#" class="w3-bar-item w3-button">Keras</a>
+              </div>
+            </div>
+          </div> <!-- End of the collapsible drop down content -->
+        </div> <!-- End of the collapsible menu -->
+      </div> <!-- End of the whole menu -->
+    </div> <!-- End of the w3-top container -->
+
+    <!-- Sidebar. Note: w3-collapse and z-index are important! -->
+    <div id="leftSidebar" class="w3-sidebar w3-collapse w3-bar-block w3-light-grey"
+      style="width:200px;z-index:3;top:35px;">
+      <p class="w3-container w3-xlarge w3-left">&#9776;</p>
+      <button class="w3-bar-item w3-button w3-large w3-hide-large"
+        onclick="w3_close()">Close &times;</button>
+      <a href="#read_csv" class="w3-bar-item w3-button" onclick="w3_close()">Read CSV</a>
+      <a href="#missing_data" class="w3-bar-item w3-button" onclick="w3_close()">Missing data</a>
+      <a href="#category" class="w3-bar-item w3-button" onclick="w3_close()">Category</a>
+    </div>
+
+    <!-- Overlay definition -->
+    <div id="myOverlay" class="w3-overlay w3-animate-opacity" onclick="w3_close()"
+      style="cursor:pointer"></div>
+
+    <!-- Main part: Note for collapsible sibar the margin-left of main content
+      should match the width of the sidebar -->
+    <!-- Use height: 100vh to set the height of the main section to that of the screen -->
+    <div class="w3-main"style="position:relative;margin-left:200px;margin-right:200px;top:50px;margin-bottom:50px;min-height:100vh;">
+      <!-- The heading -->
+      <p  id="top"></p> <!-- For a better view when click on a tag -->
+      <div class="w3-container">
+        <h2>Basic machine learning methods.</h2>
+      </div>
+
+      <div class="w3-container2 w3-border-bottom"> <!-- pd.read_csv -->
+        <p id="read_csv"> </p> <!-- For a better view when click on a tag -->
+        <h5 style="padding-top:20px;">1. Read a CSV file:</h5>
+        <p>References:</p>
+        <ol>
+          <li><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html">
+            pandas.read_csv</a></li>
+        </ol>
+        <p>Read a comma-separated values (csv) file into DataFrame.</p>
+        <div class="w3-code pythonHigh notranslate">
+          >>> import pandas as pd <br>
+          >>> df = pd.read_csv("mydata.csv", sep=',', header=0) <br>
+        </div>
+      </div>
+
+      <div class="w3-container2 w3-border-bottom"> <!-- pd.read_csv -->
+        <p id="missing_data"> </p> <!-- For a better view when click on a tag -->
+        <h5 style="padding-top:20px;">2. Deal with missing data:</h5>
+        <p>References:</p>
+        <ol>
+          <li><a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html">
+            Working with missing data</a></li>
+          <li><a href="https://machinelearningmastery.com/handle-missing-data-python/">
+            How to Handle Missing Data with Python?</a></li>
+        </ol>
+        <p>Drop the lines with missing data.</p>
+        <div class="w3-code pythonHigh notranslate">
+          >>> df = pd.DataFrame([[1, 1, 1],
+                                [2, np.nan, 2],
+                                [3, 3, np.nan]],
+                                columns=list('ABC')) <br>
+          >>> df.dropna(axis=0, how='any', inplace=True) # Default is 0 or 'index': Drop rows which contain missing values.<br>
+        </div>
+        <p>Use the pandas fillna method to fill NaN with a specified value.</p>
+        <div class="w3-code pythonHigh notranslate">
+          >>> df = pd.DataFrame([[1, 1, 1],
+                                [2, np.nan, 2],
+                                [3, 3, np.nan]],
+                                columns=list('ABC')) <br>
+          >>> df.fillna(value=0, inplace=True) <br>
+          >>> df.fillna(value=df.mean(), axis=0, inplace=True) # Default is axis=0, fill column by column. <br>
+          >>> # Fill columnwise: <br>
+          >>> df['B'] = df['B'].fillna(value=df['B'].mean()) <br>
+        </div>
+        <p>Use the pandas interpolate method to interpolate the value for NaN.</p>
+        <div class="w3-code pythonHigh notranslate">
+          >>> df = pd.DataFrame([[1, 1, 1],
+                                [2, np.nan, 2],
+                                [3, 3, np.nan]],
+                                columns=list('ABC')) <br>
+          >>> df.interpolate(method='linear', inplace=True) <br>
+          >>> df.interpolate(method='pad', inplace=True) <br>
+        </div>
+      </div>
+
+      <div class="w3-container2 w3-border-bottom"> <!-- pd.read_csv -->
+        <p id="category"> </p> <!-- For a better view when click on a tag -->
+        <h5 style="padding-top:20px;">3. Deal with category data:</h5>
+        <p>References:</p>
+        <ol>
+          <li><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html">
+            pandas.get_dummies</a></li>
+        </ol>
+        <p>Convert categorical variable into dummy/indicator variables.</p>
+        <div class="w3-code pythonHigh notranslate">
+          >>> sex = pd.get_dummies(df['Sex'], drop_first=True) <br>
+          >>> df.drop(['Sex'], axis=1, inplace=True) <br>
+          >>> df = pd.concat([df,sex], axis=1) # Default is to concatenate by row (axis=0), here we want to by column (axis=1) <br>
+        </div>
+        <p>We need to remove a column to avoid the <a href="https://www.quora.com/Do-we-have-to-consider-multicollinearity-in-machine-learning">
+          multicollinerity issue</a>.<br>
+          Multicollinearity is a phenomenon in which two or more independent
+          variables in a multiple regression model are highly correlated.</p>
+      </div>
+
+      <div class="w3-container2 w3-border-bottom"> <!-- pd.read_csv -->
+        <p id="apply"> </p> <!-- For a better view when click on a tag -->
+        <h5 style="padding-top:20px;">4. Apply a function to a column:</h5>
+        <p>References:</p>
+        <ol>
+          <li><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.apply.html">
+            pandas.Series.apply</a></li>
+          <li><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html">
+            pandas.DataFrame.apply</a></li>
+        </ol>
+        <div class="w3-code pythonHigh notranslate">
+          >>> data={'num':[1,2], 'start':['2018-01-01','2019-01-01'],'end': ['2018-10-10','2019-12-01']} <br>
+          >>> df['num'] = df['num'].apply((lambda x: x * 10)) <br>
+          >>> def get_timespan(x): <br>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;start = x[0] <br>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;end = x[1] <br>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;start = datetime.datetime.strptime(start, '%Y-%m-%d') <br>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;end = datetime.datetime.strptime(end, '%Y-%m-%d') <br>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;timespan = (end - start).days <br>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return timespan <br>
+          >>> df['timespan'] = df[['start', 'end']].apply(get_timespan, axis=1) <br>
+          >>> # Default is to process by column (axis=0), but here we need to prcess by row (axis=1) to get the time span. <br>
+        </div>
+      </div>
+
+      <div class="w3-container2 w3-border-bottom"> <!-- pd.read_csv -->
+        <p id="X_y"> </p> <!-- For a better view when click on a tag -->
+        <h5 style="padding-top:20px;">5. Get the independent variables (X) and dependent variable (y):</h5>
+        <p>When it comes to the real training step, it is better is let X
+          and y be arrays, rather than DataFrames, because the standardization
+          step would generate a 2D array.</p>
+        <div class="w3-code pythonHigh notranslate">
+          >>> X = df.iloc[:,:-1].values <br>
+          >>> y = df.iloc[:, -1].values <br>
+        </div>
+      </div>
+
+      <div class="w3-container2 w3-border-bottom"> <!-- pd.read_csv -->
+        <p id="train_test"> </p> <!-- For a better view when click on a tag -->
+        <h5 style="padding-top:20px;">6. Divide the dataset into a traing set and a test set:</h5>
+        <div class="w3-code pythonHigh notranslate">
+          >>> from sklearn.model_selection import train_test_split <br>
+          >>> X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3) <br>
+        </div>
+      </div>
+
+      <div class="w3-container2 w3-border-bottom"> <!-- pd.read_csv -->
+        <p id="scaling"> </p> <!-- For a better view when click on a tag -->
+        <h5 style="padding-top:20px;">7. Feature scaling:</h5>
+        <p>References:</p>
+        <ol>
+          <li><a href="https://scikit-learn.org/stable/modules/preprocessing.html">
+            Standardization, or mean removal and variance scaling</a></li>
+        </ol>
+        <p>Standardization of datasets is a common requirement for many machine
+          learning estimators implemented in scikit-learn; they might behave
+          badly if the individual features do not more or less look like
+          standard normally distributed data: Gaussian with zero mean and unit
+          variance.</p>
+        <div class="w3-code pythonHigh notranslate">
+          >>> from sklearn.preprocessing import StandardScaler <br>
+          >>> scaler_X = StandardScaler() <br>
+          >>> X_train = scaler_X.fit_transform(X_train) <br>
+          >>> # Should fit on the training set only, because the test set is independent from the training set!<br>
+          >>> X_test = scaler_X.transform(X_test) # Only transform the test set here, do not fit again! <br>
+          >>> # Also note there should be two scaler objects for X and y, respectively. <br>
+          >>> scaler_y = StandardScaler() <br>
+          >>> y_train = scaler_y.fit_transform(y_train) <br>
+          >>> y_test = scaler_y.trans(y_test) <br>
+          >>> # Note that X or y should be a 2D array or a DataFrame, not a 1D list, array or series. <br>
+          >>> # Tranform a data sample, note the data sample should also be a 2D array <br>
+          >>> sample = np.array([[44.0,72.0]]) <br>
+          >>> sample = scaler_X.transform(sample) <br>
+        </div>
+      </div>
+
+      <div class="w3-container2 w3-border-bottom"> <!-- pd.read_csv -->
+        <p id="result"> </p> <!-- For a better view when click on a tag -->
+        <h5 style="padding-top:20px;">8. Analyze the results:</h5>
+        <p>Before going to different machine learning methods, for ease of
+          reference it is better to first discuss the analyzig methods,
+          which is common to all ML methods.</p>
+        <div class="w3-code pythonHigh notranslate">
+          >>> X = df.iloc[:,:-1].values <br>
+          >>> y = df.iloc[:, -1].values <br>
+        </div>
+      </div>
+
+    </div> <!-- The end of the w3-main section -->
+
+    <!-- Footer -->
+    <!-- Set z-index to be higher than that of the sidebar to make it visable -->
+    <div class="w3-bar w3-teal" style="position:relative;height:50px;bottom:0;z-index:10">
+      <a href="#top" class="w3-bar-item w3-button">Top</a>
+      <a href="#2" class="w3-bar-item w3-button">About Us</a>
+      <a href="#3" class="w3-bar-item w3-button">Contact</a>
+      <span href="#4" class="w3-bar-item w3-right">Copyright  &copy; 2019 KGL</span>
+    </div>
+
+    <!-- Functions to open/close the navigation bar and sidebar. -->
+    <script>
+      function w3_open_left() {
+        document.getElementById("leftSidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+      }
+
+      function w3_close() {
+        document.getElementById("leftSidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+      }
+
+      function w3_menuDrop(menuId) {
+        var x = document.getElementById(menuId);
+        if (x.className.indexOf("w3-show") == -1) {
+          x.className += " w3-show";
+          x.previousElementSibling.className += " w3-green";
+        } else {
+          x.className = x.className.replace(" w3-show", "");
+          x.previousElementSibling.className =
+          x.previousElementSibling.className.replace(" w3-green", "");
+        }
+      }
+    </script>
+
+    <!-- w3codecolor.js must be put at the of the HTML file -->
+    <script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
+    <script>
+      w3CodeColor();
+    </script>
+
+  </body>
+</html>
